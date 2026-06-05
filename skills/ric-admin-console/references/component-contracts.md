@@ -25,6 +25,11 @@ Avoid:
 - Breadcrumbs visually glued to the H1 without spacing or a header surface.
 - Putting critical title/subtitle copy inside generated images.
 
+Screenshot verification:
+
+- Capture page header states at the required desktop viewports.
+- Confirm breadcrumb/title spacing, title uniqueness, subtitle readability, primary action placement, and generated header assets if present.
+
 ## Query Card
 
 Required behavior:
@@ -109,6 +114,11 @@ shadcn selection mapping:
 - Use `AlertDialog` for batch delete confirmation and include selected count plus cross-page scope.
 - Use one clear button labelled `清空选择`; do not add a second cancel/clear control.
 
+Screenshot verification:
+
+- Capture table loading, empty, data, selected rows, batch delete confirmation, column settings, and horizontal/vertical overflow states when present.
+- Confirm screenshots show one page title, one create action, one clear selection action, visible sort state, permission-aware batch delete, and readable row actions.
+
 Column settings:
 
 - Toggle column visibility.
@@ -159,6 +169,11 @@ shadcn mapping:
 - Always include `DialogTitle`/`AlertDialogTitle`; use a visually hidden title only when the visual design truly has an equivalent title.
 - Use shadcn `Button` variants and `Spinner` composition for pending states; do not invent `isLoading` props.
 
+Screenshot verification:
+
+- Capture modal states for normal content, validation error, submitting/loading, destructive confirmation, and overflow when applicable.
+- Confirm title, content, footer actions, focus/close behavior, and internal scroll are visible and not clipped.
+
 ## Drawer
 
 Use for:
@@ -179,6 +194,11 @@ shadcn mapping:
 - Use `Sheet` or `Drawer` based on the project shadcn setup and viewport convention.
 - Always include `SheetTitle` or `DrawerTitle`.
 - Keep long-form actions in a sticky footer region inside the sheet/drawer content.
+
+Screenshot verification:
+
+- Capture drawer states for long content and sticky footer when present.
+- Confirm the drawer preserves page context, has a visible title/status, and scrolls internally without creating a double scrollbar.
 
 ## Form
 
@@ -323,6 +343,11 @@ shadcn mapping:
 - Use `Skeleton` for card/table/detail/form/chart/media placeholders and `Spinner` composed inside `Button` or loading rows for submissions/refresh.
 - Do not build custom `animate-pulse` blocks when shadcn `Skeleton` exists.
 
+Screenshot verification:
+
+- Capture initial loading for every page type changed and data-refresh loading for list/table work.
+- Confirm skeletons match final layout footprint, no blank regions appear, and visible waits include readable Chinese loading text.
+
 ## Error State
 
 Rules:
@@ -395,3 +420,8 @@ Recommended CSS contract:
 ```
 
 If the app already has a design-system scrollbar token or utility, adapt this contract into that system instead of adding a competing style.
+
+Screenshot verification:
+
+- Capture long sidebar, wide table, long modal/drawer body, and long dropdown/popup when present.
+- Confirm scrollbars are absent without overflow, polished when visible, and there is no body/main/card double-scrollbar conflict.

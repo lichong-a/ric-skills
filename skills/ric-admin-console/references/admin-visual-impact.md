@@ -214,3 +214,10 @@ Before finishing a high-impact admin surface, verify:
 - CTA labels are concise, non-duplicated, high contrast, and unwrapped.
 - Copy is direct Chinese business language.
 - Utility pages remain utility-first.
+
+Browser screenshot verification:
+
+- Capture every page where generated assets appear: login, workbench, module homepage, empty state, announcement/onboarding, report cover, profile/avatar, or dashboard background.
+- Confirm assets load from project paths, are not broken, are not stretched, and do not obscure text, forms, data, or actions.
+- Confirm generated images contain no fake UI text, fake logo, QR code, watermark, or fake company data.
+- If screenshots show template-blue dashboards, generic gradients, clipped assets, blocked CTA paths, or marketing-page pollution on utility pages, fix the implementation and repeat the screenshot loop.

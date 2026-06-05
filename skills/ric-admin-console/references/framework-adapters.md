@@ -39,6 +39,7 @@ Rules:
 - Do not add a second UI library for a missing convenience component.
 - Do not override framework internals or broad generated class names when token/theme APIs exist.
 - Include framework-specific checks in final validation when available.
+- After runnable UI changes, include browser screenshots in final validation. Static API/CLI/lint checks do not replace screenshot verification for component composition, spacing, state, and overflow behavior.
 
 ## React + shadcn/ui
 
@@ -67,6 +68,7 @@ Rules:
 - For forms and query cards, use shadcn form/field primitives and the project validation approach; avoid raw div-only form layouts.
 - For modals and long forms, use `Dialog` for short flows and `Sheet`/`Drawer` for long flows, with required titles and accessible triggers.
 - Do not introduce Ant Design, ProComponents, Material UI, or another component library into a shadcn admin system unless the user explicitly asks and migration/mixing is in scope.
+- In screenshot verification, confirm shadcn composition is visible: `Breadcrumb`, `Card`, `Table`, `Dialog`/`Sheet`/`Drawer`, `AlertDialog`, `Skeleton`, `Empty`, `ScrollArea`, semantic tokens, consistent gaps, and no raw div-only replacement for installed primitives.
 
 ## React + Ant Design / ProComponents
 
@@ -91,6 +93,7 @@ Rules:
 - Use Modal for short forms and Drawer for long forms/detail.
 - Use ConfigProvider/theme tokens instead of scattered CSS overrides.
 - Keep menu and route definitions typed/structured.
+- In screenshot verification, confirm Ant Design/ProComponents layouts use the expected token density, table/form/modal conventions, loading states, and no accidental shadcn/AntD visual mixing.
 
 ## Vue 3 + Element Plus
 

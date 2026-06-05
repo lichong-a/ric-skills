@@ -1,6 +1,6 @@
 ---
 name: ric-admin-console
-description: "Chinese enterprise admin-console skill for polished production management systems. Use for admin panels, CRUD consoles, RBAC, data tables, branded login pages, workbench first screens, approvals, SaaS back offices, dashboards, and internal tools. Supports layouts, auth states, grouped menus, actionable breadcrumbs with back navigation, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, skeleton-first loading, active ImageGen brand asset packs, shadcn-first React stack with shadcn retrieval, optional Ant Design fallback, UI-framework routing, deduplicated headers/toolbars, polished scrollbars, and China-market enterprise taste."
+description: "Chinese enterprise admin-console skill for polished production management systems. Use for admin panels, CRUD consoles, RBAC, data tables, branded login pages, workbench first screens, approvals, SaaS back offices, dashboards, and internal tools. Supports layouts, auth states, grouped menus, actionable breadcrumbs with back navigation, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, skeleton-first loading, active ImageGen brand asset packs, shadcn-first React stack with shadcn retrieval, optional Ant Design fallback, UI-framework routing, deduplicated headers/toolbars, polished scrollbars, browser screenshot validation loops, and China-market enterprise taste."
 ---
 # RIC Admin Console Skill
 
@@ -31,6 +31,7 @@ Read these references when the task needs detail:
 - `references/admin-visual-impact.md` for admin-adapted brand expression, hero/first-screen composition, CTA quality, visual assets, layout rhythm, motion restraint, and anti-template rules.
 - `references/framework-adapters.md` for shadcn-first React defaults, framework skill retrieval, and React/Vue/UI-library decision rules.
 - `references/acceptance-checklist.md` before declaring work complete.
+- `references/validation-loop.md` for browser screenshot verification after runnable UI work.
 - `../../references/ric-imagegen-fallback.md` when admin-specific bitmap assets are needed and built-in image generation is unavailable.
 
 ## 2. Design Read
@@ -425,3 +426,11 @@ Before finishing, read `references/acceptance-checklist.md` and verify:
 - Framework-specific skills and checks were used when a matching UI framework skill exists.
 - Ordinary CRUD, permission, audit, settings, and detail pages remain efficient and are not polluted by marketing-page hero patterns.
 - Repository lint/test/build or available validation commands pass.
+
+For runnable UI work, also read and execute `references/validation-loop.md`:
+
+- Use Browser or available browser automation to open the real app and capture screenshots. Do not rely only on terminal checks or mental review for UI quality.
+- Compare screenshots against the triggered skill points and acceptance checklist.
+- If screenshots reveal a mismatch, fix it and repeat run -> screenshot -> compare until all required checks pass.
+- Final handoff must list checked pages/states, viewport sizes, issues found, fixes made, verification loop count, and residual risks.
+- If screenshots cannot be completed because the project cannot run, dependencies/env/backend are missing, or browser tooling is unavailable, state the exact blocker and run the strongest available substitute. Do not claim screenshot verification passed without real screenshots.

@@ -134,3 +134,23 @@ Run this before declaring an admin-console task complete.
 - [ ] pnpm is used for Node work unless the repo clearly uses another package manager.
 - [ ] Available lint/test/build/static checks pass.
 - [ ] Key layouts were visually checked at common desktop sizes such as 1366x768, 1440x900, and 1920x1080 when a runnable app exists.
+
+## Browser Screenshot Verification
+
+- [ ] A skill point inventory was created for this task: triggered admin-console, framework, imagegen, visual, and quality requirements.
+- [ ] A runnable app was opened in Browser or another browser automation surface; terminal-only validation was not used as a substitute for UI verification.
+- [ ] Screenshots cover `1366x768`, `1440x900`, and `1920x1080`; responsive/narrow sizes were added when relevant.
+- [ ] Login/unauthenticated/session-expired screenshots were checked when auth is in scope.
+- [ ] Workbench/default-page screenshots were checked when a default entry page exists.
+- [ ] Main list page screenshots cover initial loading, empty, data, multi-select, batch delete, column settings, refresh, pagination or infinite-scroll states when applicable.
+- [ ] Detail page or detail modal/drawer screenshots were checked when detail behavior exists.
+- [ ] Create/edit modal or drawer screenshots include title, body, actions, validation/loading, and overflow behavior.
+- [ ] Permission-denied, hidden action, disabled action, or 403 screenshots were checked when RBAC/menu permissions are in scope.
+- [ ] Long sidebar, wide/long table, long dropdown, modal body, and drawer body screenshots confirm polished scrollbars and no double-scrollbar layout.
+- [ ] Generated asset screenshots confirm logo, app icon, avatar, background, empty-state art, banner, login panel, or workbench/module texture render from project paths without obscuring text/actions.
+- [ ] Screenshots confirm no duplicated page title, duplicated create button, duplicated selection-clear action, or missing permission-aware `批量删除`.
+- [ ] Screenshots confirm skeleton-first loading and visible data refresh loading text.
+- [ ] Screenshots confirm breadcrumb parent navigation works and detail -> list return state is preserved.
+- [ ] Any screenshot mismatch with skill requirements was fixed, then the relevant screenshot verification loop was repeated.
+- [ ] Final handoff includes pages/states checked, viewport sizes, issues found, fixes made, loop count, and residual risks.
+- [ ] If screenshots could not be completed, the exact blocker and substitute verification were reported; the work did not claim screenshot verification passed.
