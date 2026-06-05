@@ -23,6 +23,8 @@ Rules:
 - Show role-specific content. An operator, manager, auditor, and admin should not see identical workbench cards.
 - The top region should clarify identity, today's priorities, key risks, and next actions.
 - Use brand expression, visual assets, or background texture only when it improves orientation and hierarchy.
+- Use a header surface with adequate breadcrumb spacing when the workbench is not full-screen: breadcrumb, then dashboard hero/command header, then content cards.
+- Initial workbench data should render card skeletons, chart skeletons, avatar skeletons, and list row skeletons before data arrives.
 - Primary CTAs must be permission-aware and operational, such as create, approve, invite, import, configure, or handle.
 - Empty states should suggest next actions.
 - Do not create fake vanity metrics without business meaning.
@@ -45,6 +47,7 @@ Rules:
 - Login copy should be short, business-specific, and trustworthy.
 - Form fields must remain high contrast over visual backgrounds.
 - Loading, disabled, validation, expired-session, and authentication-failure states must be designed.
+- If no brand mark, login background, or default avatar exists, generate them as part of the Brand Asset Pack instead of using generic placeholders.
 - Avoid generic slogans, random blue-purple gradients, fake logos, and critical text embedded in images.
 
 ## Module Homepage
@@ -70,10 +73,17 @@ Use for CRUD and searchable datasets.
 
 Page structure:
 
-1. Breadcrumb/page title.
+1. Breadcrumb plus page header/title surface.
 2. Query card.
 3. Table card.
 4. Modal/drawer for create/edit/detail when appropriate.
+
+Header rules:
+
+- Breadcrumb parent items navigate upward and detail/list return state is preserved.
+- Breadcrumb and title/header have clear spacing.
+- The page title appears once. A table card should not repeat the same title unless it adds distinct dataset context.
+- A utility list uses a compact page header or light card-like title area; product/module list entries may use a command header with generated background texture when useful.
 
 Query card rules:
 

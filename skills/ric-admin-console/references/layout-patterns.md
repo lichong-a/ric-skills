@@ -75,9 +75,13 @@ Breadcrumb rules:
 - Start from the nearest system root, not necessarily "Home" if the app uses workbench as root.
 - Labels match menu and route names.
 - Last item is the current page and is not clickable.
-- Parent items navigate upward.
-- Detail pages should preserve list state when going back.
-- If browser history is not reliable, link to the parent route with saved query state.
+- Parent items must navigate upward through real links or click handlers; a breadcrumb that only displays text is incomplete.
+- Detail pages should preserve list filters, sorting, pagination, selected tab, and scroll position when going back.
+- If browser history is not reliable, empty, or points outside the admin app, navigate to the parent route with saved query state instead of calling `back()` blindly.
+- If a route has no explicit parent, derive it from route metadata, menu tree, or the nearest navigable ancestor.
+- Breadcrumb labels, menu labels, route titles, document titles, and page headers should come from shared route/menu metadata when practical.
+- Leave visible spacing between breadcrumbs and the page title/header; the breadcrumb line must not visually stick to the H1.
+- Verify parent breadcrumb clicks in the browser or router test, including detail -> list return-state behavior.
 
 ## Menus
 

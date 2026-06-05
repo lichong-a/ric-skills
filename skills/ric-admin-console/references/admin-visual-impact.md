@@ -151,17 +151,26 @@ Use existing brand/design-system assets first. If insufficient, actively invoke 
 
 Do not treat ImageGen as optional when a high-impact admin surface needs a bitmap asset. Once the requirement is clear, generate the asset or explicitly state why a generated bitmap is not needed.
 
+For a new admin system or a visual refresh, plan a coherent Brand Asset Pack before page implementation. The pack should cover the shell brand mark, generated backgrounds, default avatar, empty-state art, and any project-specific bitmap icon family that is not covered by the chosen UI icon library.
+
 Generate assets for:
 
+- Logo/brand mark exploration when the user has no existing brand asset.
+- Sidebar/topbar brand mark or app icon variants.
+- Project-specific module icon set when generic UI icons are insufficient.
+- Full small-icon pack when the user explicitly asks for all small icons to be generated; wire it through a shared icon component instead of scattering raw image tags.
 - Login visual panel or background.
 - Workbench/module background texture.
 - Empty-state illustrations.
 - Onboarding or announcement banner.
 - Report cover or export preview.
 - Neutral profile/avatar placeholder set.
+- Page-title or command-header background texture when the page needs a branded header surface.
 
 Triggers:
 
+- New admin system with no usable logo, default avatar, or visual identity assets.
+- User asks for unified LOGO, icons, background, or avatar assets.
 - `immersive` login page with no existing visual panel/background.
 - `product` workbench or module homepage that would otherwise become only cards and text.
 - Empty/error/import/export states that would otherwise be generic or visually blank.
@@ -172,7 +181,7 @@ Triggers:
 Do not generate for:
 
 - Ordinary CRUD table backgrounds.
-- Functional icons already covered by the chosen UI/icon library.
+- Functional operation icons already covered by the chosen UI/icon library, unless the user explicitly wants a custom generated icon set.
 - Logos, trademarks, QR codes, fake company marks, or fake trust badges.
 - Critical UI text that should be real HTML text.
 
@@ -187,11 +196,12 @@ Prompt direction:
 Workflow:
 
 1. Write an Asset Plan before code: asset name, use, intended aspect ratio, generation path, save path, and consuming component.
-2. If built-in ImageGen exists, use it and move/copy the selected project-bound result into the workspace.
-3. If built-in/MCP/IDE/agent-native ImageGen is missing or unavailable, use the RIC CLI fallback directly.
-4. If `OPENAI_API_KEY` is missing for CLI fallback, stop and ask for it.
-5. Wire saved assets into the app. Do not leave referenced assets only in a tool temp folder.
-6. At handoff, report the final asset paths and whether built-in ImageGen or CLI fallback was used.
+2. For a Brand Asset Pack, define the shared style first: shape language, color family, light/dark compatibility, icon weight, avatar tone, and background noise level.
+3. If built-in ImageGen exists, use it and move/copy the selected project-bound result into the workspace.
+4. If built-in/MCP/IDE/agent-native ImageGen is missing or unavailable, use the RIC CLI fallback directly.
+5. If `OPENAI_API_KEY` is missing for CLI fallback, stop and ask for it.
+6. Wire saved assets into the app. Do not leave referenced assets only in a tool temp folder.
+7. At handoff, report the final asset paths and whether built-in ImageGen or CLI fallback was used.
 
 ## Final Visual Self-Check
 

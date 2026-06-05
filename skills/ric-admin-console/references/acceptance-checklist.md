@@ -11,6 +11,17 @@ Run this before declaring an admin-console task complete.
 - [ ] Avatar dropdown contains personal information, system settings, and logout.
 - [ ] Menus support grouping, collapse/expand, active state, disabled/no-permission state, and external-link state when relevant.
 - [ ] Breadcrumbs show the current hierarchy and support upward navigation.
+- [ ] Parent breadcrumb clicks actually navigate upward; detail -> list preserves filters, sorting, pagination, tab, and scroll state.
+- [ ] Breadcrumb labels, route titles, menu labels, and page title come from consistent metadata where practical.
+- [ ] Breadcrumbs and page title/header have clear vertical spacing and do not visually stick together.
+
+## Planning
+
+- [ ] Planning captured whether RBAC roles, role assignment, permission points, and route/button permissions are needed.
+- [ ] Planning captured whether menu management, dynamic menus, and menu permission binding are needed.
+- [ ] Planning captured whether department/organization, tenant isolation, and data permissions are needed.
+- [ ] Planning captured whether third-party login/SSO/OAuth/OIDC/LDAP/DingTalk/Feishu/WeCom/SMS login is needed.
+- [ ] If the user did not specify these capabilities, the implementation stated its default assumptions before proceeding.
 
 ## Auth And Permissions
 
@@ -27,6 +38,7 @@ Run this before declaring an admin-console task complete.
 - [ ] Workbench cards are role/business-specific.
 - [ ] Calendar/todo/activity/quick-start/metrics/notices are meaningful for the domain.
 - [ ] Priority metrics, today's work, urgent risks, notices, and quick starts are visually prioritized.
+- [ ] Initial workbench loading uses skeletons for cards, charts, avatar/user summary, lists, and async widgets.
 - [ ] Primary CTAs are operational, permission-aware, and not duplicated.
 - [ ] Empty states provide useful next actions.
 
@@ -38,17 +50,21 @@ Run this before declaring an admin-console task complete.
 - [ ] Module homepages or onboarding pages use product-level brand expression when they are entry surfaces.
 - [ ] Strong visual treatment does not hide core navigation, form, or action paths.
 - [ ] Asset Plan was produced before implementation for `product` and `immersive` surfaces.
+- [ ] A Brand Asset Pack was planned for new/visually refreshed admin systems: logo/mark, app icon, module icon style, backgrounds, default avatar, and empty-state art.
 - [ ] Needed visual assets were actively generated with ImageGen or RIC CLI fallback when existing brand/design-system assets were insufficient.
 - [ ] Generated project-bound assets are saved in the workspace and wired into code.
 
 ## List Pages
 
 - [ ] Current page title appears once; breadcrumb, page header, hero, and table card do not repeat the same title as large/primary headings.
+- [ ] Page header/title area has enough spacing from the breadcrumb and uses a compact header, card-like header, command header, or visual hero header deliberately.
+- [ ] Title/subtitle remain real accessible text even when the header uses a generated background or icon.
 - [ ] Query card exists with business-relevant filters.
 - [ ] Search and reset actions work.
 - [ ] Enter triggers search where appropriate.
 - [ ] Search resets to page 1 unless infinite scroll is used.
 - [ ] Table loading, empty, and error states exist.
+- [ ] Initial list loading uses skeleton rows/cards where possible; data refresh uses loading spinner or overlay plus clear Chinese loading text.
 - [ ] Sortable columns show sort state.
 - [ ] Selection appears only when multi-select is supported.
 - [ ] Cross-page selection semantics are explicit when supported.
@@ -89,10 +105,13 @@ Run this before declaring an admin-console task complete.
 - [ ] Icons come from one family and icon-only actions have tooltips.
 - [ ] No meaningless fake data, `John Doe`, `Acme`, or generic placeholder business values.
 - [ ] Empty/error/loading states are visually aligned with the app.
+- [ ] Shell renders before content data; waiting content uses skeletons or shape-accurate placeholders instead of blank white regions.
+- [ ] Data loading uses spinner plus text when the wait is visible to the user.
 - [ ] Important empty states explain why the state exists and provide permission-aware next actions.
 - [ ] High-impact surfaces have clear brand signal, visual hierarchy, and CTA hierarchy without generic slogans.
 - [ ] Ordinary CRUD, permission, audit, settings, and detail pages remain utility-first and are not polluted by marketing-page hero patterns.
-- [ ] Needed login, empty-state, announcement, onboarding, report, profile, or background assets use existing brand assets or generated bitmap assets instead of generic placeholders.
+- [ ] Needed logo/mark, app icon, generated backgrounds, default avatar, empty-state art, announcement/onboarding/report/profile assets use existing brand assets or generated bitmap assets instead of generic placeholders.
+- [ ] Project-specific module/icon assets share one visual language; functional operation icons come from one UI icon family unless a custom generated icon set was explicitly requested.
 - [ ] If built-in image generation was unavailable for needed assets, the RIC CLI fallback path was used or the missing `OPENAI_API_KEY` was reported.
 - [ ] Scrollbars are hidden when unnecessary and polished when visible: transparent track, semi-transparent rounded thumb, thin width, and no arrows.
 - [ ] Shell, main content, cards, tables, modals, and drawers do not create double-scrollbar layouts.

@@ -8,16 +8,22 @@ Required behavior:
 
 - Current page title appears once.
 - Breadcrumb can include the current page label, but it must not create a second large title.
+- Breadcrumb and page title/header need deliberate vertical spacing, usually at least 12-16px, so hierarchy reads as two separate layers.
+- The title area must use one clear pattern: compact page header, card-like header, command header, or visual hero header.
+- Title and subtitle can sit in a light card/header surface with icon, status badge, background texture, or generated asset when the page type benefits from it.
+- A generated background or icon in the title area must be decorative/supportive; title, subtitle, and actions stay real HTML text and accessible controls.
 - A module hero or command header can own the page title; if so, the table card title should be compact or omitted.
 - Card titles describe the contained dataset or section only when they add information.
 - In shadcn projects, use shadcn `Breadcrumb` for hierarchy and one page header or command header for the primary title.
-- In shadcn projects, use `CardTitle` only for a distinct section or dataset label; do not repeat the page title in `CardTitle`.
+- In shadcn projects, use `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `Badge`, and `Button` for card-like headers when appropriate. Use `CardTitle` only for a distinct section or dataset label; do not repeat the page title in `CardTitle`.
 
 Avoid:
 
 - Breadcrumb current label + H1 + hero/card title all repeating the same text.
 - A blue tag or pill repeating the same page title above the same page title.
 - Large page title duplicated inside the table card.
+- Breadcrumbs visually glued to the H1 without spacing or a header surface.
+- Putting critical title/subtitle copy inside generated images.
 
 ## Query Card
 
@@ -302,14 +308,19 @@ shadcn mapping:
 
 Rules:
 
-- Use skeletons for page/card/table initial loading where possible.
+- Render the app shell first, then skeleton placeholders for every content region that is waiting on data.
+- Use skeletons for page/card/table/detail/form/chart initial loading where possible.
+- Waiting content needs a shape-accurate placeholder: cards use card skeletons, lists use row skeletons, detail pages use label/value skeletons, charts use chart blocks, avatars/images use circular or media skeletons.
 - Use button loading for submissions.
-- Use table loading for data refresh.
+- Use table loading for data refresh: keep current table shape when practical, show spinner or overlay plus concise Chinese text such as `正在加载会员数据...`.
+- Use spinner + text for data requests whose duration is user-visible; do not show a spinner alone for primary content.
+- Menus, avatar/profile blocks, notifications, dashboard cards, image assets, and async widgets need loading/empty/error states when fetched remotely.
+- Do not leave blank white regions while data loads.
 - Avoid full-screen loading after the shell has rendered unless route data is genuinely blocking.
 
 shadcn mapping:
 
-- Use `Skeleton` for card/table placeholders and `Spinner` composed inside `Button` for submissions.
+- Use `Skeleton` for card/table/detail/form/chart/media placeholders and `Spinner` composed inside `Button` or loading rows for submissions/refresh.
 - Do not build custom `animate-pulse` blocks when shadcn `Skeleton` exists.
 
 ## Error State

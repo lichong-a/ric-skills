@@ -131,6 +131,8 @@ Rules:
 - Use icons for actions such as refresh, settings, export, import, delete, edit, view, more.
 - Icon-only buttons need tooltip/accessible labels.
 - Destructive icons use error color only when the action is immediate or dangerous.
+- Logo, app icon, module icons, default avatar, and generated small-icon packs should share one visual language when they are project-specific assets.
+- If the user explicitly asks for all small icons to be generated, generate a coherent small-icon pack and consume it through shared icon components; do not mix random bitmap icons across pages.
 
 ## Generated Assets
 
@@ -138,6 +140,7 @@ Use generated bitmap assets only when they improve the product experience and ex
 
 Good generated admin assets:
 
+- Brand Asset Pack: logo/mark, app icon, sidebar/topbar mark, module icon style, default avatar, empty-state art, and background textures.
 - Login illustration or subtle background.
 - Empty-state illustrations for no data, no messages, no tasks, no permissions, import success/failure, and disconnected integrations.
 - Low-contrast dashboard texture backgrounds.
@@ -153,6 +156,16 @@ Rules:
 - Avoid critical text in images.
 - Avoid fake brands, fake logos, watermarks, QR codes, decorative mascots, and high-saturation marketing art.
 - Store project-bound assets in the workspace and reference them from code.
+
+## Loading And Skeletons
+
+Rules:
+
+- Render the shell first; never leave the main area blank while waiting for data.
+- Prefer skeletons for initial content loading: cards, table rows, detail label/value pairs, charts, avatar blocks, media, and form sections.
+- Use spinner plus concise Chinese text for visible data refreshes, such as table reload or remote search.
+- Skeleton shape should match the final content footprint closely enough to prevent layout jump.
+- Loading visuals should use the same radius, density, and tone as the final UI.
 
 ## Cards
 

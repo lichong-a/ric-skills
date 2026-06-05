@@ -1,6 +1,6 @@
 ---
 name: ric-admin-console
-description: "Chinese enterprise admin-console skill for polished production management systems. Use for admin panels, CRUD consoles, RBAC, data tables, branded login pages, workbench first screens, approvals, operations consoles, SaaS back offices, dashboards, and internal tools. Supports sidebar/topnav/sidebar-plus-topbar layouts, auth states, grouped menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, active ImageGen asset planning, shadcn-first React stack with shadcn skill retrieval, optional Ant Design/antd fallback by user choice or existing project convention, Element Plus/Naive UI/Arco routing, deduplicated headers/toolbars, polished scrollbars, generated visual assets, and China-market enterprise taste."
+description: "Chinese enterprise admin-console skill for polished production management systems. Use for admin panels, CRUD consoles, RBAC, data tables, branded login pages, workbench first screens, approvals, SaaS back offices, dashboards, and internal tools. Supports layouts, auth states, grouped menus, actionable breadcrumbs with back navigation, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, skeleton-first loading, active ImageGen brand asset packs, shadcn-first React stack with shadcn retrieval, optional Ant Design fallback, UI-framework routing, deduplicated headers/toolbars, polished scrollbars, and China-market enterprise taste."
 ---
 # RIC Admin Console Skill
 
@@ -12,14 +12,15 @@ Do not blindly apply marketing-page taste rules to every admin page. Admin conso
 
 1. Perform skill retrieval before work.
 2. Inspect the existing project before choosing libraries: `package.json`, router, UI library, layout components, table/form stack, state management, auth/permission model, request client, mock/data layer, and styling system.
-3. After detecting the UI framework, perform framework skill retrieval and read the relevant installed skill when available. For React admin systems without an established UI system, retrieve and use `shadcn` before component selection or code. For React + Ant Design/ProComponents/antd imports, retrieve and use `ant-design` and/or `antd`; follow their CLI/API lookup rules when writing antd component code.
-4. Prefer the existing stack. Do not replace shadcn/ui, Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
-5. Prefer PowerShell commands on Windows. Use pnpm over npm for Node projects.
-6. Do not change global Node/FNM configuration. Use temporary `fnm use` or `fnm exec` only when needed.
-7. Treat permissions as a first-class design input. Buttons, menus, routes, API calls, and bulk actions must have a shared permission source.
-8. Provide loading, empty, error, disabled, success, and unauthenticated states for every interactive area.
-9. Never create destructive database/cache/message/object-storage operations. Follow `ric-infra-safety` for infrastructure and namespace rules.
-10. Finish with repository validation: lint/test/build when available, framework-specific checks when available, and browser or screenshot checks for layout work.
+3. Before locking the implementation scope, run the admin capability check in section 2A when RBAC, menu management, SSO, tenant/data permissions, audit, or messaging scope is unclear.
+4. After detecting the UI framework, perform framework skill retrieval and read the relevant installed skill when available. For React admin systems without an established UI system, retrieve and use `shadcn` before component selection or code. For React + Ant Design/ProComponents/antd imports, retrieve and use `ant-design` and/or `antd`; follow their CLI/API lookup rules when writing antd component code.
+5. Prefer the existing stack. Do not replace shadcn/ui, Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
+6. Prefer PowerShell commands on Windows. Use pnpm over npm for Node projects.
+7. Do not change global Node/FNM configuration. Use temporary `fnm use` or `fnm exec` only when needed.
+8. Treat permissions as a first-class design input. Buttons, menus, routes, API calls, and bulk actions must have a shared permission source.
+9. Render the shell and skeleton-first placeholders before data arrives. Provide loading, empty, error, disabled, success, and unauthenticated states for every interactive area.
+10. Never create destructive database/cache/message/object-storage operations. Follow `ric-infra-safety` for infrastructure and namespace rules.
+11. Finish with repository validation: lint/test/build when available, framework-specific checks when available, and browser or screenshot checks for layout work.
 
 Read these references when the task needs detail:
 
@@ -44,15 +45,33 @@ Examples:
 - `Reading this as: SaaS console login plus workbench for tenant admins, with sidebar-plus-topbar layout, product/immersive visual modes, medium-high density, tenant permissions, and React + shadcn/ui.`
 - `Reading this as: approval workflow console for department managers, with topnav-only layout, product visual mode, medium density, route-level permissions, and Vue 3 + Element Plus.`
 
-Ask only one clarification if the layout mode, auth model, or framework choice cannot be inferred from the repo and materially changes implementation.
+Ask clarification only when layout mode, auth model, framework choice, or capability scope cannot be inferred from the repo and materially changes implementation.
 
-## 3. Asset Plan
+## 2A. Admin Capability Questions
+
+When the user asks to create or substantially change an admin system and the scope is not already explicit, ask or record decisions for these capabilities before implementation:
+
+- RBAC roles, role assignment, permission points, and route/button permissions.
+- Menu management, dynamic menus, hidden/disabled/no-permission items, and menu permission binding.
+- Department/organization structure, tenant isolation, and data permission scope.
+- Third-party login, SSO, OAuth/OIDC, LDAP/AD, DingTalk, Feishu, WeCom, or SMS login.
+- Audit logs, login records, approval/workflow, messages/notifications, import/export, and async task center.
+
+If the user does not answer and implementation must proceed, use this default: local account login, basic RBAC, static route-derived menus with permission metadata, no third-party login, no tenant isolation, and audit/message modules only when requested by the page scope. State the assumption in the design read or handoff.
+
+## 3. Asset Plan And Brand Asset Pack
 
 After the design read and before implementation, create a concise Asset Plan:
 
 `Asset Plan: <needed assets or none>, <source: existing brand asset | ImageGen | RIC CLI fallback | not needed>, <save path>, <where used>.`
 
 Active ImageGen is required when a `product` or `immersive` surface needs visual differentiation and no suitable existing brand/design-system asset exists. This includes login visual panels, workbench/module backgrounds, onboarding/announcement banners, empty-state illustrations, report/export covers, and dashboard/command-center backgrounds.
+
+For a new or visually refreshed admin system, also create a Brand Asset Pack plan:
+
+`Brand Asset Pack: <logo/mark>, <module icon style>, <background textures>, <default avatar>, <empty-state art>, <save paths>, <consuming components>.`
+
+Generate or reuse a consistent set of admin brand assets: logo/mark, app icon, sidebar/topbar brand mark, module or navigation icon style, login/workbench/module backgrounds, default avatar, empty-state art, and report/announcement visuals when relevant.
 
 Rules:
 
@@ -62,6 +81,7 @@ Rules:
 - If image generation is needed but no built-in/agent-native tool is available, read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly.
 - The CLI fallback requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
 - `utility` pages do not need decorative generation unless they contain important empty, error, import/export, report, or onboarding states.
+- Use one visual language for logo, generated assets, avatar placeholders, and project-specific bitmap icons. Functional operation icons may use the existing UI icon library by default, but they must match the generated brand system in weight, size, and tone. If the user asks for all small icons to be generated, create a full project icon pack with ImageGen or CLI fallback and wire it through a shared icon component.
 - At final handoff, report generated asset paths or state that no image asset was needed for this page type.
 
 ## 4. Stack Selection
@@ -140,6 +160,9 @@ Admin systems usually need fewer generated visuals than marketing pages, but the
 
 Generate assets for:
 
+- Logo/brand mark and app icon when no suitable brand asset exists.
+- Sidebar/topbar brand mark variants.
+- Generated small icon pack when the user asks for all small icons to be generated, or when project-specific module icons are not covered by the chosen icon library.
 - Login page illustration, visual panel, or brand background.
 - Empty states for workbench, list pages, import/export, messages, tasks, and permissions.
 - Low-contrast dashboard texture or module background.
@@ -220,9 +243,11 @@ Menus:
 Breadcrumbs:
 
 - Show the current page location in the system hierarchy.
-- Let users navigate upward.
-- Preserve list state when returning from detail pages.
+- Let users navigate upward with real links or click handlers on parent items.
+- Preserve list filters, sorting, pagination, tab, and scroll state when returning from detail pages.
+- If browser history is unreliable or empty, navigate to the parent route with saved query/state instead of doing nothing.
 - Keep breadcrumb labels consistent with route titles and menu labels.
+- Leave clear spacing between breadcrumbs and the page title/header; never make them visually stick together.
 
 Avatar dropdown:
 
