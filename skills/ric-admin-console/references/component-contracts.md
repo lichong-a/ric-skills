@@ -10,6 +10,8 @@ Required behavior:
 - Breadcrumb can include the current page label, but it must not create a second large title.
 - A module hero or command header can own the page title; if so, the table card title should be compact or omitted.
 - Card titles describe the contained dataset or section only when they add information.
+- In shadcn projects, use shadcn `Breadcrumb` for hierarchy and one page header or command header for the primary title.
+- In shadcn projects, use `CardTitle` only for a distinct section or dataset label; do not repeat the page title in `CardTitle`.
 
 Avoid:
 
@@ -39,6 +41,12 @@ Recommended fields:
 - Time range.
 - Created/updated by.
 
+shadcn mapping:
+
+- Use shadcn `Card` for the query panel, `FieldGroup`/`Field` for form layout, `Input`, `Select`, installed date controls, and `Button` for search/reset.
+- Use `InputGroup` when an input contains an icon or inline action.
+- Do not build query forms from raw styled divs when the project has shadcn field/form primitives.
+
 ## Table
 
 Required behavior:
@@ -61,6 +69,13 @@ Column conventions:
 - Time fields use consistent format.
 - Actions last and fixed right when table is wide.
 
+shadcn mapping:
+
+- Use TanStack Table for table state when selection, sorting, pagination, column visibility, remote loading, or row actions are non-trivial.
+- Render with shadcn `Table`, `Checkbox`, `Badge`, `Button`, `DropdownMenu`, `Pagination`, `Skeleton`, `Empty`, and `Alert`/retry controls as appropriate.
+- Use shadcn `ScrollArea` or the shared `ric-scroll-region` wrapper for wide or long table regions.
+- Keep column definitions structured so column settings, export, detail labels, and table renderers share one model where practical.
+
 Selection:
 
 - Show selected count.
@@ -79,6 +94,14 @@ Selection toolbar rules:
 - If selection is cross-page, clarify whether the operation applies to selected rows only or all matching records.
 - If user lacks delete permission, hide or disable `批量删除` with an explanation.
 - Clearing selection must clear all selected row keys, including preserved cross-page keys.
+
+shadcn selection mapping:
+
+- Use `Checkbox` for row and header selection.
+- Use a compact selection bar composed from `Card`, `Alert`, or a toolbar region plus `Button` variants.
+- Use `Button variant="destructive"` for `批量删除`.
+- Use `AlertDialog` for batch delete confirmation and include selected count plus cross-page scope.
+- Use one clear button labelled `清空选择`; do not add a second cancel/clear control.
 
 Column settings:
 
@@ -124,6 +147,12 @@ Rules:
 - Do not put full-page workflows in modal.
 - Destructive actions require confirmation.
 
+shadcn mapping:
+
+- Use `Dialog` for short create/edit/detail flows and `AlertDialog` for destructive confirmation.
+- Always include `DialogTitle`/`AlertDialogTitle`; use a visually hidden title only when the visual design truly has an equivalent title.
+- Use shadcn `Button` variants and `Spinner` composition for pending states; do not invent `isLoading` props.
+
 ## Drawer
 
 Use for:
@@ -138,6 +167,12 @@ Rules:
 - Use sticky footer for long editable drawers.
 - Keep title and primary status visible.
 - Preserve page context behind it.
+
+shadcn mapping:
+
+- Use `Sheet` or `Drawer` based on the project shadcn setup and viewport convention.
+- Always include `SheetTitle` or `DrawerTitle`.
+- Keep long-form actions in a sticky footer region inside the sheet/drawer content.
 
 ## Form
 
@@ -160,6 +195,12 @@ Rules:
 - Provide field-level validation for common errors.
 - Provide form-level error for server failures.
 
+shadcn mapping:
+
+- Use `FieldGroup`, `Field`, `FieldLabel`, `FieldDescription`, and validation states from the shadcn skill.
+- Put validation on `data-invalid` plus `aria-invalid`.
+- Use `ToggleGroup` for 2-7 option mode switches; do not loop buttons with manual active styling.
+
 ## Action Buttons
 
 Placement:
@@ -177,6 +218,12 @@ Rules:
 - Do not show impossible actions.
 - Icon-only buttons need accessible labels/tooltips.
 - Bulk action availability follows selection state.
+
+shadcn mapping:
+
+- Use `Button` variants and shadcn icon rules; icons inside buttons use `data-icon`.
+- Use `Tooltip` for icon-only actions and `DropdownMenu` for overflow row actions.
+- Use semantic variants before custom color classes.
 
 ## Toolbar
 
@@ -200,6 +247,11 @@ Rules:
 - Column settings appears once per table.
 - Do not place create actions on both left and right toolbars.
 - Keep destructive batch actions visually separate from neutral tools.
+
+shadcn mapping:
+
+- Compose toolbar actions with `Button`, `DropdownMenu`, `Tooltip`, `Separator`, and `ToggleGroup` when density or view mode is selectable.
+- Keep neutral table tools on the right and selection/batch actions near the selected-count region.
 
 ## Status Tags
 
@@ -241,6 +293,11 @@ Required qualities:
 - Respect permissions. If the user cannot create data, do not show create CTA.
 - Avoid decorative emptiness with no instruction.
 
+shadcn mapping:
+
+- Use shadcn `Empty` when installed; otherwise add it through the shadcn CLI or use the existing local empty-state component.
+- Pair empty-state CTA with permission checks and avoid raw placeholder markup.
+
 ## Loading State
 
 Rules:
@@ -249,6 +306,11 @@ Rules:
 - Use button loading for submissions.
 - Use table loading for data refresh.
 - Avoid full-screen loading after the shell has rendered unless route data is genuinely blocking.
+
+shadcn mapping:
+
+- Use `Skeleton` for card/table placeholders and `Spinner` composed inside `Button` for submissions.
+- Do not build custom `animate-pulse` blocks when shadcn `Skeleton` exists.
 
 ## Error State
 

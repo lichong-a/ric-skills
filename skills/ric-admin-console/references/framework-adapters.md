@@ -24,6 +24,8 @@ After inspection and before writing framework-specific UI code, actively retriev
 
 Detection signals:
 
+- React/Vite/Next/React Router project with no established mature UI library: retrieve `shadcn` and treat it as the recommended default.
+- `components.json`, `@/components/ui`, `~/components/ui`, `shadcn`, `@radix-ui/*`, `class-variance-authority`, `tailwindcss`, `tailwind.config.*`, `app/globals.css` with shadcn tokens, or existing shadcn imports: retrieve `shadcn`.
 - `antd`, `@ant-design/pro-components`, `@ant-design/icons`, `ant-design-pro`, `@umijs/*`: retrieve `ant-design` and/or `antd`.
 - `element-plus`, `@element-plus/icons-vue`: retrieve `element-plus` or `element`.
 - `naive-ui`: retrieve `naive-ui` or `naive`.
@@ -38,9 +40,37 @@ Rules:
 - Do not override framework internals or broad generated class names when token/theme APIs exist.
 - Include framework-specific checks in final validation when available.
 
+## React + shadcn/ui
+
+Use as the default for new React admin systems and for React projects that do not already have a mature UI library or design system.
+
+Preferred tools:
+
+- shadcn/ui source components for layout, navigation, data display, forms, overlays, feedback, and empty states.
+- Tailwind semantic tokens and CSS variables from the project shadcn config.
+- Radix/base primitives through shadcn components, not direct ad hoc primitive wiring unless local components already do that.
+- TanStack Table with shadcn `Table` when sorting, pagination, column visibility, row selection, remote loading, or cross-page selection needs explicit state.
+- The project's existing router, request client, auth store, and icon library from shadcn project context.
+
+Rules:
+
+- Retrieve and apply the `shadcn` skill before writing shadcn code, even if you have used shadcn before.
+- Run shadcn commands with the project's package runner. Prefer `pnpm dlx shadcn@latest` when pnpm is the project manager; otherwise follow the package manager detected by `components.json`, lockfile, or `package.json`.
+- Before selecting components, run or refresh `shadcn info --json` and use its aliases, `isRSC`, Tailwind version, CSS file, base primitive, icon library, resolved paths, framework, package manager, and preset.
+- Before implementing or fixing shadcn components, run `shadcn docs <component...>` and fetch/read the returned docs or examples for the exact components being used.
+- Check installed components first; do not import a shadcn component that has not been added, and do not re-add one that already exists.
+- Use `shadcn search`, `view`, and `add --dry-run`/`--diff` when selecting or updating registry components. Do not fetch raw registry or GitHub component files manually.
+- Use shadcn components before custom markup: `Sidebar`, `Breadcrumb`, `Card`, `Table`, `Button`, `DropdownMenu`, `Dialog`, `Sheet`, `Drawer`, `AlertDialog`, `Form`/`Field`, `Input`, `Select`, `Checkbox`, `Badge`, `Avatar`, `Tabs`, `Pagination`, `Empty`, `Skeleton`, `Alert`, `Separator`, `Tooltip`, `ScrollArea`, `sonner`, and `Chart` when available.
+- Follow shadcn composition rules: complete `Card` structure, grouped menu/select items, required dialog/sheet/drawer titles, `AvatarFallback`, `asChild`/`render` according to the detected base, `data-invalid`/`aria-invalid` validation, and `data-icon` icons in buttons.
+- Follow shadcn styling rules: semantic tokens, `cn()`, `gap-*` instead of `space-*`, `size-*` for square dimensions, no raw color utilities for semantic state, no manual overlay z-index, and no broad overrides of generated UI components.
+- For admin list pages, pair TanStack state with shadcn `Table`, `Checkbox`, `DropdownMenu`, `Button`, `Badge`, `Pagination`, `Skeleton`, `Empty`, and `AlertDialog` so selection, sorting, column visibility, batch delete, loading, empty, and confirmation behavior stay explicit.
+- For forms and query cards, use shadcn form/field primitives and the project validation approach; avoid raw div-only form layouts.
+- For modals and long forms, use `Dialog` for short flows and `Sheet`/`Drawer` for long flows, with required titles and accessible triggers.
+- Do not introduce Ant Design, ProComponents, Material UI, or another component library into a shadcn admin system unless the user explicitly asks and migration/mixing is in scope.
+
 ## React + Ant Design / ProComponents
 
-Use when the project already has Ant Design or for new React admin systems.
+Use when the project already has Ant Design, when the user explicitly chooses Ant Design, or when the team/business requirement explicitly needs Ant Design Pro patterns. Ant Design is the secondary React option for new admin systems; do not choose it by default when shadcn is viable.
 
 Preferred tools:
 
@@ -51,6 +81,8 @@ Preferred tools:
 Rules:
 
 - Retrieve and apply `ant-design` and/or `antd` skill before writing Ant Design component code.
+- If the project is not already AntD-based and the user did not choose AntD, present shadcn as the recommended React option and ask before adding AntD.
+- Do not mix AntD/ProComponents with shadcn source components unless the repo already does so or the user explicitly approves a migration strategy.
 - If `@ant-design/cli` is available, query APIs with `antd info <Component> --format json` before using component props for Table, Button, Form, Select, Modal, Drawer, Dropdown, Menu, Pagination, ConfigProvider, ProTable, and other changed components.
 - Query tokens/semantic hooks before custom styling; prefer ConfigProvider/theme tokens, component tokens, `classNames`, and `styles` over global `.ant-*` overrides.
 - After changing antd code, run `antd lint <changed-path> --format json` when the CLI is available.

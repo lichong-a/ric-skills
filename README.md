@@ -29,7 +29,7 @@ The install name is the `name:` field in each `SKILL.md`, not necessarily the fo
 
 Use the most specific skill for the task:
 
-- Use `ric-admin-console` for admin panels, CRUD consoles, permissions, tables, back offices, operations consoles, workflow systems, Chinese enterprise management UI, branded admin login pages, visual workbenches, SaaS console homepages, dashboard first screens, active ImageGen asset planning, framework-specific UI skill routing, deduplicated list pages, polished scrollbars, and admin-specific generated assets.
+- Use `ric-admin-console` for admin panels, CRUD consoles, permissions, tables, back offices, operations consoles, workflow systems, Chinese enterprise management UI, branded admin login pages, visual workbenches, SaaS console homepages, dashboard first screens, active ImageGen asset planning, shadcn-first React admin implementation, optional Ant Design fallback by user choice or existing project convention, framework-specific UI skill routing, deduplicated list pages, polished scrollbars, and admin-specific generated assets.
 - Use `ric-design-taste-frontend` for public landing pages, portfolios, marketing pages, and visual redesigns. It routes admin-console work to `ric-admin-console`, including admin pages that need strong brand expression.
 - Use `ric-image-to-code` when a screenshot or generated design reference must be analyzed and implemented.
 - Use `ric-infra-safety` for Elasticsearch, Kafka, TimescaleDB/PostgreSQL, Redis, NATS, MinIO, migrations, schemas, topics, indices, keys, and storage.
@@ -66,7 +66,7 @@ The CLI fallback requires `OPENAI_API_KEY` in the environment. Do not hardcode k
 
 | Folder | Install name | Use for |
 | --- | --- | --- |
-| `ric-admin-console` | `ric-admin-console` | Chinese enterprise admin systems, CRUD, permissions, tables, branded login pages, visual workbenches, SaaS console homepages, framework-specific UI skill routing, active ImageGen assets, list-page quality, detail pages, profile center, workflow, logs, settings. |
+| `ric-admin-console` | `ric-admin-console` | Chinese enterprise admin systems, CRUD, permissions, tables, branded login pages, visual workbenches, SaaS console homepages, shadcn-first React stack, optional Ant Design fallback, framework-specific UI skill routing, active ImageGen assets, list-page quality, detail pages, profile center, workflow, logs, settings. |
 | `ric-agent-operating-rules` | `ric-agent-operating-rules` | Baseline agent behavior: skill retrieval, PowerShell, non-destructive work, verification. |
 | `ric-infra-safety` | `ric-infra-safety` | Shared infrastructure reuse, ric namespace rules, secrets, non-destructive data operations. |
 | `ric-node-pnpm` | `ric-node-pnpm` | Node 24/FNM/pnpm 11 workflows and lockfile hygiene. |
@@ -93,7 +93,7 @@ The CLI fallback requires `OPENAI_API_KEY` in the environment. Do not hardcode k
 - Workbench default page with dashboard hero, command header, or branded overview when it is the primary entry surface.
 - List pages with query cards, table cards, create/edit/delete, sorting, pagination, cross-page selection, column settings, refresh, import/export.
 - Main content page quality rules: one page title, one create action, one selection-clear action, permission-aware batch delete, no duplicated refresh/settings controls.
-- Framework routing for Ant Design/antd, Element Plus, Naive UI, and Arco; detected framework skills should be retrieved and used before component implementation.
+- Framework routing with shadcn-first React defaults; React implementations should retrieve and use the `shadcn` skill, while Ant Design/antd is a secondary path for explicit user choice or existing AntD projects; Element Plus, Naive UI, and Arco keep their matching retrieval rules.
 - Detail pages, profile center, permissions, approval workflows, dashboards, settings, audit logs, messages, import/export, async task center, and error pages.
 - Active ImageGen asset planning and generated or existing bitmap assets for login pages, empty states, announcements, onboarding, report covers, profile placeholders, and subtle dashboard textures when brand/design-system assets are insufficient.
 - Polished scrollbar and overflow behavior: no double scrollbars, hidden when unnecessary, transparent track, semi-transparent rounded thumb, thin width, and no arrows.

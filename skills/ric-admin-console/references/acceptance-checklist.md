@@ -101,7 +101,13 @@ Run this before declaring an admin-console task complete.
 
 - [ ] Existing framework and UI library conventions are respected.
 - [ ] Matching framework skill retrieval was performed when a known UI framework was detected.
-- [ ] React + Ant Design/ProComponents work used `ant-design` and/or `antd` skill; antd CLI API/token/demo/lint checks were used when available.
+- [ ] New React admin projects or React projects without an established UI library used shadcn-first instead of defaulting to Ant Design.
+- [ ] React + shadcn work retrieved and read the `shadcn` skill before selecting components or writing code.
+- [ ] React + shadcn work used the project package runner for `shadcn info`, checked installed components, and used `shadcn docs`, `search`, `view`, `add --dry-run`, or `add --diff` when choosing or updating components.
+- [ ] React + shadcn list/query/table/modal/empty/loading work used shadcn components and TanStack Table where appropriate instead of raw custom div structures.
+- [ ] React + shadcn work did not introduce Ant Design/ProComponents unless the user explicitly chose AntD or the existing project was already AntD-based.
+- [ ] React + Ant Design/ProComponents work had a user choice, existing AntD project basis, or explicit business/team requirement; it used `ant-design` and/or `antd` skill, and antd CLI API/token/demo/lint checks were used when available.
+- [ ] Existing React + AntD projects were not silently mixed with shadcn; migration or mixed-stack work had explicit user approval.
 - [ ] Element Plus, Naive UI, and Arco work retrieved matching skills when available or checked installed version plus official API when no local skill existed.
 - [ ] Routes, menus, permissions, columns, forms, and status dictionaries use structured data where practical.
 - [ ] No duplicated hardcoded menus scattered across pages.

@@ -1,6 +1,6 @@
 ---
 name: ric-admin-console
-description: "Chinese enterprise admin-console design and implementation skill for polished, information-dense, production-ready management systems with admin-adapted high-end visual design. Use for admin panels, CRUD consoles, permission systems, data tables, branded login pages, visual workbench first screens, workflow approval systems, operations consoles, SaaS back offices, internal tools, dashboards, and China-market enterprise control panels. Supports sidebar, top navigation, sidebar-plus-topbar layouts, authenticated and unauthenticated states, grouped collapsible menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, active ImageGen asset planning, framework-specific skill retrieval for Ant Design/antd/Element Plus/Naive UI/Arco, deduplicated page headers/toolbars, polished scrollbars, generated visual assets, brand expression, and China-market enterprise visual taste across React, Vue, and existing project stacks."
+description: "Chinese enterprise admin-console skill for polished production management systems. Use for admin panels, CRUD consoles, RBAC, data tables, branded login pages, workbench first screens, approvals, operations consoles, SaaS back offices, dashboards, and internal tools. Supports sidebar/topnav/sidebar-plus-topbar layouts, auth states, grouped menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, active ImageGen asset planning, shadcn-first React stack with shadcn skill retrieval, optional Ant Design/antd fallback by user choice or existing project convention, Element Plus/Naive UI/Arco routing, deduplicated headers/toolbars, polished scrollbars, generated visual assets, and China-market enterprise taste."
 ---
 # RIC Admin Console Skill
 
@@ -12,8 +12,8 @@ Do not blindly apply marketing-page taste rules to every admin page. Admin conso
 
 1. Perform skill retrieval before work.
 2. Inspect the existing project before choosing libraries: `package.json`, router, UI library, layout components, table/form stack, state management, auth/permission model, request client, mock/data layer, and styling system.
-3. After detecting the UI framework, perform framework skill retrieval and read the relevant installed skill when available. For React + Ant Design/ProComponents/antd imports, retrieve and use `ant-design` and/or `antd`; follow their CLI/API lookup rules when writing antd component code.
-4. Prefer the existing stack. Do not replace Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
+3. After detecting the UI framework, perform framework skill retrieval and read the relevant installed skill when available. For React admin systems without an established UI system, retrieve and use `shadcn` before component selection or code. For React + Ant Design/ProComponents/antd imports, retrieve and use `ant-design` and/or `antd`; follow their CLI/API lookup rules when writing antd component code.
+4. Prefer the existing stack. Do not replace shadcn/ui, Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
 5. Prefer PowerShell commands on Windows. Use pnpm over npm for Node projects.
 6. Do not change global Node/FNM configuration. Use temporary `fnm use` or `fnm exec` only when needed.
 7. Treat permissions as a first-class design input. Buttons, menus, routes, API calls, and bulk actions must have a shared permission source.
@@ -28,7 +28,7 @@ Read these references when the task needs detail:
 - `references/component-contracts.md` for query cards, tables, pagination, modals, drawers, forms, actions, status UI.
 - `references/china-enterprise-visual-style.md` for Chinese enterprise visual taste, density, Chinese typography, color, spacing, and anti-template rules.
 - `references/admin-visual-impact.md` for admin-adapted brand expression, hero/first-screen composition, CTA quality, visual assets, layout rhythm, motion restraint, and anti-template rules.
-- `references/framework-adapters.md` for framework skill retrieval and React/Vue/UI-library decision rules.
+- `references/framework-adapters.md` for shadcn-first React defaults, framework skill retrieval, and React/Vue/UI-library decision rules.
 - `references/acceptance-checklist.md` before declaring work complete.
 - `../../references/ric-imagegen-fallback.md` when admin-specific bitmap assets are needed and built-in image generation is unavailable.
 
@@ -40,8 +40,8 @@ Before implementation, state one concise design read:
 
 Examples:
 
-- `Reading this as: user/role management for operations staff, with sidebar-plus-topbar layout, utility visual mode, high table density, RBAC permissions, and React + Ant Design Pro.`
-- `Reading this as: SaaS console login plus workbench for tenant admins, with sidebar-plus-topbar layout, product/immersive visual modes, medium-high density, tenant permissions, and React + Ant Design Pro.`
+- `Reading this as: user/role management for operations staff, with sidebar-plus-topbar layout, utility visual mode, high table density, RBAC permissions, and React + shadcn/ui + TanStack Table.`
+- `Reading this as: SaaS console login plus workbench for tenant admins, with sidebar-plus-topbar layout, product/immersive visual modes, medium-high density, tenant permissions, and React + shadcn/ui.`
 - `Reading this as: approval workflow console for department managers, with topnav-only layout, product visual mode, medium density, route-level permissions, and Vue 3 + Element Plus.`
 
 Ask only one clarification if the layout mode, auth model, or framework choice cannot be inferred from the repo and materially changes implementation.
@@ -68,14 +68,17 @@ Rules:
 
 Use multi-stack decision-making:
 
-1. Existing React + Ant Design: use Ant Design, ProComponents, ProLayout, ProTable, Modal/Drawer/Form patterns already present.
+1. Existing React + shadcn/ui: use shadcn source components, Tailwind semantic tokens, Radix/base primitives, local aliases, and TanStack Table when table state needs explicit control.
 2. Existing Vue + Element Plus: use Element Plus layout, menu, table, form, dialog/drawer, pagination, popconfirm patterns.
 3. Existing Naive UI or Arco: stay within that library and mirror its density/token system.
 4. Existing custom design system: use the local primitives and only add external packages when missing capabilities are real.
-5. New React project without user preference: recommend React + Vite or Next + Ant Design + ProComponents.
-6. New Vue project without user preference: recommend Vue 3 + Vite + Element Plus.
+5. Existing React + Ant Design: keep Ant Design, ProComponents, ProLayout, ProTable, Modal/Drawer/Form patterns already present unless the user explicitly chooses a migration.
+6. New React project or React project without an established UI system: recommend React + Vite or Next + shadcn/ui + Tailwind + Radix primitives + TanStack Table.
+7. New Vue project without user preference: recommend Vue 3 + Vite + Element Plus.
 
-One UI system per app. Do not mix Ant Design and Element Plus, Ant Design and Material, or shadcn and ProComponents unless the repo already does so and migration is out of scope.
+React default: shadcn-first. Ant Design/ProComponents is the secondary React option and should be used only when the user chooses it, the project is already deeply AntD-based, or the team/business requirement explicitly needs Ant Design Pro patterns. If a React project already uses AntD and the task suggests shadcn, ask the user to choose between the recommended shadcn direction and preserving AntD before mixing or migrating.
+
+One UI system per app. Do not mix Ant Design and Element Plus, Ant Design and Material, or shadcn and ProComponents unless the repo already does so and migration is explicitly in scope.
 
 Before writing framework-specific component code, read `references/framework-adapters.md` and apply its skill retrieval protocol. If a matching skill is unavailable, use the existing project version and official API documentation rather than inventing props, events, tokens, or component names.
 
