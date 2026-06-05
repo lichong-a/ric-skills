@@ -19,6 +19,10 @@ Apply these rules before the upstream-derived instructions below:
 9. Complete the implementation or artifact fully. Do not leave TODO placeholders, omitted files, fake data without labeling, or instructions for the user to assemble missing parts.
 10. Verify the result with the repository's available lint, test, build, static validation, or visual checks before declaring completion.
 
+## RIC Imagegen Fallback
+
+If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, do not stop. Read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly. The CLI path requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
+
 ---
 # HARD OUTPUT RULE — READ FIRST
 
@@ -1002,5 +1006,3 @@ Generate frontend reference images that feel:
 - implementation-friendly
 
 The result should look like a top-tier website concept with strong imagery, confident creativity, and generous spacing - not a dense, repetitive AI layout.
-
-

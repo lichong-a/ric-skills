@@ -28,6 +28,7 @@ Read these references when the task needs detail:
 - `references/china-enterprise-visual-style.md` for Chinese enterprise visual taste, density, Chinese typography, color, spacing, and anti-template rules.
 - `references/framework-adapters.md` for React/Vue/UI-library decision rules.
 - `references/acceptance-checklist.md` before declaring work complete.
+- `../../references/ric-imagegen-fallback.md` when admin-specific bitmap assets are needed and built-in image generation is unavailable.
 
 ## 2. Design Read
 
@@ -71,7 +72,31 @@ Avoid:
 - Excessive gradients, glassmorphism, huge round cards, animated backgrounds, and overbuilt motion.
 - Default-looking blue-white-gray templates with no hierarchy, poor spacing, generic fake metrics, or meaningless charts.
 
-## 5. Required Shell Layouts
+## 5. Admin Asset Generation
+
+Admin systems usually need fewer generated visuals than marketing pages, but they still benefit from deliberate project-specific assets. When the system needs visual assets and no suitable existing brand/design-system asset exists, invoke the relevant agent image generation ability instead of shipping generic placeholders.
+
+Generate assets for:
+
+- Login page illustration or background.
+- Empty states for workbench, list pages, import/export, messages, tasks, and permissions.
+- Low-contrast dashboard texture or module background.
+- Announcement or onboarding banner.
+- Product/module icon concepts when no icon system exists.
+- Profile/avatar placeholder sets when the system needs neutral defaults.
+- Report cover or export preview artwork when the product has document/report flows.
+
+Rules:
+
+- Prefer existing brand assets and UI-library icon systems first for functional icons.
+- Generated admin assets must be quiet, enterprise-refined, low-noise, and secondary to the data.
+- Do not generate decorative hero art for normal CRUD pages.
+- Do not put critical UI text inside generated images.
+- Do not use fake logos, trademarks, QR codes, watermarks, fake company names, or fake business data inside generated images.
+- Save project-bound generated assets into the workspace and wire them into the app; never leave referenced assets only in a tool temp folder.
+- If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly. The CLI path requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
+
+## 6. Required Shell Layouts
 
 Support these layout modes. Pick one based on the brief or existing project:
 
@@ -102,7 +127,7 @@ All modes require:
 - Responsive collapse behavior for narrow screens.
 - Main content scrolling without breaking fixed top/header regions.
 
-## 6. Authentication And Permissions
+## 7. Authentication And Permissions
 
 Model these states explicitly:
 
@@ -120,7 +145,7 @@ Rules:
 - Sensitive back-end operations must still enforce permissions server-side.
 - When a user lacks permission, prefer a clean disabled state or 403 page over broken invisible failures.
 
-## 7. Navigation And Breadcrumbs
+## 8. Navigation And Breadcrumbs
 
 Menus:
 
@@ -144,7 +169,7 @@ Avatar dropdown:
 - Optional items: account security, notification preferences, theme, tenant switch, message center.
 - Logout must be explicit and safe; clear tokens/session and redirect to login.
 
-## 8. Default Workbench
+## 9. Default Workbench
 
 Most admin systems should open to a workbench page.
 
@@ -160,7 +185,7 @@ Include relevant cards:
 
 Do not use meaningless fake data. If mock data is necessary, make it domain-specific and replaceable.
 
-## 9. List Page Protocol
+## 10. List Page Protocol
 
 A standard list page contains a query card and a table card.
 
@@ -201,7 +226,7 @@ Table footer:
 - Use pagination by default.
 - Infinite scroll mode removes pagination but must show loading, reached-end, and retry states.
 
-## 10. Modal, Drawer, And Form Protocol
+## 11. Modal, Drawer, And Form Protocol
 
 Modal:
 
@@ -222,7 +247,7 @@ Forms:
 - Long forms should be grouped by business meaning.
 - Dangerous operations require confirmation and clear effect wording.
 
-## 11. Detail And Profile Pages
+## 12. Detail And Profile Pages
 
 Detail pages:
 
@@ -238,7 +263,7 @@ Personal center:
 - Password change includes old password, new password, confirmation, strength hint, and submit feedback.
 - Separate editable profile fields from read-only organization/role fields.
 
-## 12. Additional Page Patterns
+## 13. Additional Page Patterns
 
 Implement the right pattern for the business domain:
 
@@ -252,7 +277,7 @@ Implement the right pattern for the business domain:
 - Import/export: template download, upload, parse preview, error-row download, import progress.
 - Task center: async task list, progress, success/failure, retry, result download.
 
-## 13. Implementation Discipline
+## 14. Implementation Discipline
 
 - Use structured data for routes, menus, permissions, table columns, form schemas, and status dictionaries.
 - Keep layout shell separate from page content.
@@ -262,7 +287,7 @@ Implement the right pattern for the business domain:
 - Use stable keys for menu items, table rows, form fields, and permissions.
 - Keep Chinese copy concise and business-specific.
 
-## 14. Final Check
+## 15. Final Check
 
 Before finishing, read `references/acceptance-checklist.md` and verify:
 
@@ -274,4 +299,3 @@ Before finishing, read `references/acceptance-checklist.md` and verify:
 - Modals/drawers/forms handle overflow, validation, submission, and dangerous confirmations.
 - Visual style is enterprise-refined Chinese admin UI, not marketing-page design.
 - Repository lint/test/build or available validation commands pass.
-

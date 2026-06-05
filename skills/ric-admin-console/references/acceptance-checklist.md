@@ -68,6 +68,8 @@ Run this before declaring an admin-console task complete.
 - [ ] Icons come from one family and icon-only actions have tooltips.
 - [ ] No meaningless fake data, `John Doe`, `Acme`, or generic placeholder business values.
 - [ ] Empty/error/loading states are visually aligned with the app.
+- [ ] Needed login, empty-state, announcement, onboarding, report, profile, or background assets use existing brand assets or generated bitmap assets instead of generic placeholders.
+- [ ] If built-in image generation was unavailable for needed assets, the RIC CLI fallback path was used or the missing `OPENAI_API_KEY` was reported.
 
 ## Engineering
 

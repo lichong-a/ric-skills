@@ -36,6 +36,12 @@ Use the most specific skill for the task:
 - Use `ric-node-pnpm` for Node/FNM/pnpm work.
 - Use `ric-full-output-enforcement` when an agent must produce complete unabridged artifacts.
 
+## Image Generation Fallback
+
+RIC image-generation skills prefer the agent's built-in image generation capability when it exists. If the built-in image tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, they should use the bundled CLI fallback documented in [references/ric-imagegen-fallback.md](references/ric-imagegen-fallback.md).
+
+The CLI fallback requires `OPENAI_API_KEY` in the environment. Do not hardcode keys.
+
 ## Skills
 
 ### Upstream-Derived Design Skills
@@ -86,6 +92,7 @@ Use the most specific skill for the task:
 - Workbench default page.
 - List pages with query cards, table cards, create/edit/delete, sorting, pagination, cross-page selection, column settings, refresh, import/export.
 - Detail pages, profile center, permissions, approval workflows, dashboards, settings, audit logs, messages, import/export, async task center, and error pages.
+- Generated or existing bitmap assets for login pages, empty states, announcements, onboarding, report covers, profile placeholders, and subtle dashboard textures when brand/design-system assets are insufficient.
 
 The default visual direction is refined Chinese enterprise admin UI: clear, compact, trustworthy, information-dense, and production-oriented.
 

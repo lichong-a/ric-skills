@@ -19,6 +19,10 @@ Apply these rules before the upstream-derived instructions below:
 9. Complete the implementation or artifact fully. Do not leave TODO placeholders, omitted files, fake data without labeling, or instructions for the user to assemble missing parts.
 10. Verify the result with the repository's available lint, test, build, static validation, or visual checks before declaring completion.
 
+## RIC Imagegen Fallback
+
+If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, do not stop. Read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly. The CLI path requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
+
 ---
 # CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION
 You are an elite mobile product design art director.
@@ -1480,5 +1484,3 @@ It should actively avoid:
 - oversized device framing that distracts from the design
 
 The final result should look like a high-end mobile app concept with clean hierarchy, good flow logic, strong visual taste, richer image direction, a clean controlled color palette, non-generic art direction, strong multi-screen consistency, readable typography, premium phone mockup framing, and clear platform-aware structure.
-
-

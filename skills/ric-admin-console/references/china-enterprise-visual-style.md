@@ -96,6 +96,28 @@ Rules:
 - Icon-only buttons need tooltip/accessible labels.
 - Destructive icons use error color only when the action is immediate or dangerous.
 
+## Generated Assets
+
+Use generated bitmap assets only when they improve the product experience and existing brand/design-system assets are insufficient.
+
+Good generated admin assets:
+
+- Login illustration or subtle background.
+- Empty-state illustrations for no data, no messages, no tasks, no permissions, import success/failure, and disconnected integrations.
+- Low-contrast dashboard texture backgrounds.
+- Onboarding or announcement banner visuals.
+- Neutral profile/avatar placeholder sets.
+- Report cover or export preview visuals.
+
+Rules:
+
+- Use the agent's image generation capability when available.
+- If the image generation tool is missing or unavailable, use the RIC CLI fallback in `references/ric-imagegen-fallback.md`.
+- Keep generated assets quiet and secondary to data and actions.
+- Avoid critical text in images.
+- Avoid fake brands, fake logos, watermarks, QR codes, decorative mascots, and high-saturation marketing art.
+- Store project-bound assets in the workspace and reference them from code.
+
 ## Cards
 
 Cards are for grouping work areas:
