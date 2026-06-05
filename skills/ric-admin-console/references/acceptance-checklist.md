@@ -23,9 +23,20 @@ Run this before declaring an admin-console task complete.
 ## Workbench
 
 - [ ] Default workbench exists when the system needs a default page.
+- [ ] Workbench first screen uses a dashboard hero, command header, or branded overview when it is the primary entry surface.
 - [ ] Workbench cards are role/business-specific.
 - [ ] Calendar/todo/activity/quick-start/metrics/notices are meaningful for the domain.
+- [ ] Priority metrics, today's work, urgent risks, notices, and quick starts are visually prioritized.
+- [ ] Primary CTAs are operational, permission-aware, and not duplicated.
 - [ ] Empty states provide useful next actions.
+
+## Login And Branded Entry
+
+- [ ] Login page has a visible brand signal in the first viewport.
+- [ ] Login form has clear primary CTA, secondary actions, loading, validation, disabled, expired-session, and authentication-failure states.
+- [ ] Login visual asset/background is existing, generated, or deliberately omitted with a reason.
+- [ ] Module homepages or onboarding pages use product-level brand expression when they are entry surfaces.
+- [ ] Strong visual treatment does not hide core navigation, form, or action paths.
 
 ## List Pages
 
@@ -61,13 +72,17 @@ Run this before declaring an admin-console task complete.
 
 ## Visual Quality
 
-- [ ] The UI reads as refined Chinese enterprise admin, not marketing-page design.
+- [ ] The UI reads as refined Chinese enterprise admin with productized brand expression where the page type needs it.
+- [ ] `utility`, `product`, or `immersive` visual impact mode is appropriate for each major page.
 - [ ] Information density is useful but not cramped.
 - [ ] Chinese labels are concise and consistent.
 - [ ] Primary/semantic colors are consistent.
 - [ ] Icons come from one family and icon-only actions have tooltips.
 - [ ] No meaningless fake data, `John Doe`, `Acme`, or generic placeholder business values.
 - [ ] Empty/error/loading states are visually aligned with the app.
+- [ ] Important empty states explain why the state exists and provide permission-aware next actions.
+- [ ] High-impact surfaces have clear brand signal, visual hierarchy, and CTA hierarchy without generic slogans.
+- [ ] Ordinary CRUD, permission, audit, settings, and detail pages remain utility-first and are not polluted by marketing-page hero patterns.
 - [ ] Needed login, empty-state, announcement, onboarding, report, profile, or background assets use existing brand assets or generated bitmap assets instead of generic placeholders.
 - [ ] If built-in image generation was unavailable for needed assets, the RIC CLI fallback path was used or the missing `OPENAI_API_KEY` was reported.
 

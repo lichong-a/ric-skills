@@ -1,12 +1,12 @@
 ---
 name: ric-admin-console
-description: "Chinese enterprise admin-console design and implementation skill for polished, information-dense, production-ready management systems. Use for admin panels, CRUD consoles, permission systems, data tables, workbench pages, workflow approval systems, operations consoles, SaaS back offices, and internal tools. Supports sidebar, top navigation, sidebar-plus-topbar layouts, authenticated and unauthenticated states, grouped collapsible menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, and China-market enterprise visual taste across React, Vue, and existing project stacks."
+description: "Chinese enterprise admin-console design and implementation skill for polished, information-dense, production-ready management systems with admin-adapted high-end visual design. Use for admin panels, CRUD consoles, permission systems, data tables, branded login pages, visual workbench first screens, workflow approval systems, operations consoles, SaaS back offices, internal tools, dashboards, and China-market enterprise control panels. Supports sidebar, top navigation, sidebar-plus-topbar layouts, authenticated and unauthenticated states, grouped collapsible menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, generated visual assets, brand expression, and China-market enterprise visual taste across React, Vue, and existing project stacks."
 ---
 # RIC Admin Console Skill
 
-Use this skill for Chinese enterprise management systems: admin panels, back offices, operations consoles, CRUD systems, permission systems, workflow approval systems, internal tools, data-heavy dashboards, and SaaS control panels.
+Use this skill for Chinese enterprise management systems: admin panels, back offices, operations consoles, CRUD systems, permission systems, workflow approval systems, internal tools, data-heavy dashboards, branded login pages, visual workbenches, and SaaS control panels.
 
-Do not apply marketing-page taste rules here. Admin consoles are product surfaces for repeated work. Optimize for clarity, scan speed, predictable navigation, permission-aware actions, state coverage, and dense but orderly information.
+Do not blindly apply marketing-page taste rules to every admin page. Admin consoles are product surfaces for repeated work, but selected first-screen surfaces still need strong brand expression, visual assets, layout rhythm, CTA quality, and anti-template design judgment. Use high visual impact on login pages, workbench first screens, welcome/onboarding pages, empty states, announcement banners, dashboard first screens, big-screen command centers, module homepages, and productized SaaS console homepages. Keep ordinary CRUD, permission config, audit logs, settings, and detail pages optimized for clarity, scan speed, predictable navigation, permission-aware actions, state coverage, and dense but orderly information.
 
 ## 1. Operating Protocol
 
@@ -26,6 +26,7 @@ Read these references when the task needs detail:
 - `references/page-patterns.md` for workbench, list, detail, profile, settings, permissions, approval, logs, messages, import/export, tasks.
 - `references/component-contracts.md` for query cards, tables, pagination, modals, drawers, forms, actions, status UI.
 - `references/china-enterprise-visual-style.md` for Chinese enterprise visual taste, density, Chinese typography, color, spacing, and anti-template rules.
+- `references/admin-visual-impact.md` for admin-adapted brand expression, hero/first-screen composition, CTA quality, visual assets, layout rhythm, motion restraint, and anti-template rules.
 - `references/framework-adapters.md` for React/Vue/UI-library decision rules.
 - `references/acceptance-checklist.md` before declaring work complete.
 - `../../references/ric-imagegen-fallback.md` when admin-specific bitmap assets are needed and built-in image generation is unavailable.
@@ -34,12 +35,13 @@ Read these references when the task needs detail:
 
 Before implementation, state one concise design read:
 
-`Reading this as: <system type> for <user role>, with <layout mode>, <data density>, <permission complexity>, and <framework/UI library>.`
+`Reading this as: <system type> for <user role>, with <layout mode>, <visual impact mode>, <data density>, <permission complexity>, and <framework/UI library>.`
 
 Examples:
 
-- `Reading this as: user/role management for operations staff, with sidebar-plus-topbar layout, high table density, RBAC permissions, and React + Ant Design Pro.`
-- `Reading this as: approval workflow console for department managers, with topnav-only layout, medium density, route-level permissions, and Vue 3 + Element Plus.`
+- `Reading this as: user/role management for operations staff, with sidebar-plus-topbar layout, utility visual mode, high table density, RBAC permissions, and React + Ant Design Pro.`
+- `Reading this as: SaaS console login plus workbench for tenant admins, with sidebar-plus-topbar layout, product/immersive visual modes, medium-high density, tenant permissions, and React + Ant Design Pro.`
+- `Reading this as: approval workflow console for department managers, with topnav-only layout, product visual mode, medium density, route-level permissions, and Vue 3 + Element Plus.`
 
 Ask only one clarification if the layout mode, auth model, or framework choice cannot be inferred from the repo and materially changes implementation.
 
@@ -62,23 +64,59 @@ Default to enterprise-refined Chinese admin taste:
 
 - Clear, trustworthy, compact, and stable.
 - Medium-high information density.
+- Productized brand expression on selected first-screen surfaces.
 - Blue/neutral base with controlled semantic colors, or the product's existing brand color.
 - Strong table readability, predictable action placement, consistent icons, polished empty states, and clear status tags.
 - Chinese text rhythm: short labels, direct button copy, no oversized English marketing slogans.
 
-Avoid:
+Apply visual impact by surface:
 
-- Marketing hero sections, giant slogans, decorative landing-page illustrations, large editorial typography.
+- `utility`: tables, forms, permissions, logs, settings, and dense detail pages. Low visual drama, high efficiency.
+- `product`: workbench, module homepages, SaaS console homepages, dashboard summaries, announcement centers. Stronger brand tone, richer layout rhythm, clear CTA hierarchy.
+- `immersive`: login pages, welcome/onboarding pages, big-screen command centers, report covers, and hero-like console entry pages. Visual assets and first impression matter, but actions and state clarity still win.
+
+Inherit the useful parts of `ric-design-taste-frontend`: brand read, visual asset priority, anti-default discipline, CTA contrast/wrap checks, copy self-audit, layout diversity, and restrained motion. Adapt them for admin workflows instead of copying landing-page structure.
+
+Avoid globally:
+
+- Marketing hero sections on ordinary CRUD pages, giant slogans in operational screens, decorative illustrations that compete with data, and large editorial typography inside dense tools.
 - Excessive gradients, glassmorphism, huge round cards, animated backgrounds, and overbuilt motion.
 - Default-looking blue-white-gray templates with no hierarchy, poor spacing, generic fake metrics, or meaningless charts.
 
-## 5. Admin Asset Generation
+## 5. Admin Visual Impact
+
+Use high visual design only where it improves brand recognition, orientation, business understanding, or action conversion.
+
+Required high-impact surfaces:
+
+- Login page: branded first screen, clear authentication path, trustworthy copy, primary login CTA, secondary help/security links, and a visual asset or brand background when assets are available.
+- Workbench first screen: dashboard hero, command header, or branded overview that summarizes identity, today's priorities, urgent tasks, key metrics, notices, and quick starts.
+- Module homepage: visual overview that explains the module's purpose, primary actions, status, and next best actions.
+- Empty states: business-specific explanation, permission-aware CTA, and generated or existing visual asset when useful.
+- Announcement/onboarding: focused message, one primary CTA per intent, supporting visual, and dismiss/read state.
+- Dashboard/big screen: stronger theme, chart rhythm, motion when useful, clear metric definitions, refresh/state indicators, and visible abnormal states.
+
+Rules:
+
+- Do not turn every content page into a hero page.
+- Do not use marketing copy where operational copy is needed.
+- Do not invent fake business numbers, fake brands, fake logos, QR codes, or decorative trust claims.
+- Keep CTA labels direct and action-specific. Avoid duplicate CTA intent on the same surface.
+- Button text must not wrap on desktop and must pass contrast checks.
+- Hero/command-header copy must be short enough to scan while working.
+- Use real UI components for product previews. Avoid fake screenshot divs.
+- Motion must communicate navigation, loading, reveal, expansion, or data change; avoid scroll storytelling and decorative loops in normal admin work.
+- Before finishing, reread visible copy and replace vague, poetic, or AI-sounding text with concise business language.
+
+Read `references/admin-visual-impact.md` before implementing login, workbench first screen, module homepage, onboarding, empty state, dashboard hero, or command-center visuals.
+
+## 6. Admin Asset Generation
 
 Admin systems usually need fewer generated visuals than marketing pages, but they still benefit from deliberate project-specific assets. When the system needs visual assets and no suitable existing brand/design-system asset exists, invoke the relevant agent image generation ability instead of shipping generic placeholders.
 
 Generate assets for:
 
-- Login page illustration or background.
+- Login page illustration, visual panel, or brand background.
 - Empty states for workbench, list pages, import/export, messages, tasks, and permissions.
 - Low-contrast dashboard texture or module background.
 - Announcement or onboarding banner.
@@ -96,7 +134,7 @@ Rules:
 - Save project-bound generated assets into the workspace and wire them into the app; never leave referenced assets only in a tool temp folder.
 - If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly. The CLI path requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
 
-## 6. Required Shell Layouts
+## 7. Required Shell Layouts
 
 Support these layout modes. Pick one based on the brief or existing project:
 
@@ -127,7 +165,7 @@ All modes require:
 - Responsive collapse behavior for narrow screens.
 - Main content scrolling without breaking fixed top/header regions.
 
-## 7. Authentication And Permissions
+## 8. Authentication And Permissions
 
 Model these states explicitly:
 
@@ -145,7 +183,7 @@ Rules:
 - Sensitive back-end operations must still enforce permissions server-side.
 - When a user lacks permission, prefer a clean disabled state or 403 page over broken invisible failures.
 
-## 8. Navigation And Breadcrumbs
+## 9. Navigation And Breadcrumbs
 
 Menus:
 
@@ -169,9 +207,9 @@ Avatar dropdown:
 - Optional items: account security, notification preferences, theme, tenant switch, message center.
 - Logout must be explicit and safe; clear tokens/session and redirect to login.
 
-## 9. Default Workbench
+## 10. Default Workbench
 
-Most admin systems should open to a workbench page.
+Most admin systems should open to a workbench page. Treat the top of the workbench as a product surface, not a generic card dump.
 
 Include relevant cards:
 
@@ -183,9 +221,17 @@ Include relevant cards:
 - Personalized metrics: role-relevant counts, trend deltas, SLA reminders, health indicators.
 - System notices: announcements, maintenance, unread messages.
 
+Workbench visual rules:
+
+- Use a dashboard hero, command header, or branded overview when the workbench is a primary entry page.
+- Show identity and priorities: role, department/tenant, today's focus, urgent work, key metrics, notices, and quick starts.
+- Give CTAs clear operational intent, such as create order, handle approval, invite user, view risk, or configure integration.
+- Use brand visuals, textures, or generated assets only when they support orientation and hierarchy.
+- Keep core numbers, tasks, and actions immediately scannable.
+
 Do not use meaningless fake data. If mock data is necessary, make it domain-specific and replaceable.
 
-## 10. List Page Protocol
+## 11. List Page Protocol
 
 A standard list page contains a query card and a table card.
 
@@ -226,7 +272,7 @@ Table footer:
 - Use pagination by default.
 - Infinite scroll mode removes pagination but must show loading, reached-end, and retry states.
 
-## 11. Modal, Drawer, And Form Protocol
+## 12. Modal, Drawer, And Form Protocol
 
 Modal:
 
@@ -247,7 +293,7 @@ Forms:
 - Long forms should be grouped by business meaning.
 - Dangerous operations require confirmation and clear effect wording.
 
-## 12. Detail And Profile Pages
+## 13. Detail And Profile Pages
 
 Detail pages:
 
@@ -263,7 +309,7 @@ Personal center:
 - Password change includes old password, new password, confirmation, strength hint, and submit feedback.
 - Separate editable profile fields from read-only organization/role fields.
 
-## 13. Additional Page Patterns
+## 14. Additional Page Patterns
 
 Implement the right pattern for the business domain:
 
@@ -277,7 +323,7 @@ Implement the right pattern for the business domain:
 - Import/export: template download, upload, parse preview, error-row download, import progress.
 - Task center: async task list, progress, success/failure, retry, result download.
 
-## 14. Implementation Discipline
+## 15. Implementation Discipline
 
 - Use structured data for routes, menus, permissions, table columns, form schemas, and status dictionaries.
 - Keep layout shell separate from page content.
@@ -287,7 +333,7 @@ Implement the right pattern for the business domain:
 - Use stable keys for menu items, table rows, form fields, and permissions.
 - Keep Chinese copy concise and business-specific.
 
-## 15. Final Check
+## 16. Final Check
 
 Before finishing, read `references/acceptance-checklist.md` and verify:
 
@@ -297,5 +343,7 @@ Before finishing, read `references/acceptance-checklist.md` and verify:
 - Workbench/list/detail/profile patterns match the request.
 - Tables handle loading, empty, error, sorting, pagination/infinite scroll, column settings, selection, and actions.
 - Modals/drawers/forms handle overflow, validation, submission, and dangerous confirmations.
-- Visual style is enterprise-refined Chinese admin UI, not marketing-page design.
+- Visual style is enterprise-refined Chinese admin UI with admin-adapted brand impact where the page type needs it.
+- Login, workbench, module homepage, onboarding, announcement, dashboard hero, and empty states use visual assets, CTA hierarchy, copy self-audit, and anti-template judgment when relevant.
+- Ordinary CRUD, permission, audit, settings, and detail pages remain efficient and are not polluted by marketing-page hero patterns.
 - Repository lint/test/build or available validation commands pass.

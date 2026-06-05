@@ -6,6 +6,8 @@ Use this reference when selecting content page structures.
 
 The workbench is the default entry page for most admin systems.
 
+Treat the first screen as a productized admin surface. It can use a dashboard hero, command header, or branded overview when the system opens here by default.
+
 Recommended modules:
 
 - Personal summary: avatar, name, role, department, tenant, current status.
@@ -19,8 +21,48 @@ Recommended modules:
 Rules:
 
 - Show role-specific content. An operator, manager, auditor, and admin should not see identical workbench cards.
+- The top region should clarify identity, today's priorities, key risks, and next actions.
+- Use brand expression, visual assets, or background texture only when it improves orientation and hierarchy.
+- Primary CTAs must be permission-aware and operational, such as create, approve, invite, import, configure, or handle.
 - Empty states should suggest next actions.
 - Do not create fake vanity metrics without business meaning.
+- Avoid repeated generic metric cards with meaningless growth rates.
+
+## Login Page
+
+Use a full-screen or focused shell exception for login.
+
+Required:
+
+- Brand mark/name in the first viewport.
+- Clear login form and one primary login CTA.
+- Secondary actions such as forgot password, SSO, tenant join/register, help, or security notice when relevant.
+- Trust cues such as data security, tenant isolation, audit log, service status, or support channel.
+- Existing brand asset or generated visual asset when available.
+
+Rules:
+
+- Login copy should be short, business-specific, and trustworthy.
+- Form fields must remain high contrast over visual backgrounds.
+- Loading, disabled, validation, expired-session, and authentication-failure states must be designed.
+- Avoid generic slogans, random blue-purple gradients, fake logos, and critical text embedded in images.
+
+## Module Homepage
+
+Use when a major module needs an entry page before list/detail workflows.
+
+Required:
+
+- Concise module purpose.
+- Primary action and secondary shortcuts.
+- Current status summary.
+- Recent activity, alerts, or setup progress when useful.
+
+Rules:
+
+- Use `product` visual impact mode: stronger hierarchy and brand rhythm than a table page, less narrative than a public landing page.
+- Keep actions immediately reachable.
+- Do not hide workflow entry points behind decorative graphics.
 
 ## List Page
 
@@ -151,6 +193,8 @@ Rules:
 
 Use dashboards for operational monitoring, not decorative charts.
 
+Dashboard first screens and big-screen command centers may use `product` or `immersive` visual impact mode when stronger visual hierarchy helps monitoring.
+
 Required qualities:
 
 - Metric definitions are explicit.
@@ -159,6 +203,8 @@ Required qualities:
 - Empty/no-data states exist.
 - Chart colors match semantic meaning.
 - Alerts are actionable.
+- Refresh state and abnormal thresholds are visible.
+- Drill-down or next action exists for important anomalies when allowed.
 
 Avoid:
 
@@ -166,6 +212,7 @@ Avoid:
 - Fake precision.
 - Unlabeled trends.
 - Decorative charts with no decision value.
+- Motion that makes data freshness or abnormal state unclear.
 
 ## Settings
 
@@ -273,4 +320,7 @@ Required states:
 Rules:
 
 - Give clear action: back, retry, login again, request permission, create first record.
+- Empty states must explain why the state exists and what the user can do next.
+- Use existing or generated visual assets for important empty states when they improve comprehension.
+- CTA visibility must respect permissions.
 - Do not show technical stack traces to normal users.

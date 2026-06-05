@@ -1,4 +1,4 @@
-ric-design-taste-frontend: RIC derivative of taste-skill for anti-slop landing pages, portfolios, marketing pages, and visual redesigns; routes admin-console work to ric-admin-console.
+ric-design-taste-frontend: RIC derivative of taste-skill for anti-slop landing pages, portfolios, marketing pages, and visual redesigns; routes admin-console work, including branded admin login/workbench screens, to ric-admin-console.
 ric-design-taste-frontend-v1: RIC derivative of the original taste-skill v1 for backward-compatible frontend taste behavior with RIC constraints.
 ric-gpt-taste: Stricter GPT/Codex premium frontend design and motion skill for high-end marketing surfaces.
 ric-image-to-code: Image-first design analysis and implementation; admin screenshots are analyzed for shell/table/query/permission structure and then handled through ric-admin-console.
@@ -11,7 +11,7 @@ ric-full-output-enforcement: Complete output enforcement skill that forbids plac
 ric-minimalist-ui: Clean editorial minimalist UI skill for restrained product interfaces.
 ric-industrial-brutalist-ui: Industrial brutalist UI skill for Swiss, mechanical, tactical telemetry aesthetics.
 ric-stitch-design-taste: Google Stitch-compatible semantic DESIGN.md and premium UI rule generation skill.
-ric-admin-console: Chinese enterprise admin-console skill for layouts, menus, auth states, workbench, CRUD lists, detail pages, tables, forms, modals, permissions, logs, settings, approval, import/export, task centers, and needed generated assets.
+ric-admin-console: Chinese enterprise admin-console skill for layouts, menus, auth states, branded login pages, visual workbenches, SaaS console homepages, dashboard first screens, CRUD lists, detail pages, tables, forms, modals, permissions, logs, settings, approval, import/export, task centers, admin-adapted brand expression, and needed generated assets.
 ric-agent-operating-rules: Baseline agent rules for skill retrieval, PowerShell, non-destructive changes, runtime discipline, and verification.
 ric-infra-safety: Shared infrastructure safety skill for Elasticsearch, Kafka, TimescaleDB/PostgreSQL, Redis, NATS, MinIO, ric namespaces, and secrets.
 ric-node-pnpm: Node/FNM/pnpm workflow skill for Node 24.x, pnpm 11.x, PowerShell commands, and lockfile hygiene.

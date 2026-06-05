@@ -1,6 +1,6 @@
 ---
 name: ric-design-taste-frontend
-description: "RIC derivative of taste-skill for anti-slop landing pages, portfolios, marketing pages, and visual redesigns. Based on Leonxlnx/taste-skill and strengthened for ric workflows: perform skill retrieval, prefer Windows PowerShell, respect FNM Node 24 and pnpm 11, reuse shared infrastructure safely, and hand off admin panels, CRUD consoles, dense dashboards, permission systems, and China-market back offices to ric-admin-console."
+description: "RIC derivative of taste-skill for anti-slop landing pages, portfolios, marketing pages, and visual redesigns. Based on Leonxlnx/taste-skill and strengthened for ric workflows: perform skill retrieval, prefer Windows PowerShell, respect FNM Node 24 and pnpm 11, reuse shared infrastructure safely, and hand off admin panels, CRUD consoles, dense dashboards, permission systems, branded admin login/workbench screens, and China-market back offices to ric-admin-console, which contains admin-adapted visual design rules."
 ---
 ---
 
@@ -15,7 +15,7 @@ Apply these rules before the upstream-derived instructions below:
 5. Reuse shared ric infrastructure before creating new services. Never perform destructive operations against databases, caches, message systems, or object storage.
 6. All writable Elasticsearch indices, PostgreSQL/TimescaleDB resources, Redis keys, Kafka/NATS subjects when applicable, and storage assets must respect the ric namespace rules from `ric-infra-safety`.
 7. Secrets must come from environment variables. Do not hardcode credentials or fabricate missing secrets.
-8. When the request is an admin panel, management console, CRUD system, permission system, dense dashboard, Chinese enterprise back office, operations console, or table-heavy product UI, stop applying marketing-page rules and use `ric-admin-console` instead.
+8. When the request is an admin panel, management console, CRUD system, permission system, dense dashboard, Chinese enterprise back office, operations console, table-heavy product UI, branded admin login page, or visual admin workbench, stop implementing here and use `ric-admin-console` instead. `ric-admin-console` already contains the admin-adapted brand, first-screen, CTA, visual-asset, and anti-template rules from this skill.
 9. Complete the implementation or artifact fully. Do not leave TODO placeholders, omitted files, fake data without labeling, or instructions for the user to assemble missing parts.
 10. Verify the result with the repository's available lint, test, build, static validation, or visual checks before declaring completion.
 
