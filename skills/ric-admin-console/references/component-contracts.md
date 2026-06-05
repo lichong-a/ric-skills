@@ -2,6 +2,21 @@
 
 Use these contracts to keep admin UI behavior complete.
 
+## Page Header
+
+Required behavior:
+
+- Current page title appears once.
+- Breadcrumb can include the current page label, but it must not create a second large title.
+- A module hero or command header can own the page title; if so, the table card title should be compact or omitted.
+- Card titles describe the contained dataset or section only when they add information.
+
+Avoid:
+
+- Breadcrumb current label + H1 + hero/card title all repeating the same text.
+- A blue tag or pill repeating the same page title above the same page title.
+- Large page title duplicated inside the table card.
+
 ## Query Card
 
 Required behavior:
@@ -36,6 +51,7 @@ Required behavior:
 - Column settings.
 - Row actions.
 - Permission-aware actions.
+- Deduplicated create action and selection actions.
 
 Column conventions:
 
@@ -48,9 +64,21 @@ Column conventions:
 Selection:
 
 - Show selected count.
-- Support clear selection.
+- Support one clear selection action.
 - Cross-page selection must be explicit.
 - Batch actions must be disabled without selection.
+- If delete permission exists, show batch delete when selection exists.
+
+Selection toolbar rules:
+
+- Use one clear action label, default `清空选择`.
+- Do not show both `取消选择` and `清空选择`.
+- Put batch actions near selected count, not far away from the selection context.
+- `批量删除` uses danger styling and requires confirmation.
+- Confirmation copy includes selected count and whether selection crosses pages.
+- If selection is cross-page, clarify whether the operation applies to selected rows only or all matching records.
+- If user lacks delete permission, hide or disable `批量删除` with an explanation.
+- Clearing selection must clear all selected row keys, including preserved cross-page keys.
 
 Column settings:
 
@@ -143,10 +171,35 @@ Placement:
 
 Rules:
 
+- Only one create/new button per page-level workflow. For normal CRUD, place it in the table toolbar. For a branded hero/command header, do not repeat the same create action in the table toolbar.
+- Primary action label must be specific, such as `新增会员`, `新建角色`, `创建任务`, not generic `新增` when the object type is known.
 - Disable actions without permission or missing prerequisites.
 - Do not show impossible actions.
 - Icon-only buttons need accessible labels/tooltips.
 - Bulk action availability follows selection state.
+
+## Toolbar
+
+Top-left:
+
+- Primary create action, unless already owned by a hero/command header.
+- Batch actions only after selection exists or as disabled controls with clear reason.
+- One selected-count/selection-toolbar region.
+
+Top-right:
+
+- Refresh.
+- Column settings.
+- Density when supported.
+- Export/import when authorized.
+- Do not duplicate icon actions with both text and icon-only variants unless they serve different scope.
+
+Rules:
+
+- Refresh appears once per table.
+- Column settings appears once per table.
+- Do not place create actions on both left and right toolbars.
+- Keep destructive batch actions visually separate from neutral tools.
 
 ## Status Tags
 
@@ -205,3 +258,67 @@ Rules:
 - Give re-login for auth expiration.
 - Give request-permission or back action for 403.
 - Do not expose unsafe technical details.
+
+## Scrollbar And Overflow
+
+Use a consistent admin scrollbar style for scrollable regions.
+
+Targets:
+
+- Sidebar menu.
+- Main content container.
+- Table horizontal/vertical scroll wrappers.
+- Modal body.
+- Drawer body.
+- Long dropdown/popup lists when locally styled by the project.
+
+Rules:
+
+- Avoid double scrollbars. Usually exactly one vertical scroll owner should exist for the shell content area.
+- Do not show scrollbars when content does not overflow.
+- Normal cards should not scroll internally unless the card is a bounded widget.
+- Track should be transparent.
+- Thumb should be semi-transparent, rounded, and thin.
+- Show stronger thumb only on hover, focus-within, or active scrolling when CSS/JS supports it.
+- Remove scrollbar arrows/buttons.
+- Do not use thick, opaque system scrollbars in polished admin surfaces.
+
+Recommended CSS contract:
+
+```css
+.ric-scroll-region {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 23, 42, 0.28) transparent;
+}
+
+.ric-scroll-region::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ric-scroll-region::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ric-scroll-region::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.24);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ric-scroll-region:hover::-webkit-scrollbar-thumb,
+.ric-scroll-region:focus-within::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.36);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ric-scroll-region::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+```
+
+If the app already has a design-system scrollbar token or utility, adapt this contract into that system instead of adding a competing style.

@@ -1,6 +1,6 @@
 ---
 name: ric-admin-console
-description: "Chinese enterprise admin-console design and implementation skill for polished, information-dense, production-ready management systems with admin-adapted high-end visual design. Use for admin panels, CRUD consoles, permission systems, data tables, branded login pages, visual workbench first screens, workflow approval systems, operations consoles, SaaS back offices, internal tools, dashboards, and China-market enterprise control panels. Supports sidebar, top navigation, sidebar-plus-topbar layouts, authenticated and unauthenticated states, grouped collapsible menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, generated visual assets, brand expression, and China-market enterprise visual taste across React, Vue, and existing project stacks."
+description: "Chinese enterprise admin-console design and implementation skill for polished, information-dense, production-ready management systems with admin-adapted high-end visual design. Use for admin panels, CRUD consoles, permission systems, data tables, branded login pages, visual workbench first screens, workflow approval systems, operations consoles, SaaS back offices, internal tools, dashboards, and China-market enterprise control panels. Supports sidebar, top navigation, sidebar-plus-topbar layouts, authenticated and unauthenticated states, grouped collapsible menus, breadcrumbs, profile dropdowns, list/detail/workbench/profile/settings/audit/approval pages, modals, drawers, forms, tables, active ImageGen asset planning, framework-specific skill retrieval for Ant Design/antd/Element Plus/Naive UI/Arco, deduplicated page headers/toolbars, polished scrollbars, generated visual assets, brand expression, and China-market enterprise visual taste across React, Vue, and existing project stacks."
 ---
 # RIC Admin Console Skill
 
@@ -12,13 +12,14 @@ Do not blindly apply marketing-page taste rules to every admin page. Admin conso
 
 1. Perform skill retrieval before work.
 2. Inspect the existing project before choosing libraries: `package.json`, router, UI library, layout components, table/form stack, state management, auth/permission model, request client, mock/data layer, and styling system.
-3. Prefer the existing stack. Do not replace Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
-4. Prefer PowerShell commands on Windows. Use pnpm over npm for Node projects.
-5. Do not change global Node/FNM configuration. Use temporary `fnm use` or `fnm exec` only when needed.
-6. Treat permissions as a first-class design input. Buttons, menus, routes, API calls, and bulk actions must have a shared permission source.
-7. Provide loading, empty, error, disabled, success, and unauthenticated states for every interactive area.
-8. Never create destructive database/cache/message/object-storage operations. Follow `ric-infra-safety` for infrastructure and namespace rules.
-9. Finish with repository validation: lint/test/build when available, and browser or screenshot checks for layout work.
+3. After detecting the UI framework, perform framework skill retrieval and read the relevant installed skill when available. For React + Ant Design/ProComponents/antd imports, retrieve and use `ant-design` and/or `antd`; follow their CLI/API lookup rules when writing antd component code.
+4. Prefer the existing stack. Do not replace Ant Design, Element Plus, Naive UI, Arco, or another established UI system unless the user asks.
+5. Prefer PowerShell commands on Windows. Use pnpm over npm for Node projects.
+6. Do not change global Node/FNM configuration. Use temporary `fnm use` or `fnm exec` only when needed.
+7. Treat permissions as a first-class design input. Buttons, menus, routes, API calls, and bulk actions must have a shared permission source.
+8. Provide loading, empty, error, disabled, success, and unauthenticated states for every interactive area.
+9. Never create destructive database/cache/message/object-storage operations. Follow `ric-infra-safety` for infrastructure and namespace rules.
+10. Finish with repository validation: lint/test/build when available, framework-specific checks when available, and browser or screenshot checks for layout work.
 
 Read these references when the task needs detail:
 
@@ -27,7 +28,7 @@ Read these references when the task needs detail:
 - `references/component-contracts.md` for query cards, tables, pagination, modals, drawers, forms, actions, status UI.
 - `references/china-enterprise-visual-style.md` for Chinese enterprise visual taste, density, Chinese typography, color, spacing, and anti-template rules.
 - `references/admin-visual-impact.md` for admin-adapted brand expression, hero/first-screen composition, CTA quality, visual assets, layout rhythm, motion restraint, and anti-template rules.
-- `references/framework-adapters.md` for React/Vue/UI-library decision rules.
+- `references/framework-adapters.md` for framework skill retrieval and React/Vue/UI-library decision rules.
 - `references/acceptance-checklist.md` before declaring work complete.
 - `../../references/ric-imagegen-fallback.md` when admin-specific bitmap assets are needed and built-in image generation is unavailable.
 
@@ -45,7 +46,25 @@ Examples:
 
 Ask only one clarification if the layout mode, auth model, or framework choice cannot be inferred from the repo and materially changes implementation.
 
-## 3. Stack Selection
+## 3. Asset Plan
+
+After the design read and before implementation, create a concise Asset Plan:
+
+`Asset Plan: <needed assets or none>, <source: existing brand asset | ImageGen | RIC CLI fallback | not needed>, <save path>, <where used>.`
+
+Active ImageGen is required when a `product` or `immersive` surface needs visual differentiation and no suitable existing brand/design-system asset exists. This includes login visual panels, workbench/module backgrounds, onboarding/announcement banners, empty-state illustrations, report/export covers, and dashboard/command-center backgrounds.
+
+Rules:
+
+- Do not skip needed visual assets after the requirement is clear.
+- Do not substitute pure CSS gradients, blank placeholders, hand-rolled decorative SVG, or fake screenshot divs when a bitmap asset is needed.
+- If built-in image generation, MCP image tooling, IDE image tooling, or agent-native image capability is available, use it first for project-bound bitmap assets.
+- If image generation is needed but no built-in/agent-native tool is available, read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly.
+- The CLI fallback requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
+- `utility` pages do not need decorative generation unless they contain important empty, error, import/export, report, or onboarding states.
+- At final handoff, report generated asset paths or state that no image asset was needed for this page type.
+
+## 4. Stack Selection
 
 Use multi-stack decision-making:
 
@@ -58,7 +77,9 @@ Use multi-stack decision-making:
 
 One UI system per app. Do not mix Ant Design and Element Plus, Ant Design and Material, or shadcn and ProComponents unless the repo already does so and migration is out of scope.
 
-## 4. Visual Direction
+Before writing framework-specific component code, read `references/framework-adapters.md` and apply its skill retrieval protocol. If a matching skill is unavailable, use the existing project version and official API documentation rather than inventing props, events, tokens, or component names.
+
+## 5. Visual Direction
 
 Default to enterprise-refined Chinese admin taste:
 
@@ -83,7 +104,7 @@ Avoid globally:
 - Excessive gradients, glassmorphism, huge round cards, animated backgrounds, and overbuilt motion.
 - Default-looking blue-white-gray templates with no hierarchy, poor spacing, generic fake metrics, or meaningless charts.
 
-## 5. Admin Visual Impact
+## 6. Admin Visual Impact
 
 Use high visual design only where it improves brand recognition, orientation, business understanding, or action conversion.
 
@@ -108,9 +129,9 @@ Rules:
 - Motion must communicate navigation, loading, reveal, expansion, or data change; avoid scroll storytelling and decorative loops in normal admin work.
 - Before finishing, reread visible copy and replace vague, poetic, or AI-sounding text with concise business language.
 
-Read `references/admin-visual-impact.md` before implementing login, workbench first screen, module homepage, onboarding, empty state, dashboard hero, or command-center visuals.
+Read `references/admin-visual-impact.md` before implementing login, workbench first screen, module homepage, onboarding, empty state, dashboard hero, command-center visuals, or any generated admin bitmap asset.
 
-## 6. Admin Asset Generation
+## 7. Admin Asset Generation
 
 Admin systems usually need fewer generated visuals than marketing pages, but they still benefit from deliberate project-specific assets. When the system needs visual assets and no suitable existing brand/design-system asset exists, invoke the relevant agent image generation ability instead of shipping generic placeholders.
 
@@ -134,7 +155,7 @@ Rules:
 - Save project-bound generated assets into the workspace and wire them into the app; never leave referenced assets only in a tool temp folder.
 - If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, read `../../references/ric-imagegen-fallback.md` and use the bundled CLI fallback directly. The CLI path requires `OPENAI_API_KEY`; if it is missing, stop and ask for that environment variable.
 
-## 7. Required Shell Layouts
+## 8. Required Shell Layouts
 
 Support these layout modes. Pick one based on the brief or existing project:
 
@@ -165,7 +186,7 @@ All modes require:
 - Responsive collapse behavior for narrow screens.
 - Main content scrolling without breaking fixed top/header regions.
 
-## 8. Authentication And Permissions
+## 9. Authentication And Permissions
 
 Model these states explicitly:
 
@@ -183,7 +204,7 @@ Rules:
 - Sensitive back-end operations must still enforce permissions server-side.
 - When a user lacks permission, prefer a clean disabled state or 403 page over broken invisible failures.
 
-## 9. Navigation And Breadcrumbs
+## 10. Navigation And Breadcrumbs
 
 Menus:
 
@@ -207,7 +228,7 @@ Avatar dropdown:
 - Optional items: account security, notification preferences, theme, tenant switch, message center.
 - Logout must be explicit and safe; clear tokens/session and redirect to login.
 
-## 10. Default Workbench
+## 11. Default Workbench
 
 Most admin systems should open to a workbench page. Treat the top of the workbench as a product surface, not a generic card dump.
 
@@ -231,9 +252,15 @@ Workbench visual rules:
 
 Do not use meaningless fake data. If mock data is necessary, make it domain-specific and replaceable.
 
-## 11. List Page Protocol
+## 12. List Page Protocol
 
 A standard list page contains a query card and a table card.
+
+Page header:
+
+- Render the current page title once.
+- Breadcrumb labels, page header title, module hero title, and table card title must not repeat the same title as separate large headings.
+- If a module hero or command header already owns the page title, the table card title should be a compact dataset label or omitted.
 
 Query card:
 
@@ -246,8 +273,8 @@ Query card:
 
 Table card top-left:
 
-- Primary create action.
-- Bulk delete only when row selection exists.
+- Primary create action only when it is not already present in a page hero or command header.
+- Bulk delete appears when row selection exists and the user has delete permission.
 - Other batch actions only when permission and selection semantics are clear.
 
 Table card top-right:
@@ -267,12 +294,20 @@ Table body:
 - Status fields use consistent semantic tags.
 - The last column is actions: edit, delete, and more actions in an overflow menu.
 
+Selection toolbar:
+
+- Show one selected-count message.
+- Show one clear action, default label `清空选择`.
+- Do not render both `取消选择` and `清空选择`.
+- When deletion is allowed, show `批量删除` after selection; use danger styling and require confirmation with selected count and cross-page semantics.
+- Disable batch actions when the selection is empty or permission is missing.
+
 Table footer:
 
 - Use pagination by default.
 - Infinite scroll mode removes pagination but must show loading, reached-end, and retry states.
 
-## 12. Modal, Drawer, And Form Protocol
+## 13. Modal, Drawer, And Form Protocol
 
 Modal:
 
@@ -293,7 +328,7 @@ Forms:
 - Long forms should be grouped by business meaning.
 - Dangerous operations require confirmation and clear effect wording.
 
-## 13. Detail And Profile Pages
+## 14. Detail And Profile Pages
 
 Detail pages:
 
@@ -309,7 +344,7 @@ Personal center:
 - Password change includes old password, new password, confirmation, strength hint, and submit feedback.
 - Separate editable profile fields from read-only organization/role fields.
 
-## 14. Additional Page Patterns
+## 15. Additional Page Patterns
 
 Implement the right pattern for the business domain:
 
@@ -323,7 +358,18 @@ Implement the right pattern for the business domain:
 - Import/export: template download, upload, parse preview, error-row download, import progress.
 - Task center: async task list, progress, success/failure, retry, result download.
 
-## 15. Implementation Discipline
+## 16. Scrollbar And Overflow Discipline
+
+- Avoid double scrollbars between `body`, shell, main content, cards, tables, modals, and drawers.
+- Long sidebar menus, table regions, modal bodies, and drawer bodies may scroll; normal cards should not create unnecessary internal scroll areas.
+- Do not show scrollbars when content does not overflow.
+- Use a shared scrollbar style such as `ric-scroll-region`: transparent track, semi-transparent rounded thumb on hover/scroll/focus, thin width, and no arrow buttons.
+- For WebKit, hide scrollbar buttons with `::-webkit-scrollbar-button { display: none; }`.
+- For Firefox, use `scrollbar-width: thin` and `scrollbar-color: rgba(...) transparent`.
+
+Read `references/component-contracts.md` for the full scrollbar and overflow contract before implementing complex list/table/modal pages.
+
+## 17. Implementation Discipline
 
 - Use structured data for routes, menus, permissions, table columns, form schemas, and status dictionaries.
 - Keep layout shell separate from page content.
@@ -333,7 +379,7 @@ Implement the right pattern for the business domain:
 - Use stable keys for menu items, table rows, form fields, and permissions.
 - Keep Chinese copy concise and business-specific.
 
-## 16. Final Check
+## 18. Final Check
 
 Before finishing, read `references/acceptance-checklist.md` and verify:
 
@@ -342,8 +388,12 @@ Before finishing, read `references/acceptance-checklist.md` and verify:
 - Menus, breadcrumbs, active route, and profile dropdown work.
 - Workbench/list/detail/profile patterns match the request.
 - Tables handle loading, empty, error, sorting, pagination/infinite scroll, column settings, selection, and actions.
+- Main content pages avoid duplicated titles, duplicated create buttons, duplicated selection-clear actions, and missing batch delete when deletion is allowed.
 - Modals/drawers/forms handle overflow, validation, submission, and dangerous confirmations.
+- Scrollbars are hidden when unnecessary and polished when visible; no double-scrollbar layout.
 - Visual style is enterprise-refined Chinese admin UI with admin-adapted brand impact where the page type needs it.
 - Login, workbench, module homepage, onboarding, announcement, dashboard hero, and empty states use visual assets, CTA hierarchy, copy self-audit, and anti-template judgment when relevant.
+- Asset Plan was followed; generated asset paths are reported, or no generated asset was needed for the page type.
+- Framework-specific skills and checks were used when a matching UI framework skill exists.
 - Ordinary CRUD, permission, audit, settings, and detail pages remain efficient and are not polluted by marketing-page hero patterns.
 - Repository lint/test/build or available validation commands pass.

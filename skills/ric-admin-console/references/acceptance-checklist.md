@@ -37,9 +37,13 @@ Run this before declaring an admin-console task complete.
 - [ ] Login visual asset/background is existing, generated, or deliberately omitted with a reason.
 - [ ] Module homepages or onboarding pages use product-level brand expression when they are entry surfaces.
 - [ ] Strong visual treatment does not hide core navigation, form, or action paths.
+- [ ] Asset Plan was produced before implementation for `product` and `immersive` surfaces.
+- [ ] Needed visual assets were actively generated with ImageGen or RIC CLI fallback when existing brand/design-system assets were insufficient.
+- [ ] Generated project-bound assets are saved in the workspace and wired into code.
 
 ## List Pages
 
+- [ ] Current page title appears once; breadcrumb, page header, hero, and table card do not repeat the same title as large/primary headings.
 - [ ] Query card exists with business-relevant filters.
 - [ ] Search and reset actions work.
 - [ ] Enter triggers search where appropriate.
@@ -48,8 +52,13 @@ Run this before declaring an admin-console task complete.
 - [ ] Sortable columns show sort state.
 - [ ] Selection appears only when multi-select is supported.
 - [ ] Cross-page selection semantics are explicit when supported.
+- [ ] Create/new action appears once for the workflow and uses the specific object label.
+- [ ] Selection toolbar has one selected count and one clear action, default `清空选择`.
+- [ ] `取消选择` and `清空选择` are not both rendered.
+- [ ] `批量删除` appears after selection when delete permission exists, uses danger styling, and requires confirmation with selected count.
 - [ ] Create/batch/delete/export/import actions respect permissions.
 - [ ] Refresh and column settings exist when expected.
+- [ ] Refresh, column settings, density, and export/import controls are not duplicated.
 - [ ] Name/title column opens detail.
 - [ ] Row actions are in the final column and do not overcrowd the row.
 - [ ] Pagination or infinite-scroll states are complete.
@@ -85,10 +94,15 @@ Run this before declaring an admin-console task complete.
 - [ ] Ordinary CRUD, permission, audit, settings, and detail pages remain utility-first and are not polluted by marketing-page hero patterns.
 - [ ] Needed login, empty-state, announcement, onboarding, report, profile, or background assets use existing brand assets or generated bitmap assets instead of generic placeholders.
 - [ ] If built-in image generation was unavailable for needed assets, the RIC CLI fallback path was used or the missing `OPENAI_API_KEY` was reported.
+- [ ] Scrollbars are hidden when unnecessary and polished when visible: transparent track, semi-transparent rounded thumb, thin width, and no arrows.
+- [ ] Shell, main content, cards, tables, modals, and drawers do not create double-scrollbar layouts.
 
 ## Engineering
 
 - [ ] Existing framework and UI library conventions are respected.
+- [ ] Matching framework skill retrieval was performed when a known UI framework was detected.
+- [ ] React + Ant Design/ProComponents work used `ant-design` and/or `antd` skill; antd CLI API/token/demo/lint checks were used when available.
+- [ ] Element Plus, Naive UI, and Arco work retrieved matching skills when available or checked installed version plus official API when no local skill existed.
 - [ ] Routes, menus, permissions, columns, forms, and status dictionaries use structured data where practical.
 - [ ] No duplicated hardcoded menus scattered across pages.
 - [ ] Request, loading, and error handling follow local conventions.

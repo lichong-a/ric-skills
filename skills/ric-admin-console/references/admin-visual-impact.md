@@ -145,9 +145,11 @@ Avoid:
 - Saturated color everywhere.
 - Motion that hides whether data is current.
 
-## Asset Generation
+## Active ImageGen Protocol
 
-Use existing brand/design-system assets first. If insufficient, invoke the available agent image-generation capability. If it is missing or unavailable, use the RIC CLI fallback documented in `../../references/ric-imagegen-fallback.md`.
+Use existing brand/design-system assets first. If insufficient, actively invoke the available agent image-generation capability. If it is missing or unavailable, use the RIC CLI fallback documented in `../../references/ric-imagegen-fallback.md`.
+
+Do not treat ImageGen as optional when a high-impact admin surface needs a bitmap asset. Once the requirement is clear, generate the asset or explicitly state why a generated bitmap is not needed.
 
 Generate assets for:
 
@@ -158,6 +160,22 @@ Generate assets for:
 - Report cover or export preview.
 - Neutral profile/avatar placeholder set.
 
+Triggers:
+
+- `immersive` login page with no existing visual panel/background.
+- `product` workbench or module homepage that would otherwise become only cards and text.
+- Empty/error/import/export states that would otherwise be generic or visually blank.
+- Announcement/onboarding banner that introduces a feature, migration, or maintenance event.
+- Dashboard/command-center surface that needs a low-noise map, topology, texture, or monitoring backdrop.
+- Report/export preview when the user sees a document-like result.
+
+Do not generate for:
+
+- Ordinary CRUD table backgrounds.
+- Functional icons already covered by the chosen UI/icon library.
+- Logos, trademarks, QR codes, fake company marks, or fake trust badges.
+- Critical UI text that should be real HTML text.
+
 Prompt direction:
 
 - Chinese enterprise SaaS admin product.
@@ -165,6 +183,15 @@ Prompt direction:
 - Brand color compatible.
 - No readable fake UI text inside image.
 - No fake logo, trademark, QR code, watermark, or fake company data.
+
+Workflow:
+
+1. Write an Asset Plan before code: asset name, use, intended aspect ratio, generation path, save path, and consuming component.
+2. If built-in ImageGen exists, use it and move/copy the selected project-bound result into the workspace.
+3. If built-in/MCP/IDE/agent-native ImageGen is missing or unavailable, use the RIC CLI fallback directly.
+4. If `OPENAI_API_KEY` is missing for CLI fallback, stop and ask for it.
+5. Wire saved assets into the app. Do not leave referenced assets only in a tool temp folder.
+6. At handoff, report the final asset paths and whether built-in ImageGen or CLI fallback was used.
 
 ## Final Visual Self-Check
 
