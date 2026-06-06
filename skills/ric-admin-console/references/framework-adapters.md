@@ -16,6 +16,8 @@ Before coding, inspect:
 - Permission model.
 - State management.
 - Styling solution.
+- Theme implementation: CSS variables, design tokens, dark-mode class/data attribute, UI-library provider, persisted preference.
+- Locale implementation: existing i18n library, message files, route locale segment, cookie/user preference, or backend dictionaries.
 - Existing test/build commands.
 
 ## Framework Skill Retrieval Protocol
@@ -40,6 +42,8 @@ Rules:
 - Do not override framework internals or broad generated class names when token/theme APIs exist.
 - Include framework-specific checks in final validation when available.
 - After runnable UI changes, include browser screenshots in final validation. Static API/CLI/lint checks do not replace screenshot verification for component composition, spacing, state, and overflow behavior.
+- For i18n or theme work, read `i18n-patterns.md` and verify both framework API usage and visible UI behavior in every implemented locale/theme.
+- Theme changes must use framework token APIs, CSS variables, or design-system providers. Do not scatter raw light/dark colors across components.
 
 ## React + shadcn/ui
 
@@ -70,6 +74,14 @@ Rules:
 - Do not introduce Ant Design, ProComponents, Material UI, or another component library into a shadcn admin system unless the user explicitly asks and migration/mixing is in scope.
 - In screenshot verification, confirm shadcn composition is visible: `Breadcrumb`, `Card`, `Table`, `Dialog`/`Sheet`/`Drawer`, `AlertDialog`, `Skeleton`, `Empty`, `ScrollArea`, semantic tokens, consistent gaps, and no raw div-only replacement for installed primitives.
 
+Theme and i18n:
+
+- Use shadcn/Tailwind semantic tokens for light/dark/system; prefer a root class or data attribute controlled by the project theme provider.
+- Persist theme in the existing user settings store, cookie, or local storage according to the app architecture.
+- Verify generated LOGO/avatar/background assets against both light and dark shells; provide variants or neutral assets when one file fails contrast.
+- For Next.js App Router, pair shadcn with `next-intl` when i18n is requested; for Vite/SPA React, pair with `react-i18next + i18next` unless the existing project already chose another i18n stack.
+- Do not hardcode menu, breadcrumb, table, and form labels inside shadcn components when i18n is in scope.
+
 ## React + Ant Design / ProComponents
 
 Use when the project already has Ant Design, when the user explicitly chooses Ant Design, or when the team/business requirement explicitly needs Ant Design Pro patterns. Ant Design is the secondary React option for new admin systems; do not choose it by default when shadcn is viable.
@@ -95,6 +107,13 @@ Rules:
 - Keep menu and route definitions typed/structured.
 - In screenshot verification, confirm Ant Design/ProComponents layouts use the expected token density, table/form/modal conventions, loading states, and no accidental shadcn/AntD visual mixing.
 
+Theme and i18n:
+
+- Use `ConfigProvider` theme tokens, component tokens, and algorithm options for light/dark theming instead of broad `.ant-*` overrides.
+- Persist theme in the existing settings/user preference layer and ensure table selected rows, hover rows, modal masks, notifications, and status tags remain readable.
+- For i18n, use the project's i18n library plus AntD `ConfigProvider` locale packages where date picker, pagination, form validation, and empty-state built-ins need localization.
+- If the project uses ProComponents, check its locale and token hooks before overriding text manually.
+
 ## Vue 3 + Element Plus
 
 Use when the project already has Vue/Element Plus or for Vue admin systems.
@@ -115,6 +134,12 @@ Rules:
 - Use dialog for short forms and drawer for complex forms/detail.
 - If no skill is available, check the installed Element Plus version and official API before using props/events.
 
+Theme and i18n:
+
+- Use Element Plus config provider, CSS variables, and project theme tokens for dark/light support.
+- Use the existing Vue i18n stack or `vue-i18n` Composition API for menus, breadcrumbs, tables, forms, validation, and notifications.
+- Localize Element Plus built-in component text through its locale provider when needed.
+
 ## Naive UI
 
 Use when the project already uses Naive UI.
@@ -131,6 +156,11 @@ Rules:
 - Keep action render functions accessible and permission-aware.
 - If no skill is available, check the installed Naive UI version and official API before using props/events.
 
+Theme and i18n:
+
+- Use Naive UI theme provider and theme overrides for light/dark/system support.
+- Use the existing Vue i18n stack or `vue-i18n`; do not hardcode render-function strings when i18n is in scope.
+
 ## Arco Design
 
 Use when the project uses Arco React or Arco Vue.
@@ -142,6 +172,11 @@ Rules:
 - Use design tokens instead of ad hoc colors.
 - Keep density consistent with the project's existing Arco config.
 - If no skill is available, check the installed Arco version and official API before using props/events.
+
+Theme and i18n:
+
+- Use Arco design tokens, config provider, and locale provider where available.
+- Keep React/Vue i18n integration aligned with the project framework and router.
 
 ## TanStack Table
 

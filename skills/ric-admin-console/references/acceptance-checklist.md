@@ -17,11 +17,27 @@ Run this before declaring an admin-console task complete.
 
 ## Planning
 
+- [ ] Planning captured website/system title, product name, LOGO source, desired LOGO style, and brand color.
+- [ ] Planning captured layout mode: `sidebar-only`, `topnav-only`, or `sidebar-with-topbar`; if unspecified, the default was recorded.
+- [ ] Planning captured theme mode: light only, dark only, or `light/dark/system`, including persistence strategy when switching is in scope.
+- [ ] Planning captured multilingual/i18n scope, default locale, target locales, persistence/routing strategy, and whether implementation is i18n-ready or fully translated.
+- [ ] Planning captured whether public portal, website, user-facing console, login/register, invite, help center, tenant welcome, or report cover surfaces are in scope.
 - [ ] Planning captured whether RBAC roles, role assignment, permission points, and route/button permissions are needed.
 - [ ] Planning captured whether menu management, dynamic menus, and menu permission binding are needed.
 - [ ] Planning captured whether department/organization, tenant isolation, and data permissions are needed.
 - [ ] Planning captured whether third-party login/SSO/OAuth/OIDC/LDAP/DingTalk/Feishu/WeCom/SMS login is needed.
 - [ ] If the user did not specify these capabilities, the implementation stated its default assumptions before proceeding.
+
+## Locale And Theme
+
+- [ ] When i18n is in scope, `i18n-patterns.md` was read and the stack-specific library choice was justified by the actual project.
+- [ ] Menus, breadcrumbs, route/page titles, table columns, buttons, status labels, form labels, validation messages, loading text, empty states, notifications, and auth/permission text use translation keys when i18n is implemented.
+- [ ] Date, time, number, percentage, and currency formatting are locale-aware.
+- [ ] Language choice is persisted through URL, cookie, user profile, tenant setting, or local storage as planned.
+- [ ] Longer translated labels do not wrap or break desktop toolbar, sidebar, breadcrumb, table header, modal, and dropdown layouts.
+- [ ] Theme is token-driven through CSS variables, design-system provider, or framework theme APIs instead of scattered raw colors.
+- [ ] LOGO, app icon, generated background, avatar, empty-state art, charts, table hover/selected rows, modal masks, dropdowns, skeletons, loading overlays, and scrollbars work in light and dark themes.
+- [ ] Theme choice is persisted when theme switching is implemented.
 
 ## Auth And Permissions
 
@@ -49,6 +65,9 @@ Run this before declaring an admin-console task complete.
 - [ ] Login visual asset/background is existing, generated, or deliberately omitted with a reason.
 - [ ] Module homepages or onboarding pages use product-level brand expression when they are entry surfaces.
 - [ ] Strong visual treatment does not hide core navigation, form, or action paths.
+- [ ] Public portal or user-facing surfaces use stronger brand expression, visual assets, CTA discipline, and anti-template checks when in scope.
+- [ ] Portal/login/workbench/module/command-center motion or 3D effects serve orientation, brand, data comprehension, guided focus, or state change.
+- [ ] GSAP, Three.js/WebGL, canvas, and advanced motion are isolated with cleanup and reduced-motion fallback when used.
 - [ ] Asset Plan was produced before implementation for `product` and `immersive` surfaces.
 - [ ] A Brand Asset Pack was planned for new/visually refreshed admin systems: logo/mark, app icon, module icon style, backgrounds, default avatar, and empty-state art.
 - [ ] Needed visual assets were actively generated with ImageGen or RIC CLI fallback when existing brand/design-system assets were insufficient.
@@ -110,6 +129,7 @@ Run this before declaring an admin-console task complete.
 - [ ] Important empty states explain why the state exists and provide permission-aware next actions.
 - [ ] High-impact surfaces have clear brand signal, visual hierarchy, and CTA hierarchy without generic slogans.
 - [ ] Ordinary CRUD, permission, audit, settings, and detail pages remain utility-first and are not polluted by marketing-page hero patterns.
+- [ ] Ordinary CRUD, permission, audit, settings, and detail pages do not use decorative scroll storytelling, parallax, animated backgrounds, or cinematic motion.
 - [ ] Needed logo/mark, app icon, generated backgrounds, default avatar, empty-state art, announcement/onboarding/report/profile assets use existing brand assets or generated bitmap assets instead of generic placeholders.
 - [ ] Project-specific module/icon assets share one visual language; functional operation icons come from one UI icon family unless a custom generated icon set was explicitly requested.
 - [ ] If built-in image generation was unavailable for needed assets, the RIC CLI fallback path was used or the missing `OPENAI_API_KEY` was reported.
@@ -128,6 +148,11 @@ Run this before declaring an admin-console task complete.
 - [ ] React + Ant Design/ProComponents work had a user choice, existing AntD project basis, or explicit business/team requirement; it used `ant-design` and/or `antd` skill, and antd CLI API/token/demo/lint checks were used when available.
 - [ ] Existing React + AntD projects were not silently mixed with shadcn; migration or mixed-stack work had explicit user approval.
 - [ ] Element Plus, Naive UI, and Arco work retrieved matching skills when available or checked installed version plus official API when no local skill existed.
+- [ ] Next.js i18n work used `next-intl` unless the existing project already chose another stack.
+- [ ] React/Vite/SPA i18n work used `react-i18next + i18next` unless the existing project already chose another stack.
+- [ ] Vue 3 i18n work used `vue-i18n` Composition API unless the existing project already chose another stack.
+- [ ] Nuxt i18n work used `@nuxtjs/i18n` unless the existing project already chose another stack.
+- [ ] Angular i18n work used official Angular i18n by default, or a runtime library only after the tradeoff was explicit.
 - [ ] Routes, menus, permissions, columns, forms, and status dictionaries use structured data where practical.
 - [ ] No duplicated hardcoded menus scattered across pages.
 - [ ] Request, loading, and error handling follow local conventions.
@@ -148,6 +173,9 @@ Run this before declaring an admin-console task complete.
 - [ ] Permission-denied, hidden action, disabled action, or 403 screenshots were checked when RBAC/menu permissions are in scope.
 - [ ] Long sidebar, wide/long table, long dropdown, modal body, and drawer body screenshots confirm polished scrollbars and no double-scrollbar layout.
 - [ ] Generated asset screenshots confirm logo, app icon, avatar, background, empty-state art, banner, login panel, or workbench/module texture render from project paths without obscuring text/actions.
+- [ ] Locale screenshots confirm translated shell/menu/breadcrumb/list/form/loading/empty text and no layout breakage when i18n is implemented.
+- [ ] Theme screenshots confirm light/dark/system visual quality, asset contrast, chart colors, table selected/hover states, modal masks, dropdowns, skeletons, loading overlays, and scrollbars when theme switching is implemented.
+- [ ] Public portal or user-facing surface screenshots confirm strong brand expression and CTA quality, while utility page screenshots confirm admin density remains intact.
 - [ ] Screenshots confirm no duplicated page title, duplicated create button, duplicated selection-clear action, or missing permission-aware `批量删除`.
 - [ ] Screenshots confirm skeleton-first loading and visible data refresh loading text.
 - [ ] Screenshots confirm breadcrumb parent navigation works and detail -> list return state is preserved.

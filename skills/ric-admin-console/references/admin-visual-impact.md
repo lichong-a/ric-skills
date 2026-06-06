@@ -14,6 +14,25 @@ Choose one mode per page or region:
 
 Do not apply `immersive` to normal CRUD pages.
 
+## Public Portal And User-Facing Surfaces
+
+Some admin projects include public or user-facing surfaces: official portal, product landing page, tenant welcome page, invite page, login/register, help center, report cover, portal preview, or a lightweight customer console.
+
+For these surfaces:
+
+- Keep `ric-admin-console` as the overall entry skill, then inherit `ric-design-taste-frontend` for brand read, visual variance, assets, CTA discipline, copy audit, motion rules, and anti-template checks.
+- Use stronger ImageGen assets when the surface is meant to persuade, orient, onboard, or create brand confidence.
+- Use GSAP, Three.js/WebGL, 3D tilt/cards, canvas backgrounds, kinetic type, or advanced motion only when it communicates brand, hierarchy, onboarding progress, data change, or guided focus.
+- Keep motion isolated in leaf components with cleanup and reduced-motion behavior. Do not let animation libraries fight over the same DOM/canvas region.
+- Public portal surfaces may use landing-page rhythm; utility admin pages may not.
+
+Portal acceptance:
+
+- First viewport has recognizable brand, one primary CTA, and a direct route to login/admin entry when relevant.
+- Visual assets are real or generated project assets, not generic CSS decoration.
+- Portal copy is product-specific and avoids vague slogans.
+- Browser screenshots cover both the portal surface and the admin utility surface that links to it.
+
 ## Inherited Taste Rules For Admin
 
 Borrow these from high-end frontend design:
@@ -147,7 +166,7 @@ Avoid:
 
 ## Active ImageGen Protocol
 
-Use existing brand/design-system assets first. If insufficient, actively invoke the available agent image-generation capability. If it is missing or unavailable, use the RIC CLI fallback documented in `../../references/ric-imagegen-fallback.md`.
+Use existing brand/design-system assets first. If insufficient, actively invoke the available agent-native image generation, built-in image tool, MCP image tool, or IDE image tool. If image tooling is missing or unavailable, use the RIC CLI fallback documented in `../../references/ric-imagegen-fallback.md`.
 
 Do not treat ImageGen as optional when a high-impact admin surface needs a bitmap asset. Once the requirement is clear, generate the asset or explicitly state why a generated bitmap is not needed.
 
@@ -159,6 +178,7 @@ Generate assets for:
 - Sidebar/topbar brand mark or app icon variants.
 - Project-specific module icon set when generic UI icons are insufficient.
 - Full small-icon pack when the user explicitly asks for all small icons to be generated; wire it through a shared icon component instead of scattering raw image tags.
+- Public portal hero imagery, tenant welcome visuals, invite/onboarding graphics, or user-facing product backdrops when those surfaces are in scope.
 - Login visual panel or background.
 - Workbench/module background texture.
 - Empty-state illustrations.
@@ -197,8 +217,8 @@ Workflow:
 
 1. Write an Asset Plan before code: asset name, use, intended aspect ratio, generation path, save path, and consuming component.
 2. For a Brand Asset Pack, define the shared style first: shape language, color family, light/dark compatibility, icon weight, avatar tone, and background noise level.
-3. If built-in ImageGen exists, use it and move/copy the selected project-bound result into the workspace.
-4. If built-in/MCP/IDE/agent-native ImageGen is missing or unavailable, use the RIC CLI fallback directly.
+3. If agent-native, built-in, MCP, or IDE ImageGen exists, use it and move/copy the selected project-bound result into the workspace.
+4. If agent-native/built-in/MCP/IDE ImageGen is missing or unavailable, use the RIC CLI fallback directly.
 5. If `OPENAI_API_KEY` is missing for CLI fallback, stop and ask for it.
 6. Wire saved assets into the app. Do not leave referenced assets only in a tool temp folder.
 7. At handoff, report the final asset paths and whether built-in ImageGen or CLI fallback was used.

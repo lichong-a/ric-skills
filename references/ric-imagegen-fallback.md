@@ -4,9 +4,9 @@ Use this reference from any RIC skill that needs generated bitmap assets.
 
 ## Rule
 
-Prefer the environment's built-in image generation capability when it exists. If the built-in image generation tool, MCP image tool, IDE image tool, or agent-native image capability is missing or unavailable, use the bundled CLI fallback directly instead of stopping.
+Prefer the environment's agent-native image generation capability when it exists: Codex image generation, built-in image tools, MCP image tools, IDE-integrated image tools, or equivalent agent-native generation. If image tooling is missing or unavailable, use the bundled CLI fallback directly instead of stopping.
 
-This RIC repository intentionally changes the upstream default: missing built-in image tooling is not a blocker when the CLI path is available.
+This RIC repository intentionally changes the upstream default: missing built-in or agent-native image tooling is not a blocker when the CLI path is available.
 
 ## CLI Requirements
 
@@ -65,7 +65,7 @@ python $env:IMAGE_GEN generate-batch `
 
 ## Transparent Assets
 
-For simple opaque cutouts, built-in image generation plus chroma-key removal is preferred when available. If the built-in tool is unavailable and the user needs true transparent output, CLI fallback can use:
+For simple opaque cutouts, agent-native or built-in image generation plus chroma-key removal is preferred when available. If image tooling is unavailable and the user needs true transparent output, CLI fallback can use:
 
 ```powershell
 python $env:IMAGE_GEN generate `

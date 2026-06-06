@@ -6,7 +6,7 @@ Use this loop after implementing or substantially changing a runnable admin UI. 
 
 1. **Skill point inventory**: list the task-relevant requirements from `ric-admin-console` and any triggered UI/design/image/framework skills: layout, menu, auth, permissions, breadcrumbs, page header, loading, table, modal/drawer, scrollbar, generated assets, and framework component rules.
 2. **Static checks**: run available lint, test, build, typecheck, and framework-specific checks.
-3. **Browser run**: start or reuse the dev/preview server. If the preferred port is busy, use another port. Open the real page in Browser or another available browser automation surface.
+3. **Browser run**: start or reuse the dev/preview server. If the preferred port is busy, use another port. In Codex, prefer the Browser plugin. In other agent environments, use Playwright, Cypress, Puppeteer, IDE browser preview, or another available browser automation surface.
 4. **Screenshot matrix**: capture screenshots for relevant pages, states, and viewports. Minimum desktop viewports are `1366x768`, `1440x900`, and `1920x1080`; add mobile/narrow viewports when responsive behavior is in scope.
 5. **Visual comparison**: compare screenshots against the skill point inventory and `acceptance-checklist.md`.
 6. **Fix loop**: if any mismatch appears, modify the implementation, rerun relevant static checks, reload the browser, recapture screenshots, and compare again. Repeat until all required checks pass or an external blocker is explicit.
@@ -24,6 +24,8 @@ Capture every relevant item below:
 - Long sidebar menu, wide/long table, long dropdown, modal body, and drawer body for scrollbar and double-scrollbar checks.
 - Permission-denied, hidden action, disabled action, or 403 state when RBAC/menu permissions are in scope.
 - Generated asset placements: logo, app icon, avatar, background, empty-state image, announcement/banner, login visual panel, workbench/module texture.
+- Locale/theme states when implemented: language switch, translated menu/breadcrumb/table/form strings, light theme, dark theme, and system/default theme behavior.
+- Public portal or user-facing surfaces when the admin system includes them.
 
 ## What To Compare
 
@@ -37,12 +39,15 @@ Check screenshots for:
 - Modal/drawer/form states include title, body, action area, validation, submit loading, success/failure, and internal scrolling when needed.
 - Scrollbars are hidden when unnecessary and polished when visible: transparent track, semi-transparent rounded thumb, thin width, no arrows, no double scrollbar.
 - Generated assets render from project paths, do not cover text/actions, do not contain fake UI copy, and match the Brand Asset Pack.
+- Multilingual UI has no untranslated visible strings in the checked scope, no desktop button wrapping caused by longer translations, and locale-aware date/number/currency formatting.
+- Theme switching preserves contrast and hierarchy for LOGO, avatar, generated assets, charts, table selected/hover rows, modal masks, dropdowns, skeletons, and scrollbars.
+- Portal or user-facing surfaces show stronger brand expression when required, while CRUD/permission/audit/settings/detail pages remain utility-first.
 - Framework-specific component composition follows the triggered skill: shadcn/AntD/Element/Naive/Arco components, tokens, spacing, accessibility, and validation patterns.
 
 ## Blocking And Fallback
 
 If browser screenshots cannot be completed:
 
-- State the exact blocker: project cannot start, dependency install failed, missing env secret, missing backend/mock, unavailable Browser tool, or auth cannot be completed.
+- State the exact blocker: project cannot start, dependency install failed, missing env secret, missing backend/mock, unavailable browser automation, or auth cannot be completed.
 - Use the strongest available substitute: static render tests, storybook screenshots, Playwright/E2E screenshots, component snapshots, DOM inspection, or build artifacts.
 - Do not claim browser screenshot verification passed unless real screenshots of the runnable UI were captured and compared.

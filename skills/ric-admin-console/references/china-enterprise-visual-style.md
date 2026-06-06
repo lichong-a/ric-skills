@@ -47,6 +47,30 @@ Rules:
 - Avoid uncontrolled gradients and generic AI-purple backgrounds.
 - Avoid "template blue" by improving hierarchy, spacing, typography, and state details.
 
+## Theme Switching
+
+When theme switching is requested or a new product should be theme-ready, prefer `light/dark/system` with token-driven implementation.
+
+Rules:
+
+- Define semantic tokens for surface, elevated surface, border, text, muted text, primary action, focus, hover, selected row, danger, warning, success, info, chart colors, and scrollbar.
+- Persist user choice through the existing user settings store, cookie, or local storage. Do not ignore server-side user preference if one exists.
+- LOGO, app icon, default avatar, generated backgrounds, empty-state art, and report covers must work on both light and dark shells. Generate variants when one asset cannot pass contrast.
+- Table hover/selected states, modal masks, dropdowns, popovers, skeletons, loading overlays, chart colors, and scrollbars must be checked in both themes.
+- Avoid page-by-page manual inversion. Theme should come from provider, CSS variables, or design-system tokens.
+
+## Language And Locale
+
+China-market defaults are usually Simplified Chinese first, but admin systems often need English, Traditional Chinese, or tenant-specific languages.
+
+Rules:
+
+- Keep Chinese labels concise and business-specific.
+- When i18n is in scope, menus, breadcrumbs, route titles, page headers, table columns, button labels, status tags, validation errors, loading text, empty states, toasts, and permission messages must use translation keys.
+- English labels are often longer; validate sidebar width, toolbar buttons, breadcrumbs, dropdowns, table headers, and modal titles in every implemented language.
+- Date, number, percentage, and currency formatting should use locale-aware APIs or the chosen i18n library.
+- Do not put critical text inside generated images because it cannot be localized reliably.
+
 ## Typography
 
 Chinese admin UI needs readable system fonts:
@@ -150,8 +174,8 @@ Good generated admin assets:
 
 Rules:
 
-- Use the agent's image generation capability when available.
-- If the image generation tool is missing or unavailable, use the RIC CLI fallback in `references/ric-imagegen-fallback.md`.
+- Use the agent-native, built-in, MCP, or IDE image generation capability when available.
+- If image generation tooling is missing or unavailable, use the RIC CLI fallback in `references/ric-imagegen-fallback.md`.
 - Keep generated assets quiet and secondary to data and actions on utility pages; allow stronger brand presence on login, onboarding, workbench hero, and command-center first screens.
 - Avoid critical text in images.
 - Avoid fake brands, fake logos, watermarks, QR codes, decorative mascots, and high-saturation marketing art.
@@ -216,6 +240,8 @@ Avoid:
 - Excessive page transitions.
 
 On login, onboarding, workbench hero, and command-center screens, motion can be more expressive if it communicates reveal, status, data update, or guided focus. It must remain optional and respect reduced-motion preferences when the stack supports it.
+
+Public portals, tenant welcome pages, help/marketing-adjacent pages, and user-facing console entry pages may use stronger motion and 3D treatment. GSAP, Three.js/WebGL, 3D tilt cards, and canvas scenes are acceptable only on these low-frequency high-expression surfaces, with cleanup, reduced-motion fallback, and screenshot verification. Ordinary CRUD, permissions, audit logs, settings, and dense detail pages stay motion-light.
 
 ## Anti-Template Rules
 

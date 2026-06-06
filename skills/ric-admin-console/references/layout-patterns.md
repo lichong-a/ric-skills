@@ -87,7 +87,7 @@ Browser screenshot verification:
 
 - Capture the selected shell layout at `1366x768`, `1440x900`, and `1920x1080`.
 - Confirm fixed sidebar/topbar regions do not cover breadcrumbs or page content.
-- Click parent breadcrumb items in Browser and verify upward navigation, then return to the detail flow and confirm list filters, sorting, pagination, selected tab, and scroll state are preserved.
+- Click parent breadcrumb items in Codex Browser or another browser automation surface and verify upward navigation, then return to the detail flow and confirm list filters, sorting, pagination, selected tab, and scroll state are preserved.
 - Capture long-menu and collapsed-menu states when the sidebar can overflow or collapse.
 
 ## Menus
