@@ -63,11 +63,8 @@ RIC image-generation skills prefer the environment's agent-native or built-in im
 
 If image tooling is missing or unavailable, RIC skills use the bundled CLI fallback documented in [references/ric-imagegen-fallback.md](references/ric-imagegen-fallback.md). The CLI fallback requires `OPENAI_API_KEY` in the environment. Do not hardcode keys.
 
-Typical admin asset pack:
+Typical admin asset pack for downstream projects:
 
-- `assets/ric-skills-logo.png`
-- `assets/ric-skills-mark.png`
-- `assets/readme-hero.png`
 - App logo or mark variants for sidebar/topbar.
 - Default avatar and profile placeholders.
 - Empty-state art and onboarding/report/announcement backgrounds.
