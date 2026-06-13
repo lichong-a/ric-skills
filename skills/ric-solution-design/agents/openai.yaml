@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Solution Design"
+  short_description: "Design implementation-ready solutions and work packages"
+  default_prompt: "Use $ric-solution-design to create and review an implementation-ready design for this request."

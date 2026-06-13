@@ -1,115 +1,69 @@
 ---
 name: ric-data-pipeline
-description: "RIC data pipeline skill for Kafka, NATS, Redis streams, TimescaleDB/PostgreSQL, Elasticsearch indexing, event schemas, ingestion, projection, retries, idempotency, backfills, observability, and non-destructive migration design under ric namespace rules."
+description: Use when designing or changing event streams, ingestion, projections, indexing, analytics flows, consumers, retries, dead-letter handling, replay, reconciliation, or backfills.
 ---
 # RIC Data Pipeline
 
-Use this skill for event-driven, streaming, indexing, ingestion, projection, and analytical data flows.
+For non-trivial delivery, operate as the single primary executor under `ric-delivery-loop`; do not approve requirements, design, code review, security review, tests, or acceptance.
 
-## Safety
+## Role
 
-Always apply `ric-infra-safety`.
+Own data-flow semantics and implementation. Never waive infrastructure safety, reconciliation, independent review, or test evidence.
 
-- Reuse shared services.
-- Use ric-prefixed writable resources.
-- Never perform destructive data operations.
-- Do not delete, truncate, flush, or drop existing data.
-- Backfills and migrations must be additive and reversible when possible.
+## Required Companions
 
-## Pipeline Design
+- Apply `ric-agent-operating-rules` and `ric-infra-safety`.
+- Use `ric-api-design` for externally consumed event or data contracts.
+- Hand changes to independent `ric-code-review` and `ric-testing-quality`.
 
-Define:
+## Required Design Record
 
-- Source system.
-- Event or record schema.
-- Transport: Kafka, NATS, Redis stream, database polling, file/object import.
-- Consumer group / durable name.
-- Idempotency key.
-- Retry policy.
-- Dead-letter handling.
-- Target projection/index/table.
-- Monitoring and replay plan.
+Define before implementation:
 
-## Event Schema
+- source, target, owner, schema, version, and volume expectations;
+- delivery semantic: at-most-once, at-least-once, or effectively-once;
+- partition key, ordering boundary, and concurrency model;
+- consumer group or durable identity;
+- offset/checkpoint commit point and recovery behavior;
+- idempotency and deduplication strategy;
+- retry policy, poison-message handling, DLQ, and replay procedure;
+- backpressure, rate limits, lag thresholds, and stop conditions;
+- source-to-target reconciliation and retention policy.
 
-Events should include:
+## Data Contract
 
-- Event name/type.
-- Version.
-- Event ID.
-- Occurred time.
-- Producer.
-- Tenant/account/project context when relevant.
-- Entity ID.
-- Payload.
-- Trace/correlation ID.
+Events or records must have stable identity, schema version, timestamps, producer, tenant/data scope, entity identity, payload bounds, and correlation context when relevant. Do not include secrets. Preserve backward compatibility or provide an approved migration.
 
-Rules:
+## Processing Contract
 
-- Version schemas.
-- Keep backward compatibility.
-- Avoid unbounded payloads.
-- Do not include secrets.
+- Commit checkpoints only after the defined durable success point.
+- Make retries safe and observable.
+- Handle duplicates and out-of-order input according to declared semantics.
+- Bound queues, batches, payloads, retries, and concurrency.
+- Route permanent failures to an inspectable DLQ without losing source context.
+- Define replay idempotency and prevent replay from bypassing authorization or safety rules.
 
-## Idempotency
+## Backfill Contract
 
-Every consumer should be safe to retry.
+Every backfill must be additive, bounded, resumable, throttled, observable, and idempotent. Define:
 
-Patterns:
+- checkpoint format and resume behavior;
+- source range and exclusion rules;
+- throttle and resource budget;
+- abort and rollback/recovery conditions;
+- validation queries and reconciliation thresholds;
+- failure report and safe rerun procedure.
 
-- Idempotency key table.
-- Upsert by natural key.
-- Last-write version check.
-- Deduplicate by event ID.
-- Store processed offset/checkpoint.
+## Required Evidence
 
-## Storage Targets
+Provide:
 
-TimescaleDB/PostgreSQL:
+- approved pipeline design record and schema compatibility result;
+- tests for happy path, duplicate, out-of-order, retryable failure, permanent failure/DLQ, replay, checkpoint recovery, backpressure, and schema versions;
+- reconciliation report showing source and target counts or domain invariants;
+- lag, throughput, failure, and DLQ monitoring plan;
+- remaining data-correctness and operational risks.
 
-- Use `ric_` names.
-- Prefer additive migrations.
-- Use indexes intentionally.
-- Keep hypertable/time-series design explicit.
+## Gate And Handoff
 
-Elasticsearch:
-
-- Index names start with `ric-`.
-- Define mappings before indexing when field types matter.
-- Use aliases for versioned index rollout when needed.
-
-Redis:
-
-- Keys start with `ric:` or `ric-`.
-- Set TTLs for cache keys when appropriate.
-- Do not use `FLUSH*`.
-
-Kafka/NATS:
-
-- Use ric-prefixed subjects/topics when creating.
-- Define retention and consumer behavior.
-- Add dead-letter or retry strategy for poison messages.
-
-## Backfills
-
-Backfills must be:
-
-- Non-destructive.
-- Bounded.
-- Resumable.
-- Observable.
-- Idempotent.
-
-Report progress and failures clearly.
-
-## Verification
-
-Test:
-
-- Happy path.
-- Duplicate event.
-- Out-of-order event when possible.
-- Retryable failure.
-- Permanent failure/dead-letter.
-- Schema version compatibility.
-
+Independent review must confirm semantics, safety, and reconciliation against the pinned artifact. The test gate must use isolated or approved RIC-prefixed resources. A failed reconciliation, unbounded backfill, unsafe resource, or missing recovery procedure blocks handoff.

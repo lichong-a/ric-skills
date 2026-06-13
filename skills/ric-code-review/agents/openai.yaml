@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Code Review"
+  short_description: "Run an independent evidence-backed code review"
+  default_prompt: "Use $ric-code-review as a read-only independent reviewer for this pinned revision."
+policy:
+  allow_implicit_invocation: true

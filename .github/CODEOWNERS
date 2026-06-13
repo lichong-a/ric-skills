@@ -1,0 +1,13 @@
+# Branch protection must require CODEOWNER review for these paths.
+/.github/workflows/ @lichong-a
+/scripts/ @lichong-a
+/schemas/ @lichong-a
+/skills/catalog.json @lichong-a
+/skills/ric-delivery-loop/ @lichong-a
+/skills/ric-independent-review/ @lichong-a
+/skills/ric-security-review/ @lichong-a
+/skills/ric-code-review/ @lichong-a
+/skills/ric-testing-quality/ @lichong-a
+/skills/ric-acceptance-validation/ @lichong-a
+/skills/ric-visual-design-review/ @lichong-a
+/skills/ric-design-qa/ @lichong-a

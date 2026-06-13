@@ -1,0 +1,5 @@
+interface:
+  display_name: "RIC Design Taste Frontend"
+  short_description: "Distinctive public frontend visual direction"
+  default_prompt: "Use $ric-design-taste-frontend to create or refine a distinctive public-facing frontend experience."
+

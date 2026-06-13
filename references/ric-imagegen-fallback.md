@@ -13,7 +13,7 @@ This RIC repository intentionally changes the upstream default: missing built-in
 The fallback CLI is:
 
 ```powershell
-$env:IMAGE_GEN = "$env:USERPROFILE\.codex\skills\.system\imagegen\scripts\image_gen.py"
+$env:IMAGE_GEN = [System.IO.Path]::GetFullPath("$env:USERPROFILE\.codex\skills\.system\imagegen\scripts\image_gen.py")
 python $env:IMAGE_GEN --help
 ```
 
@@ -29,6 +29,7 @@ Requirements:
 - Network access.
 - `OPENAI_API_KEY` in the environment.
 - Do not hardcode the key.
+- Resolve and inspect the canonical path before execution. An environment override or path outside the trusted system-skill directory requires explicit user confirmation.
 - Do not modify `scripts/image_gen.py`.
 - Save final project-bound assets under the workspace, usually `output/imagegen/` or the app's asset directory.
 - Use `tmp/imagegen/` only for temporary JSONL prompts or scratch files.

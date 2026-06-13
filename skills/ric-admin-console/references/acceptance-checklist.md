@@ -160,10 +160,12 @@ Run this before declaring an admin-console task complete.
 - [ ] Available lint/test/build/static checks pass.
 - [ ] Key layouts were visually checked at common desktop sizes such as 1366x768, 1440x900, and 1920x1080 when a runnable app exists.
 
-## Browser Screenshot Verification
+## Independent Visual And Acceptance Verification
 
 - [ ] A skill point inventory was created for this task: triggered admin-console, framework, imagegen, visual, and quality requirements.
-- [ ] A runnable app was opened in Browser or another browser automation surface; terminal-only validation was not used as a substitute for UI verification.
+- [ ] Visual review, design QA when applicable, and behavioral acceptance validation were assigned to fresh-context reviewers who did not author or fix the reviewed revision.
+- [ ] Every review result identifies the current source revision or artifact version; affected evidence was rerun after changes.
+- [ ] A runnable app was opened in Browser or another browser automation surface; terminal-only validation and implementation-agent self-approval were not used as substitutes.
 - [ ] Screenshots cover `1366x768`, `1440x900`, and `1920x1080`; responsive/narrow sizes were added when relevant.
 - [ ] Login/unauthenticated/session-expired screenshots were checked when auth is in scope.
 - [ ] Workbench/default-page screenshots were checked when a default entry page exists.
@@ -178,7 +180,10 @@ Run this before declaring an admin-console task complete.
 - [ ] Public portal or user-facing surface screenshots confirm strong brand expression and CTA quality, while utility page screenshots confirm admin density remains intact.
 - [ ] Screenshots confirm no duplicated page title, duplicated create button, duplicated selection-clear action, or missing permission-aware `批量删除`.
 - [ ] Screenshots confirm skeleton-first loading and visible data refresh loading text.
-- [ ] Screenshots confirm breadcrumb parent navigation works and detail -> list return state is preserved.
-- [ ] Any screenshot mismatch with skill requirements was fixed, then the relevant screenshot verification loop was repeated.
-- [ ] Final handoff includes pages/states checked, viewport sizes, issues found, fixes made, loop count, and residual risks.
-- [ ] If screenshots could not be completed, the exact blocker and substitute verification were reported; the work did not claim screenshot verification passed.
+- [ ] Browser actions and assertions, not screenshots alone, confirm breadcrumb parent navigation and fallback behavior.
+- [ ] Browser actions and assertions confirm detail -> list return state preserves filters, sorting, pagination, tab, and scroll state where required.
+- [ ] Browser actions and assertions cover menus, profile dropdown, modal/drawer, search/reset, refresh, column settings, pagination, selection, clear selection, batch actions, permissions, forms, session states, keyboard/focus, and responsive behavior as applicable.
+- [ ] Any visual or behavioral mismatch was assigned to a fixer, followed by affected tests, required full tests, and repeated independent review/validation.
+- [ ] The same unresolved finding did not loop indefinitely; no-progress and reviewer-conflict cases used adjudication or user escalation.
+- [ ] Final handoff includes reviewer roles, bound source/artifact version, pages/states checked, viewport sizes, interaction assertions, issues found, fixes made, loop count, evidence paths, and residual risks.
+- [ ] If independent browser verification could not be completed, the affected gate remained `BLOCKED`; any user-accepted degraded handoff was diagnostic only and did not claim verification passed.

@@ -1,74 +1,74 @@
 ---
 name: ric-testing-quality
-description: "RIC testing and quality skill. Use for unit, integration, E2E, visual, accessibility, static analysis, build verification, regression coverage, test selection, and acceptance checks across frontend, backend, admin-console, API, and data-pipeline work."
+description: Use when changed behavior requires a formal unit, integration, contract, end-to-end, browser, accessibility, security, migration, data, performance, or build verification gate.
 ---
 # RIC Testing And Quality
 
-Use this skill to decide and run verification.
+## Role
 
-## Test Selection
+Own the formal test gate and evidence manifest. Test executors are independent from implementers, run assigned suites, and do not fix production code or approve untested behavior.
 
-Match tests to risk:
+## Required Companions
 
-- Small pure function: unit test.
-- API handler/service: unit + integration.
-- Data pipeline: idempotency/retry/schema tests.
-- Admin UI: component/page tests plus visual/manual browser check.
-- Auth/permission: explicit denied/allowed tests.
-- Migration/config: dry-run or validation tests.
+- Apply `ric-agent-operating-rules`.
+- Read approved acceptance criteria, primary domain skill, and relevant safety policy.
+- Use framework-specific testing skills when available.
+- Return failures and final evidence to `ric-delivery-loop`; the orchestrator dispatches a separate triager/fixer and downstream gates.
 
-## Frontend Checks
+## Test Plan Contract
 
-Verify:
+Before execution, create a test plan that maps each acceptance criterion and major risk to:
 
-- Build passes.
-- Lint/typecheck passes.
-- Key user flows work.
-- Loading/empty/error states render.
-- Responsive layouts do not break.
-- Admin tables/modals/forms match `ric-admin-console` acceptance checks.
+- suite and test level;
+- environment and prerequisites;
+- executor/subagent role;
+- command or browser flow;
+- expected result and retained evidence;
+- rerun and flake policy;
+- explicit untested scope.
 
-Use browser screenshots for meaningful UI changes when app can run.
+Dispatch independent test subagents by non-overlapping domain when the environment supports subagents. Each test executor loads `ric-testing-quality`, the primary domain skill, and applicable framework testing skills. Otherwise use isolated fresh-context executors and disclose degraded independence.
 
-## Backend Checks
+## Required Test Domains
 
-Verify:
+Select based on risk:
 
-- Unit/integration tests.
-- API contract behavior.
-- Validation failures.
-- Permission failures.
-- External dependency failures.
-- Health checks.
+- unit and component behavior;
+- integration, API, schema, and contract compatibility;
+- E2E and browser interaction;
+- accessibility and responsive states;
+- auth, authorization, tenant isolation, and security abuse cases;
+- migrations, data semantics, reconciliation, replay, and backfills;
+- build, lint, typecheck, packaging, startup, health, and shutdown;
+- performance, load, or resource limits when risk warrants.
 
-## Data Checks
+## Execution Integrity
 
-Verify:
+- Test the pinned integrated revision.
+- Record exact command, environment, duration, exit code, and artifact location.
+- Do not delete tests, weaken assertions, ignore failures, or rerun only passing cases.
+- Treat flaky tests as failures requiring triage; record reproduction attempts and ownership.
+- Keep test data isolated and apply `ric-infra-safety` to persistent resources.
+- Browser screenshots prove visual state; browser actions/assertions prove interaction behavior.
 
-- No destructive operations.
-- Namespace compliance.
-- Idempotency.
-- Retry/dead-letter behavior.
-- Backfill resumability when relevant.
+## Failure Loop
 
-## Commands
+1. Executors report failures without changing production code.
+2. A failure triager groups failures by probable root cause and assigns fix scope.
+3. A fixer changes the implementation or tests only when the expected behavior was wrong.
+4. Rerun affected tests, then the complete required suites, then recompute the gate.
 
-Use existing scripts first:
-
-```powershell
-pnpm test
-pnpm lint
-pnpm build
-```
-
-For other stacks, inspect project docs and manifests before choosing commands.
-
-## Reporting
+## Evidence Manifest
 
 Report:
 
-- Commands run.
-- Results.
-- Tests not run and why.
-- Residual risks.
+- pinned revision and test-plan version;
+- acceptance-criteria coverage matrix;
+- commands, results, logs, screenshots, traces, and reports;
+- failed, flaky, skipped, and untested cases with reasons;
+- environment differences and residual risks;
+- decision: `PASS`, `PASS_WITH_ADVISORIES`, `FAIL_REWORK`, `BLOCKED`, or `ESCALATE`.
 
+## Exit Criteria
+
+Return the decision only to `ric-delivery-loop`. Pass only when all mandatory suites pass, every acceptance criterion has sufficient evidence, no failure is untriaged, and advisories have owners. Missing required tools, unsafe infrastructure, or unverifiable behavior blocks the gate.

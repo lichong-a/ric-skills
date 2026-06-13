@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "kind": "trigger-selection",
+  "description": "Prompts that must select one primary executor plus required policies and gates.",
+  "cases": [
+    {
+      "id": "react-admin-console",
+      "prompt": "Create a React and shadcn tenant administration console with RBAC, audit logs, multilingual UI, and browser verification.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": [
+          "ric-delivery-loop",
+          "ric-agent-operating-rules",
+          "ric-security-review",
+          "ric-testing-quality",
+          "ric-code-review",
+          "ric-acceptance-validation",
+          "ric-visual-design-review",
+          "ric-design-qa"
+        ],
+        "excluded": [
+          "ric-design-taste-frontend"
+        ]
+      }
+    },
+    {
+      "id": "public-product-frontend",
+      "prompt": "Build a high-impact public product landing page with generated brand assets and a distinctive responsive visual direction.",
+      "expected": {
+        "primary": "ric-design-taste-frontend",
+        "required": [
+          "ric-delivery-loop",
+          "ric-imagegen-runtime",
+          "ric-visual-design-review",
+          "ric-design-qa",
+          "ric-testing-quality",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-admin-console"
+        ]
+      }
+    },
+    {
+      "id": "backend-api-feature",
+      "prompt": "Add a tenant-scoped invitation API, background email delivery, audit events, contract tests, and release evidence.",
+      "expected": {
+        "primary": "ric-backend-service",
+        "required": [
+          "ric-delivery-loop",
+          "ric-api-design",
+          "ric-infra-safety",
+          "ric-security-review",
+          "ric-testing-quality",
+          "ric-code-review",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-admin-console",
+          "ric-design-taste-frontend"
+        ]
+      }
+    },
+    {
+      "id": "data-pipeline-backfill",
+      "prompt": "Implement a resumable Kafka to TimescaleDB pipeline with DLQ replay, a bounded backfill, and reconciliation evidence.",
+      "expected": {
+        "primary": "ric-data-pipeline",
+        "required": [
+          "ric-delivery-loop",
+          "ric-infra-safety",
+          "ric-security-review",
+          "ric-testing-quality",
+          "ric-code-review",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-admin-console"
+        ]
+      }
+    },
+    {
+      "id": "saas-back-office-synonym",
+      "prompt": "Build a SaaS back office for tenant billing and operations.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": ["ric-delivery-loop", "ric-code-review", "ric-security-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-design-taste-frontend"]
+      }
+    },
+    {
+      "id": "mixed-utility-and-branded-admin",
+      "prompt": "Build utility-first CRUD pages plus a branded login and workbench for an admin console.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": ["ric-delivery-loop", "ric-visual-design-review", "ric-design-qa"],
+        "excluded": ["ric-design-taste-frontend"]
+      }
+    },
+    {
+      "id": "screenshot-to-code",
+      "prompt": "Implement from screenshot and preserve source-to-render fidelity.",
+      "expected": {
+        "primary": "ric-image-to-code",
+        "required": ["ric-delivery-loop", "ric-design-qa", "ric-visual-design-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "skill-authoring-change",
+      "prompt": "Modify an existing skill and prove its trigger behavior improved.",
+      "expected": {
+        "primary": null,
+        "required": ["ric-skill-quality", "ric-independent-review"],
+        "excluded": ["ric-delivery-loop", "ric-admin-console", "ric-design-taste-frontend"]
+      }
+    },
+    {
+      "id": "api-contract-primary",
+      "prompt": "Design an OpenAPI design and webhook contract without implementing a service.",
+      "expected": {
+        "primary": "ric-api-design",
+        "required": ["ric-delivery-loop", "ric-security-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-backend-service"]
+      }
+    },
+    {
+      "id": "brand-identity-primary",
+      "prompt": "Create a brand identity and logo direction for a new product.",
+      "expected": {
+        "primary": "ric-brandkit",
+        "required": ["ric-imagegen-runtime", "ric-visual-design-review", "ric-design-qa"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "web-imagegen-primary",
+      "prompt": "Generate a web visual direction and web comp concepts for a campaign.",
+      "expected": {
+        "primary": "ric-imagegen-frontend-web",
+        "required": ["ric-imagegen-runtime", "ric-visual-design-review", "ric-design-qa"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "mobile-imagegen-primary",
+      "prompt": "Generate a mobile visual direction and mobile screen concepts.",
+      "expected": {
+        "primary": "ric-imagegen-frontend-mobile",
+        "required": ["ric-imagegen-runtime", "ric-visual-design-review", "ric-design-qa"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "redesign-primary",
+      "prompt": "Redesign the existing public product while preserving verified behavior.",
+      "expected": {
+        "primary": "ric-redesign-existing-projects",
+        "required": ["ric-delivery-loop", "ric-visual-design-review", "ric-design-qa", "ric-testing-quality"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "deployment-primary",
+      "prompt": "Plan and execute a release rollout with rollback verification.",
+      "expected": {
+        "primary": "ric-deployment-ops",
+        "required": ["ric-delivery-loop", "ric-security-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "docs-primary",
+      "prompt": "Write the runbook and documentation delivery for a changed system.",
+      "expected": {
+        "primary": "ric-docs",
+        "required": ["ric-delivery-loop", "ric-code-review", "ric-acceptance-validation"],
+        "excluded": ["ric-admin-console"]
+      }
+    },
+    {
+      "id": "infrastructure-primary",
+      "prompt": "Deliver a shared Redis integration using RIC namespaces.",
+      "expected": {
+        "primary": "ric-infra-safety",
+        "required": ["ric-delivery-loop", "ric-security-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-data-pipeline"]
+      }
+    },
+    {
+      "id": "node-pnpm-primary",
+      "prompt": "Perform a pnpm workspace lockfile migration and dependency update.",
+      "expected": {
+        "primary": "ric-node-pnpm",
+        "required": ["ric-delivery-loop", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation"],
+        "excluded": ["ric-backend-service"]
+      }
+    }
+  ]
+}

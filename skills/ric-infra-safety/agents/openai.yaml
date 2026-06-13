@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Infrastructure Safety"
+  short_description: "Protect shared services and persistent RIC data"
+  default_prompt: "Use $ric-infra-safety to classify and safely review this infrastructure or persistent-data operation."
+policy:
+  allow_implicit_invocation: true

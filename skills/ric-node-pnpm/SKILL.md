@@ -1,95 +1,63 @@
 ---
 name: ric-node-pnpm
-description: "RIC Node.js, FNM, and pnpm workflow skill. Use for Node, JavaScript, TypeScript, React, Vue, Next.js, Vite, package management, dependency installation, scripts, monorepos, and workspace tasks. Enforces Node 24.x default through FNM, no global default changes, pnpm 11.x preference, PowerShell examples, and lockfile hygiene."
+description: Use when a task changes Node.js versions, JavaScript or TypeScript dependencies, package-manager state, workspace scripts, lockfiles, or pnpm monorepo configuration.
 ---
-# RIC Node And pnpm Workflow
+# RIC Node And pnpm
 
-Use this skill for Node.js projects.
+## Role
 
-## Defaults
+Own Node.js runtime and package-management decisions. Do not choose application architecture or approve the final delivery gate.
 
-- OS: Windows 11 x64.
-- Shell: PowerShell.
-- Node.js: managed by FNM.
-- Default Node: 24.x.
-- Package manager: pnpm 11.x.
+## Required Companions
 
-## Hard Rules
+- Apply `ric-agent-operating-rules`.
+- Use the detected framework or domain skill for application changes.
+- Hand verification to `ric-testing-quality` when dependency or script changes affect delivery.
 
-- Never run `fnm default *`.
-- Never modify user-wide FNM configuration.
-- Do not introduce `package-lock.json` unless the project already uses npm.
-- Prefer pnpm over npm.
-- Prefer workspace-aware commands in monorepos.
+## Inputs
 
-## Inspection
+Inspect before changing anything:
 
-Before changing dependencies or scripts, inspect:
+- `package.json`, workspace manifests, and existing scripts;
+- `pnpm-lock.yaml`, other lockfiles, `.npmrc`, and package-manager fields;
+- `.node-version`, `.nvmrc`, `.tool-versions`, and `engines`;
+- current `fnm`, Node, pnpm, and Corepack state.
 
-- `package.json`
-- `pnpm-lock.yaml`
-- `pnpm-workspace.yaml`
-- `.npmrc`
-- `.node-version`
-- `.nvmrc`
-- `engines`
-- existing scripts
-- existing lockfiles
+## Runtime Contract
 
-## Commands
+- Node is managed by FNM; default Node is 24.x.
+- Never run `fnm default *` or modify user-wide FNM configuration.
+- Use `fnm use <version>` or `fnm exec --using <version> -- <command>` temporarily.
+- Prefer pnpm 11.x and workspace-aware commands.
+- Do not introduce `package-lock.json` or another package manager unless the repository already uses it or the user explicitly requests migration.
 
-Check current runtime:
+## Dependency Contract
 
-```powershell
-fnm current
-fnm default
-node --version
-pnpm --version
-```
+- Reuse existing packages before adding dependencies.
+- Add the smallest justified dependency surface.
+- Do not introduce a second UI, state, testing, logging, or build system for a narrow need.
+- Preserve peer-dependency and workspace-version conventions.
+- Explain security-sensitive, native, postinstall, or supply-chain-sensitive additions.
+- Do not silence install warnings without understanding them.
 
-Temporarily use another Node version:
+## Procedure
 
-```powershell
-fnm use <version>
-```
+1. Record current runtime and package-manager state.
+2. Determine the repository's authoritative package manager and Node range.
+3. Make the minimal dependency or script change.
+4. Update only the authoritative lockfile.
+5. Run affected scripts and inspect lockfile diff for unexpected churn.
 
-Run a command under a specific version:
+## Evidence
 
-```powershell
-fnm exec --using <version> -- pnpm install
-```
+Report:
 
-Install dependencies:
+- Node and pnpm versions used;
+- manifests and lockfiles changed;
+- dependencies added, removed, or upgraded with rationale;
+- install, lint, typecheck, test, and build results;
+- warnings, compatibility risks, and unverified platforms.
 
-```powershell
-pnpm install
-pnpm add <package>
-pnpm add -D <package>
-pnpm --filter <workspace-name> add <package>
-```
+## Exit Criteria
 
-Run scripts:
-
-```powershell
-pnpm test
-pnpm lint
-pnpm build
-pnpm --filter <workspace-name> test
-```
-
-## Dependency Discipline
-
-- Check existing packages before adding new ones.
-- Prefer established repo conventions.
-- Avoid adding a new UI, state, test, or build library for one small need.
-- For frontend icons, use the existing icon family.
-- Keep dependency changes minimal and justified.
-
-## Verification
-
-After dependency or Node-related changes:
-
-- Run `pnpm install` if lockfile needs update.
-- Run relevant scripts from `package.json`.
-- Report if scripts are missing or fail.
-
+Pass only when runtime changes are temporary, lockfile state is coherent, relevant scripts pass, and no unintended package-manager artifacts exist.

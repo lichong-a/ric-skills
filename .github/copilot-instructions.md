@@ -1,12 +1,21 @@
-# Copilot Instructions: RIC Taste Standard
+# RIC Skills Repository Instructions
 
-> **Note:** GitHub Copilot automatically reads this file to set its global behavior. This repository is a RIC derivative of `Leonxlnx/taste-skill`, so Copilot should follow the RIC skill set rather than upstream install names.
+Use `ric-delivery-loop` as the default entry for every non-trivial product or engineering delivery. Select exactly one active primary executor from `skills/catalog.json`.
 
-## The RIC Anti-Slop Manifesto
+Maintaining this skill repository, editing skill text, updating schemas, or making
+a mechanical repository fix does not automatically require the complete delivery
+loop. Use repository checks directly, then invoke `ric-skill-quality` explicitly
+when final independent skill behavior evaluation is needed.
 
-1. **Use the right RIC skill:** Landing pages use `ric-design-taste-frontend`; admin panels, CRUD, permissions, tables, and back offices use `ric-admin-console`.
-2. **No generic UI:** Do not generate default SaaS templates or default blue-white admin shells without hierarchy, state coverage, and business-specific structure.
-3. **Complete implementation:** No placeholders, no `// TODO: add actual code here`, no omitted files.
-4. **PowerShell and pnpm by default:** Prefer Windows PowerShell examples and pnpm commands. Do not change global FNM defaults.
-5. **Infrastructure safety:** Reuse shared RIC infrastructure, use environment variables for secrets, and never generate destructive data operations.
-6. **Contextual awareness:** For deep rules, read the localized `SKILL.md` files in `skills/`.
+Mandatory rules:
+
+1. Retrieve relevant skills before work.
+2. Keep authors/fixers separate from fresh-context, read-only reviewers, test executors, and validators.
+3. Every non-trivial delivery requires independent security review.
+4. A changed source revision invalidates old code, security, test, visual, design-QA, and acceptance results.
+5. During a complete delivery loop, missing independent reviewer capability means `BLOCKED`; degraded handoff never becomes PASS.
+6. Use `.ric-work/<run-id>/` JSON artifacts and validate them with `scripts/validate-delivery-run.py`.
+7. Preserve user changes, prefer PowerShell and pnpm/FNM rules, set `PYTHONUTF8=1`, and follow `ric-infra-safety`.
+8. Never fabricate execution, screenshots, plugin calls, ImageGen output, tests, review, or evidence.
+
+For narrow single-stage requests, use the relevant domain or quality-gate skill directly without claiming the complete delivery loop ran.

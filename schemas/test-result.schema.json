@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/test-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "suite_id", "rerun_scope", "executor", "fresh_context", "read_only", "source_revision", "result", "evidence"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "suite_id": {"type": "string"},
+    "rerun_scope": {"enum": ["baseline", "impacted", "full"]},
+    "executor": {"type": "string"},
+    "fresh_context": {"type": "boolean"},
+    "read_only": {"type": "boolean"},
+    "source_revision": {"type": "string"},
+    "result": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]},
+    "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "failures": {"type": "array", "items": {"type": "string"}}
+  }
+}

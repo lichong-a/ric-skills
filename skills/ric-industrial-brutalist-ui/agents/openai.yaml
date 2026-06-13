@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Industrial Brutalist UI"
+  short_description: "Apply an industrial visual direction"
+  default_prompt: "Use $ric-industrial-brutalist-ui as a bounded style modifier and preserve product usability."

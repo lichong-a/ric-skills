@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/test-plan.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "source_revision", "suites"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "source_revision": {"type": "string"},
+    "suites": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "mandatory", "rerun_scope", "acceptance_ids"],
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string"},
+          "mandatory": {"type": "boolean"},
+          "rerun_scope": {"enum": ["baseline", "impacted", "full"]},
+          "acceptance_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

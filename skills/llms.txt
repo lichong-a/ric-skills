@@ -1,24 +1,34 @@
-ric-design-taste-frontend: RIC derivative of taste-skill for anti-slop landing pages, portfolios, marketing pages, and visual redesigns; routes admin-console work, including branded admin login/workbench screens, to ric-admin-console.
-ric-design-taste-frontend-v1: RIC derivative of the original taste-skill v1 for backward-compatible frontend taste behavior with RIC constraints.
-ric-gpt-taste: Stricter GPT/Codex premium frontend design and motion skill for high-end marketing surfaces.
-ric-image-to-code: Image-first design analysis and implementation; admin screenshots are analyzed for shell/table/query/permission structure and then handled through ric-admin-console.
-ric-imagegen-frontend-web: Image-generation-only skill for premium website reference images; if built-in image tooling is unavailable, use the RIC CLI fallback.
-ric-imagegen-frontend-mobile: Image-generation-only skill for premium mobile app screen concepts and flows; if built-in image tooling is unavailable, use the RIC CLI fallback.
-ric-brandkit: Image-generation-only skill for brand-kit boards, logo systems, palettes, typography, and mockups; if built-in image tooling is unavailable, use the RIC CLI fallback.
-ric-redesign-existing-projects: Audit-first redesign skill for existing websites, apps, and admin systems; uses ric-admin-console for Chinese enterprise back offices.
-ric-high-end-visual-design: Premium visual design skill for polished, calm, high-end frontend surfaces.
-ric-full-output-enforcement: Complete output enforcement skill that forbids placeholders, omitted files, and partial artifacts.
-ric-minimalist-ui: Clean editorial minimalist UI skill for restrained product interfaces.
-ric-industrial-brutalist-ui: Industrial brutalist UI skill for Swiss, mechanical, tactical telemetry aesthetics.
-ric-stitch-design-taste: Google Stitch-compatible semantic DESIGN.md and premium UI rule generation skill.
-ric-admin-console: Chinese enterprise admin-console skill for layouts, menus, auth states, actionable breadcrumbs, branded login pages, visual workbenches, SaaS console homepages, public portals attached to admin systems, CRUD lists, detail pages, tables, forms, modals, RBAC/menu/SSO planning, multilingual/i18n planning and implementation patterns, light/dark/system theme switching, skeleton-first loading, active ImageGen brand asset packs for logo/icons/background/avatar/empty states, shadcn-first React admin stack with shadcn retrieval, optional Ant Design fallback, Element Plus/Naive UI/Arco routing, controlled GSAP/3D/WebGL on high-impact surfaces, deduplicated headers/toolbars/selection actions, polished scrollbars, cross-agent fallbacks, and browser screenshot validation loops.
-ric-agent-operating-rules: Baseline agent rules for skill retrieval, PowerShell, non-destructive changes, runtime discipline, and verification.
-ric-infra-safety: Shared infrastructure safety skill for Elasticsearch, Kafka, TimescaleDB/PostgreSQL, Redis, NATS, MinIO, ric namespaces, and secrets.
-ric-node-pnpm: Node/FNM/pnpm workflow skill for Node 24.x, pnpm 11.x, PowerShell commands, and lockfile hygiene.
-ric-backend-service: Backend service skill for APIs, workers, configuration, health checks, logging, auth, and shared infrastructure connections.
-ric-data-pipeline: Data pipeline skill for events, Kafka, NATS, Redis, TimescaleDB, Elasticsearch, idempotency, retries, backfills, and projections.
-ric-api-design: API contract skill for REST/RPC, schemas, pagination, filtering, sorting, errors, auth, permissions, and compatibility.
-ric-testing-quality: Testing and quality skill for unit, integration, E2E, visual, static, build, and regression verification.
-ric-code-review: Code review skill prioritizing bugs, regressions, safety, permissions, infrastructure risk, and missing tests.
-ric-deployment-ops: Deployment and operations skill for builds, CI/CD, environment config, health checks, release, rollback, logs, and monitoring.
-ric-docs: Documentation skill for README, runbooks, API docs, admin docs, changelogs, deployment docs, and handoff notes.
+ric-acceptance-validation: Use when a tested integrated revision must be independently validated against approved acceptance criteria before final delivery or release readiness.
+ric-admin-console: Use when creating or changing admin panels, SaaS back offices, CRUD consoles, RBAC systems, data-heavy dashboards, branded management workbenches, or public surfaces attached to an admin product.
+ric-agent-operating-rules: Use when performing any task in a RIC workspace or when repository work must preserve user changes, follow the configured Windows runtime, and apply RIC safety constraints.
+ric-api-design: Use when creating or changing REST, RPC, event, webhook, OpenAPI, request-response, pagination, error, authorization, or compatibility contracts between systems.
+ric-backend-service: Use when creating or changing API servers, backend services, workers, scheduled jobs, integrations, persistence logic, service lifecycle, or runtime observability.
+ric-brandkit: Use when generating or refining a visual identity system, logo direction, brand board, palette, typography direction, image language, or branded application concepts.
+ric-code-review: Use when an implementation, diff, pull request, migration, configuration change, test change, or documentation change requires an independent correctness and risk decision.
+ric-data-pipeline: Use when designing or changing event streams, ingestion, projections, indexing, analytics flows, consumers, retries, dead-letter handling, replay, reconciliation, or backfills.
+ric-delivery-loop: Use when delivering a non-trivial feature, fix, redesign, migration, or system change that requires coordinated requirements, design, implementation, review, testing, validation, and evidence.
+ric-deployment-ops: Use when a verified change must be packaged, released, rolled out, monitored, rolled back, or assessed for production readiness through CI/CD or runtime operations.
+ric-design-qa: Use when a rendered UI or generated asset implementation must be compared with an approved design, screenshot, reference image, direction board, or source-of-truth visual target.
+ric-design-taste-frontend: Use when creating or substantially redesigning public-facing websites, landing pages, portfolios, product marketing surfaces, or branded frontend experiences where visual direction, interaction craft, and anti-template quality materially affect the outcome.
+ric-design-taste-frontend-v1: Use when an existing visual direction explicitly depends on the legacy taste-skill v1 language and needs a bounded compatibility modifier.
+ric-docs: Use when changed behavior, contracts, configuration, architecture, operations, setup, release procedures, or user workflows require accurate documentation or handoff material.
+ric-full-output-enforcement: Use when a requested implementation or artifact must be complete and partial snippets, placeholders, omitted files, or user-side assembly would make delivery unusable.
+ric-gpt-taste: Use when a public-facing visual surface needs a premium, motion-aware direction and the primary executor needs a bounded style modifier.
+ric-high-end-visual-design: Use when an approved product or public-facing surface needs a premium visual direction with stronger hierarchy, typography, imagery, and interaction craft.
+ric-image-to-code: Use when implementing or redesigning a frontend from screenshots, mockups, generated references, design exports, or other visual sources where source-to-render fidelity is a primary acceptance criterion.
+ric-imagegen-frontend-mobile: Use when generating mobile app visual directions, screen concepts, flow references, or asset systems for iOS, Android, and cross-platform product experiences.
+ric-imagegen-frontend-web: Use when generating visual directions, section references, asset concepts, or high-fidelity web comps for landing pages, public product surfaces, portfolios, campaigns, and image-led frontend work.
+ric-imagegen-runtime: Use when generated or edited raster assets are required in an environment where ImageGen capabilities, providers, credentials, or output paths may vary.
+ric-independent-review: Use when requirements, designs, code, tests, evidence, or release decisions need a read-only fresh-context reviewer who is independent from the artifact author or fixer.
+ric-industrial-brutalist-ui: Use when an approved interface direction calls for industrial, brutalist, mechanical, Swiss, tactical, or telemetry-oriented visual language.
+ric-infra-safety: Use when work may read or modify databases, migrations, caches, queues, search indices, streams, object storage, shared services, credentials, or infrastructure provisioning.
+ric-minimalist-ui: Use when an approved product direction calls for restrained, editorial, calm, precise, or utility-focused visual language.
+ric-node-pnpm: Use when a task changes Node.js versions, JavaScript or TypeScript dependencies, package-manager state, workspace scripts, lockfiles, or pnpm monorepo configuration.
+ric-redesign-existing-projects: Use when an existing website, product, admin console, or application needs a visual or interaction redesign while preserving verified behavior.
+ric-requirements-engineering: Use when a non-trivial request has ambiguous scope, unstated constraints, missing acceptance criteria, competing stakeholder needs, or requires a reviewable requirements baseline.
+ric-security-review: Use when a non-trivial change touches code, data, authentication, authorization, tenants, secrets, dependencies, infrastructure, integrations, deployment, or any user-controlled input.
+ric-skill-quality: Use when creating, editing, reviewing, packaging, or releasing skills and the repository needs structural checks, trigger evaluation, conflict detection, behavioral scenarios, or independent quality evidence.
+ric-solution-design: Use when approved requirements need an implementation-ready product, architecture, data, API, visual, operational, or migration design before coding begins.
+ric-stitch-design-taste: Use when an approved design direction needs a concise semantic DESIGN.md or Google Stitch-compatible visual guidance artifact.
+ric-testing-quality: Use when changed behavior requires a formal unit, integration, contract, end-to-end, browser, accessibility, security, migration, data, performance, or build verification gate.
+ric-visual-design-review: Use when a UI, portal, admin console, redesign, brand surface, generated asset set, or visual implementation needs an independent critique of quality, specificity, hierarchy, and distinctiveness.

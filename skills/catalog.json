@@ -1,0 +1,858 @@
+{
+  "version": 1,
+  "roles": [
+    "orchestrator",
+    "lifecycle-stage",
+    "policy",
+    "primary-executor",
+    "modifier",
+    "quality-gate",
+    "handoff",
+    "runtime"
+  ],
+  "capabilities": [
+    "agent-native-imagegen",
+    "ant-design",
+    "browser",
+    "codex-security",
+    "creative-production",
+    "external-agent",
+    "imagegen",
+    "isolated-thread",
+    "mcp-imagegen",
+    "playwright",
+    "product-design",
+    "shadcn",
+    "subagent",
+    "trusted-cli",
+    "visual-work",
+    "web-data-visualization"
+  ],
+  "skills": {
+    "ric-delivery-loop": {
+      "description": "Use when delivering a non-trivial feature, fix, redesign, migration, or system change that requires coordinated requirements, design, implementation, review, testing, validation, and evidence.",
+      "allowed_roles": [
+        "orchestrator"
+      ],
+      "default_role": "orchestrator",
+      "domains": [
+        "delivery-lifecycle"
+      ],
+      "required_companions": [
+        "ric-agent-operating-rules",
+        "ric-requirements-engineering",
+        "ric-solution-design",
+        "ric-independent-review",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review",
+        "ric-design-qa",
+        "ric-docs",
+        "ric-deployment-ops"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-independent-review",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "capability_routes": [
+        "subagent",
+        "isolated-thread",
+        "external-agent"
+      ]
+    },
+    "ric-requirements-engineering": {
+      "description": "Use when a non-trivial request has ambiguous scope, unstated constraints, missing acceptance criteria, competing stakeholder needs, or requires a reviewable requirements baseline.",
+      "allowed_roles": [
+        "lifecycle-stage"
+      ],
+      "default_role": "lifecycle-stage",
+      "domains": [
+        "requirements"
+      ],
+      "required_companions": [
+        "ric-independent-review",
+        "ric-security-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-independent-review",
+        "ric-security-review"
+      ],
+      "capability_routes": []
+    },
+    "ric-solution-design": {
+      "description": "Use when approved requirements need an implementation-ready product, architecture, data, API, visual, operational, or migration design before coding begins.",
+      "allowed_roles": [
+        "lifecycle-stage"
+      ],
+      "default_role": "lifecycle-stage",
+      "domains": [
+        "solution-design",
+        "product-design"
+      ],
+      "required_companions": [
+        "ric-independent-review",
+        "ric-security-review"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-independent-review",
+        "ric-security-review"
+      ],
+      "capability_routes": [
+        "creative-production",
+        "product-design",
+        "web-data-visualization"
+      ]
+    },
+    "ric-independent-review": {
+      "description": "Use when requirements, designs, code, tests, evidence, or release decisions need a read-only fresh-context reviewer who is independent from the artifact author or fixer.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "review"
+      ],
+      "required_companions": [],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "subagent",
+        "isolated-thread",
+        "external-agent"
+      ],
+      "gate_types": [
+        "requirements",
+        "design"
+      ]
+    },
+    "ric-security-review": {
+      "description": "Use when a non-trivial change touches code, data, authentication, authorization, tenants, secrets, dependencies, infrastructure, integrations, deployment, or any user-controlled input.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "security"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [
+        "ric-infra-safety"
+      ],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "codex-security"
+      ],
+      "gate_types": [
+        "security-review"
+      ]
+    },
+    "ric-acceptance-validation": {
+      "description": "Use when a tested integrated revision must be independently validated against approved acceptance criteria before final delivery or release readiness.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "acceptance",
+        "browser-interaction"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "browser",
+        "playwright",
+        "external-agent"
+      ],
+      "gate_types": [
+        "acceptance"
+      ]
+    },
+    "ric-visual-design-review": {
+      "description": "Use when a UI, portal, admin console, redesign, brand surface, generated asset set, or visual implementation needs an independent critique of quality, specificity, hierarchy, and distinctiveness.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "visual-review"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "product-design",
+        "creative-production"
+      ],
+      "gate_types": [
+        "visual-review"
+      ]
+    },
+    "ric-design-qa": {
+      "description": "Use when a rendered UI or generated asset implementation must be compared with an approved design, screenshot, reference image, direction board, or source-of-truth visual target.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "design-qa"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "browser",
+        "product-design"
+      ],
+      "gate_types": [
+        "design-qa"
+      ]
+    },
+    "ric-skill-quality": {
+      "description": "Use when creating, editing, reviewing, packaging, or releasing skills and the repository needs structural checks, trigger evaluation, conflict detection, behavioral scenarios, or independent quality evidence.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "skill-authoring"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "subagent",
+        "isolated-thread",
+        "external-agent"
+      ],
+      "gate_types": [
+        "skill-quality"
+      ]
+    },
+    "ric-imagegen-runtime": {
+      "description": "Use when generated or edited raster assets are required in an environment where ImageGen capabilities, providers, credentials, or output paths may vary.",
+      "allowed_roles": [
+        "runtime",
+        "policy"
+      ],
+      "default_role": "runtime",
+      "domains": [
+        "image-generation"
+      ],
+      "required_companions": [],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "agent-native-imagegen",
+        "mcp-imagegen",
+        "trusted-cli"
+      ]
+    },
+    "ric-agent-operating-rules": {
+      "description": "Use when performing any task in a RIC workspace or when repository work must preserve user changes, follow the configured Windows runtime, and apply RIC safety constraints.",
+      "allowed_roles": [
+        "policy"
+      ],
+      "default_role": "policy",
+      "domains": [
+        "agent-policy"
+      ],
+      "required_companions": [],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": []
+    },
+    "ric-infra-safety": {
+      "description": "Use when work may read or modify databases, migrations, caches, queues, search indices, streams, object storage, shared services, credentials, or infrastructure provisioning.",
+      "allowed_roles": [
+        "policy",
+        "primary-executor"
+      ],
+      "default_role": "policy",
+      "domains": [
+        "infrastructure",
+        "data-safety"
+      ],
+      "required_companions": [
+        "ric-security-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-security-review"
+      ],
+      "capability_routes": []
+    },
+    "ric-node-pnpm": {
+      "description": "Use when a task changes Node.js versions, JavaScript or TypeScript dependencies, package-manager state, workspace scripts, lockfiles, or pnpm monorepo configuration.",
+      "allowed_roles": [
+        "policy",
+        "primary-executor"
+      ],
+      "default_role": "policy",
+      "domains": [
+        "node",
+        "package-management"
+      ],
+      "required_companions": [],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": []
+    },
+    "ric-admin-console": {
+      "description": "Use when creating or changing admin panels, SaaS back offices, CRUD consoles, RBAC systems, data-heavy dashboards, branded management workbenches, or public surfaces attached to an admin product.",
+      "allowed_roles": [
+        "primary-executor"
+      ],
+      "default_role": "primary-executor",
+      "domains": [
+        "admin-console",
+        "product-ui"
+      ],
+      "required_companions": [
+        "ric-delivery-loop",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "optional_companions": [
+        "ric-design-taste-frontend",
+        "ric-imagegen-runtime",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "conditional_quality_gates": {
+        "visual-work": [
+          "ric-visual-design-review",
+          "ric-design-qa"
+        ]
+      },
+      "capability_routes": [
+        "shadcn",
+        "ant-design",
+        "browser",
+        "imagegen",
+        "product-design",
+        "web-data-visualization"
+      ]
+    },
+    "ric-backend-service": {
+      "description": "Use when creating or changing API servers, backend services, workers, scheduled jobs, integrations, persistence logic, service lifecycle, or runtime observability.",
+      "allowed_roles": [
+        "primary-executor"
+      ],
+      "default_role": "primary-executor",
+      "domains": [
+        "backend"
+      ],
+      "required_companions": [
+        "ric-delivery-loop",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "optional_companions": [
+        "ric-api-design",
+        "ric-infra-safety"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "capability_routes": []
+    },
+    "ric-data-pipeline": {
+      "description": "Use when designing or changing event streams, ingestion, projections, indexing, analytics flows, consumers, retries, dead-letter handling, replay, reconciliation, or backfills.",
+      "allowed_roles": [
+        "primary-executor"
+      ],
+      "default_role": "primary-executor",
+      "domains": [
+        "data-pipeline"
+      ],
+      "required_companions": [
+        "ric-delivery-loop",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "optional_companions": [
+        "ric-infra-safety"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "capability_routes": []
+    },
+    "ric-api-design": {
+      "description": "Use when creating or changing REST, RPC, event, webhook, OpenAPI, request-response, pagination, error, authorization, or compatibility contracts between systems.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "api-design"
+      ],
+      "required_companions": [
+        "ric-security-review",
+        "ric-testing-quality"
+      ],
+      "optional_companions": [
+        "ric-delivery-loop"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-security-review",
+        "ric-testing-quality"
+      ],
+      "capability_routes": []
+    },
+    "ric-testing-quality": {
+      "description": "Use when changed behavior requires a formal unit, integration, contract, end-to-end, browser, accessibility, security, migration, data, performance, or build verification gate.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "testing"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [
+        "browser",
+        "playwright"
+      ],
+      "gate_types": [
+        "test"
+      ]
+    },
+    "ric-code-review": {
+      "description": "Use when an implementation, diff, pull request, migration, configuration change, test change, or documentation change requires an independent correctness and risk decision.",
+      "allowed_roles": [
+        "quality-gate"
+      ],
+      "default_role": "quality-gate",
+      "domains": [
+        "code-review"
+      ],
+      "required_companions": [
+        "ric-independent-review"
+      ],
+      "optional_companions": [
+        "ric-security-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": [],
+      "gate_types": [
+        "code-review"
+      ]
+    },
+    "ric-deployment-ops": {
+      "description": "Use when a verified change must be packaged, released, rolled out, monitored, rolled back, or assessed for production readiness through CI/CD or runtime operations.",
+      "allowed_roles": [
+        "primary-executor",
+        "handoff"
+      ],
+      "default_role": "handoff",
+      "domains": [
+        "deployment",
+        "operations"
+      ],
+      "required_companions": [
+        "ric-security-review",
+        "ric-testing-quality"
+      ],
+      "optional_companions": [
+        "ric-delivery-loop"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-security-review",
+        "ric-testing-quality"
+      ],
+      "capability_routes": []
+    },
+    "ric-docs": {
+      "description": "Use when changed behavior, contracts, configuration, architecture, operations, setup, release procedures, or user workflows require accurate documentation or handoff material.",
+      "allowed_roles": [
+        "primary-executor",
+        "handoff"
+      ],
+      "default_role": "handoff",
+      "domains": [
+        "documentation"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-delivery-loop"
+      ],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": []
+    },
+    "ric-design-taste-frontend": {
+      "description": "Use when creating or substantially redesigning public-facing websites, landing pages, portfolios, product marketing surfaces, or branded frontend experiences where visual direction, interaction craft, and anti-template quality materially affect the outcome.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "primary-executor",
+      "domains": [
+        "public-frontend",
+        "visual-design"
+      ],
+      "required_companions": [
+        "ric-delivery-loop",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "optional_companions": [
+        "ric-imagegen-runtime",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "creative-production",
+        "product-design",
+        "imagegen",
+        "browser"
+      ]
+    },
+    "ric-image-to-code": {
+      "description": "Use when implementing or redesigning a frontend from screenshots, mockups, generated references, design exports, or other visual sources where source-to-render fidelity is a primary acceptance criterion.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "primary-executor",
+      "domains": [
+        "image-to-code",
+        "visual-design"
+      ],
+      "required_companions": [
+        "ric-design-qa",
+        "ric-testing-quality"
+      ],
+      "optional_companions": [
+        "ric-delivery-loop"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-design-qa",
+        "ric-testing-quality"
+      ],
+      "capability_routes": [
+        "browser",
+        "product-design"
+      ]
+    },
+    "ric-imagegen-frontend-web": {
+      "description": "Use when generating visual directions, section references, asset concepts, or high-fidelity web comps for landing pages, public product surfaces, portfolios, campaigns, and image-led frontend work.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "web-imagegen"
+      ],
+      "required_companions": [
+        "ric-imagegen-runtime"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "creative-production",
+        "imagegen"
+      ]
+    },
+    "ric-imagegen-frontend-mobile": {
+      "description": "Use when generating mobile app visual directions, screen concepts, flow references, or asset systems for iOS, Android, and cross-platform product experiences.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "mobile-imagegen"
+      ],
+      "required_companions": [
+        "ric-imagegen-runtime"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "creative-production",
+        "imagegen"
+      ]
+    },
+    "ric-brandkit": {
+      "description": "Use when generating or refining a visual identity system, logo direction, brand board, palette, typography direction, image language, or branded application concepts.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "brand"
+      ],
+      "required_companions": [
+        "ric-imagegen-runtime"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "creative-production",
+        "imagegen"
+      ]
+    },
+    "ric-redesign-existing-projects": {
+      "description": "Use when an existing website, product, admin console, or application needs a visual or interaction redesign while preserving verified behavior.",
+      "allowed_roles": [
+        "primary-executor",
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "redesign"
+      ],
+      "required_companions": [
+        "ric-delivery-loop",
+        "ric-testing-quality"
+      ],
+      "optional_companions": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-code-review",
+        "ric-testing-quality",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "product-design",
+        "browser"
+      ]
+    },
+    "ric-design-taste-frontend-v1": {
+      "description": "Use when an existing visual direction explicitly depends on the legacy taste-skill v1 language and needs a bounded compatibility modifier.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": []
+    },
+    "ric-gpt-taste": {
+      "description": "Use when a public-facing visual surface needs a premium, motion-aware direction and the primary executor needs a bounded style modifier.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": []
+    },
+    "ric-high-end-visual-design": {
+      "description": "Use when an approved product or public-facing surface needs a premium visual direction with stronger hierarchy, typography, imagery, and interaction craft.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": [
+        "creative-production"
+      ]
+    },
+    "ric-minimalist-ui": {
+      "description": "Use when an approved product direction calls for restrained, editorial, calm, precise, or utility-focused visual language.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": []
+    },
+    "ric-industrial-brutalist-ui": {
+      "description": "Use when an approved interface direction calls for industrial, brutalist, mechanical, Swiss, tactical, or telemetry-oriented visual language.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-visual-design-review"
+      ],
+      "conflicts": [],
+      "quality_gates": [
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "capability_routes": []
+    },
+    "ric-stitch-design-taste": {
+      "description": "Use when an approved design direction needs a concise semantic DESIGN.md or Google Stitch-compatible visual guidance artifact.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "visual-style",
+        "stitch"
+      ],
+      "required_companions": [],
+      "optional_companions": [
+        "ric-solution-design"
+      ],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": []
+    },
+    "ric-full-output-enforcement": {
+      "description": "Use when a requested implementation or artifact must be complete and partial snippets, placeholders, omitted files, or user-side assembly would make delivery unusable.",
+      "allowed_roles": [
+        "modifier"
+      ],
+      "default_role": "modifier",
+      "domains": [
+        "output-policy"
+      ],
+      "required_companions": [],
+      "optional_companions": [],
+      "conflicts": [],
+      "quality_gates": [],
+      "capability_routes": []
+    }
+  }
+}

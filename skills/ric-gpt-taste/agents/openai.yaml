@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC GPT Taste"
+  short_description: "Apply premium motion-aware visual direction"
+  default_prompt: "Use $ric-gpt-taste as a bounded visual modifier and submit the result to independent visual review."

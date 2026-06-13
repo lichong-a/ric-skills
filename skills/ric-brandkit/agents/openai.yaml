@@ -1,0 +1,5 @@
+interface:
+  display_name: "RIC Brandkit"
+  short_description: "Create reviewed visual identity directions"
+  default_prompt: "Use $ric-brandkit to create and independently review a coherent visual identity direction."
+

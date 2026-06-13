@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Documentation"
+  short_description: "Keep implementation and operational docs verifiable"
+  default_prompt: "Use $ric-docs to update and verify the documentation required by this change."
+policy:
+  allow_implicit_invocation: true

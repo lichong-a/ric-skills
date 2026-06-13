@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Data Pipeline"
+  short_description: "Build safe, replayable, reconciled data flows"
+  default_prompt: "Use $ric-data-pipeline to design and verify this ingestion, event, projection, or backfill change."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC High-End Visual Design"
+  short_description: "Apply premium visual craft as a modifier"
+  default_prompt: "Use $ric-high-end-visual-design as a bounded modifier under the selected primary executor."

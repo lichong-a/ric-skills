@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "kind": "end-to-end-delivery",
+  "description": "Representative delivery scenarios that must reach an evidence-backed terminal state.",
+  "cases": [
+    {
+      "id": "tenant-invitation-feature",
+      "prompt": "Deliver tenant-member invitations across API, background email delivery, React admin UI, public acceptance flow, RBAC, audit, tests, and browser validation.",
+      "primary": "ric-backend-service",
+      "required_gates": [
+        "ric-independent-review",
+        "ric-security-review",
+        "ric-code-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "required_artifacts": [
+        "requirements.md",
+        "run.json",
+        "acceptance.json",
+        "traceability.json",
+        "risk-register.json",
+        "design.md",
+        "dispatch",
+        "review-results",
+        "test-plan.json",
+        "test-results",
+        "handoff.md",
+        "evidence-manifest.json"
+      ],
+      "terminal_states": [
+        "PASS",
+        "PASS_WITH_ADVISORIES",
+        "BLOCKED",
+        "ESCALATE"
+      ]
+    },
+    {
+      "id": "admin-console-redesign",
+      "prompt": "Redesign an existing Chinese enterprise admin console with a branded login, workbench, utility list pages, generated assets, and preserved behavior.",
+      "primary": "ric-admin-console",
+      "required_gates": [
+        "ric-independent-review",
+        "ric-security-review",
+        "ric-code-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "required_artifacts": [
+        "requirements.md",
+        "run.json",
+        "acceptance.json",
+        "traceability.json",
+        "risk-register.json",
+        "design.md",
+        "preservation-contract",
+        "design-directions",
+        "browser-screenshots",
+        "interaction-traces",
+        "dispatch",
+        "review-results",
+        "test-plan.json",
+        "test-results",
+        "handoff.md",
+        "evidence-manifest.json"
+      ],
+      "terminal_states": [
+        "PASS",
+        "PASS_WITH_ADVISORIES",
+        "BLOCKED",
+        "ESCALATE"
+      ]
+    },
+    {
+      "id": "resumable-data-backfill",
+      "prompt": "Deliver a resumable and throttled historical data backfill with checkpoints, reconciliation, failure recovery, and no destructive operations.",
+      "primary": "ric-data-pipeline",
+      "required_gates": [
+        "ric-independent-review",
+        "ric-security-review",
+        "ric-code-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation"
+      ],
+      "required_artifacts": [
+        "requirements.md",
+        "run.json",
+        "acceptance.json",
+        "traceability.json",
+        "risk-register.json",
+        "design.md",
+        "backfill-plan",
+        "reconciliation-report",
+        "dispatch",
+        "review-results",
+        "test-plan.json",
+        "test-results",
+        "handoff.md",
+        "evidence-manifest.json"
+      ],
+      "terminal_states": [
+        "PASS",
+        "PASS_WITH_ADVISORIES",
+        "BLOCKED",
+        "ESCALATE"
+      ]
+    },
+    {
+      "id": "react-shadcn-admin",
+      "prompt": "Deliver a React and shadcn admin console with RBAC, list selection, batch delete, actionable breadcrumbs, themes, i18n readiness, and browser evidence.",
+      "primary": "ric-admin-console",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation", "ric-visual-design-review", "ric-design-qa"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["PASS", "PASS_WITH_ADVISORIES", "BLOCKED", "ESCALATE"]
+    },
+    {
+      "id": "portal-and-admin-saas",
+      "prompt": "Deliver a branded public SaaS portal plus a utility-focused management console with generated assets and mobile evidence.",
+      "primary": "ric-admin-console",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation", "ric-visual-design-review", "ric-design-qa"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["PASS", "PASS_WITH_ADVISORIES", "BLOCKED", "ESCALATE"]
+    },
+    {
+      "id": "backend-api-contract",
+      "prompt": "Deliver a tenant-scoped backend API with authorization, concurrency, idempotency, audit, and contract tests.",
+      "primary": "ric-backend-service",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["PASS", "PASS_WITH_ADVISORIES", "BLOCKED", "ESCALATE"]
+    },
+    {
+      "id": "shared-infrastructure-integration",
+      "prompt": "Integrate an application with existing shared Redis and TimescaleDB using RIC namespaces and non-destructive evidence.",
+      "primary": "ric-infra-safety",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["PASS", "PASS_WITH_ADVISORIES", "BLOCKED", "ESCALATE"]
+    },
+    {
+      "id": "breadcrumb-acceptance-regression",
+      "prompt": "Acceptance validation finds a broken parent breadcrumb after prior tests passed; prove repair, re-review, complete retest, and revalidation.",
+      "primary": "ric-admin-console",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation", "ric-visual-design-review", "ric-design-qa"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["PASS", "PASS_WITH_ADVISORIES", "BLOCKED", "ESCALATE"]
+    },
+    {
+      "id": "no-independent-review-capability",
+      "prompt": "Run a non-trivial delivery in an environment with no subagent, isolated thread, or external reviewer capability.",
+      "primary": "ric-backend-service",
+      "required_gates": ["ric-independent-review", "ric-security-review", "ric-code-review", "ric-testing-quality", "ric-acceptance-validation"],
+      "required_artifacts": ["run.json", "requirements.md", "acceptance.json", "traceability.json", "risk-register.json", "design.md", "dispatch", "review-results", "test-plan.json", "test-results", "evidence-manifest.json", "handoff.md"],
+      "terminal_states": ["BLOCKED"]
+    }
+  ]
+}

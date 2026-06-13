@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-06-13 - Non-cryptographic hardening pass
+
+- Fixed mixed-scope visual gate bypass: backend-primary or data-primary deliveries with React/Vue/portal/login/workbench requests now require visual-review and design-qa gates, not just ric-admin-console tasks.
+- Fixed design-security reviewer skill loadout conflict: all runtime skills, contracts, and the validator now require `ric-solution-design` in the design-security-reviewer bundle.
+- Fixed live-eval reviewer role enforcement: passing behavioral gates now require a recognized independent reviewer role with `read_only=true`; fixer, implementer, and unknown roles are rejected.
+- Fixed changed-skill loading enforcement: explicit `ric-skill-quality` evaluation now derives the required skill from `changed_skill` independently of the fixture bundle.
+- Fixed catalog crash: malformed catalog instances with unhashable capabilities or non-object skills now produce structured findings instead of crashing the validator.
+- Fixed mandatory test suite and acceptance-to-test mapping: passing test gates now require at least one mandatory suite and every mandatory acceptance criterion mapped to a mandatory suite.
+- Fixed empty-author provenance bypass: a passing delivery run must declare at least one author.
+- Fixed live-eval coexistence with PASS: a passing delivery run with a live-eval file now requires all scenarios to pass with fresh context and no validation errors.
+- Added typed evidence binding, finding-id repair cycles, dispatch invocation fields, and content-hash artifact version descriptions to the delivery contracts.
+- Clarified the non-cryptographic strengthening model: prevents honest mistakes and accidental forgeries; does not claim to prevent a malicious actor who controls the entire package, artifacts, and validator.
+- Added 9 new adversarial regression tests (total now 62).
+
+## 2026-06-10 - Closed-loop delivery architecture
+
+- Added `ric-delivery-loop` and independent requirements, solution-design, security, code-review, test, visual, Design QA, and acceptance gates.
+- Added `skills/catalog.json` as the source of truth for roles, companions, conflicts, quality gates, capability routes, registries, and the README skill table.
+- Added JSON delivery schemas, semantic cross-artifact validation, evidence hashing and secret scanning, deterministic evals, and optional capability-detected live behavior evals.
+- Added catalog runtime role/gate enforcement, required subagent skill mapping, ordered rework history, terminal gate invalidation, cross-run artifact rejection, strict finite JSON numbers, and bounded external-adapter execution.
+- Hardened delivery validation against role spoofing, split-reviewer evidence, active-modifier omission, malformed auxiliary artifacts, stale post-fix passes, weak adjudication, criterion evidence substitution, and old-revision acceptance repair ordering.
+- Clarified that complete subagent review/test/validation is a runtime delivery contract; maintaining this skill repository may use direct edits and static checks before an explicit final `ric-skill-quality` behavior evaluation.
+- Added Windows/Linux CI, pinned GitHub Actions, CODEOWNERS, `.ric-work/` ignore rules, generated registry checks, and path-boundary validation.
+- Refactored legacy visual skills into bounded modifiers and removed redirect, simulated-execution, placeholder-gallery, random-direction, and perpetual-animation conflicts.
+- Reworked README around the complete revision-bound delivery loop and the separation between visual screenshots, Design QA, and behavioral acceptance.
+
 ## RIC derivative
 
 This repository is derived from `Leonxlnx/taste-skill` at commit `3c7017d636c3a4aad378433ea6d0cfa6c921da4a`.

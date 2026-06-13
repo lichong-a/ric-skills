@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "kind": "composition-conflicts",
+  "description": "Expected valid and invalid skill compositions used to detect ownership conflicts.",
+  "cases": [
+    {
+      "id": "admin-with-visual-gates",
+      "scenario": "A branded admin login and workbench are implemented and independently reviewed.",
+      "composition": [
+        "ric-delivery-loop",
+        "ric-requirements-engineering",
+        "ric-solution-design",
+        "ric-agent-operating-rules",
+        "ric-independent-review",
+        "ric-admin-console",
+        "ric-imagegen-runtime",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "active_roles": {
+        "ric-delivery-loop": "orchestrator",
+        "ric-requirements-engineering": "lifecycle-stage",
+        "ric-solution-design": "lifecycle-stage",
+        "ric-agent-operating-rules": "policy",
+        "ric-independent-review": "quality-gate",
+        "ric-admin-console": "primary-executor",
+        "ric-imagegen-runtime": "runtime",
+        "ric-code-review": "quality-gate",
+        "ric-security-review": "quality-gate",
+        "ric-testing-quality": "quality-gate",
+        "ric-acceptance-validation": "quality-gate",
+        "ric-visual-design-review": "quality-gate",
+        "ric-design-qa": "quality-gate"
+      },
+      "expected_result": "valid",
+      "reason": "One admin primary executor is combined with runtime and quality-gate skills."
+    },
+    {
+      "id": "two-primary-frontends",
+      "scenario": "A task attempts to use both public frontend and admin console as primary owners.",
+      "composition": [
+        "ric-admin-console",
+        "ric-design-taste-frontend"
+      ],
+      "active_roles": {
+        "ric-admin-console": "primary-executor",
+        "ric-design-taste-frontend": "primary-executor"
+      },
+      "expected_result": "invalid",
+      "reason": "A delivery run may have only one primary executor."
+    },
+    {
+      "id": "reviewer-and-fixer-same-role",
+      "scenario": "The same agent edits an implementation and then approves its own review gate.",
+      "composition": [
+        "ric-delivery-loop",
+        "ric-independent-review",
+        "ric-code-review"
+      ],
+      "active_roles": {
+        "ric-delivery-loop": "orchestrator",
+        "ric-independent-review": "quality-gate",
+        "ric-code-review": "quality-gate"
+      },
+      "author_id": "agent-1",
+      "reviewer_id": "agent-1",
+      "expected_result": "invalid",
+      "reason": "Independent reviewers are read-only and cannot approve artifacts they authored or fixed."
+    },
+    {
+      "id": "backend-with-api-modifier",
+      "scenario": "A backend service feature uses API design as a companion and independent quality gates.",
+      "composition": [
+        "ric-delivery-loop",
+        "ric-requirements-engineering",
+        "ric-solution-design",
+        "ric-agent-operating-rules",
+        "ric-independent-review",
+        "ric-backend-service",
+        "ric-api-design",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-code-review",
+        "ric-acceptance-validation"
+      ],
+      "active_roles": {
+        "ric-delivery-loop": "orchestrator",
+        "ric-requirements-engineering": "lifecycle-stage",
+        "ric-solution-design": "lifecycle-stage",
+        "ric-agent-operating-rules": "policy",
+        "ric-independent-review": "quality-gate",
+        "ric-backend-service": "primary-executor",
+        "ric-api-design": "modifier",
+        "ric-security-review": "quality-gate",
+        "ric-testing-quality": "quality-gate",
+        "ric-code-review": "quality-gate",
+        "ric-acceptance-validation": "quality-gate"
+      },
+      "expected_result": "valid",
+      "reason": "The backend service remains the single owner while API design and gates provide bounded support."
+    },
+    {
+      "id": "admin-with-public-visual-modifier",
+      "scenario": "An admin product with an attached public portal uses design taste as a modifier under the admin primary.",
+      "composition": [
+        "ric-delivery-loop",
+        "ric-requirements-engineering",
+        "ric-solution-design",
+        "ric-agent-operating-rules",
+        "ric-independent-review",
+        "ric-admin-console",
+        "ric-design-taste-frontend",
+        "ric-code-review",
+        "ric-security-review",
+        "ric-testing-quality",
+        "ric-acceptance-validation",
+        "ric-visual-design-review",
+        "ric-design-qa"
+      ],
+      "active_roles": {
+        "ric-delivery-loop": "orchestrator",
+        "ric-requirements-engineering": "lifecycle-stage",
+        "ric-solution-design": "lifecycle-stage",
+        "ric-agent-operating-rules": "policy",
+        "ric-independent-review": "quality-gate",
+        "ric-admin-console": "primary-executor",
+        "ric-design-taste-frontend": "modifier",
+        "ric-code-review": "quality-gate",
+        "ric-security-review": "quality-gate",
+        "ric-testing-quality": "quality-gate",
+        "ric-acceptance-validation": "quality-gate",
+        "ric-visual-design-review": "quality-gate",
+        "ric-design-qa": "quality-gate"
+      },
+      "expected_result": "valid",
+      "reason": "The explicit active role keeps admin as the only primary while design taste provides bounded visual direction."
+    }
+  ]
+}

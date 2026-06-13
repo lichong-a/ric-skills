@@ -22,5 +22,6 @@ This repository renames upstream skills into `ric-*` install names and adds RIC-
 - Admin-console routing away from marketing-page design rules.
 - A new `ric-admin-console` skill for Chinese enterprise management systems.
 - New engineering skills for infrastructure, Node/pnpm, backend services, data pipelines, API design, testing, code review, deployment/ops, documentation, and agent operating rules.
+- An evidence-backed delivery orchestrator, independent quality gates, a machine-readable skill catalog, JSON delivery contracts, semantic cross-artifact validation, optional bounded live behavior eval adapters, and cross-agent capability routing.
 
 The original upstream project remains the source of the taste/design skill foundation. This repository is a customized derivative for personal RIC workflows and is not the upstream `taste-skill` project.

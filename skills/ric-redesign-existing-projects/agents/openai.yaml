@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Redesign Existing Projects"
+  short_description: "Redesign while preserving verified behavior"
+  default_prompt: "Use $ric-redesign-existing-projects with a preservation contract and independent validation."

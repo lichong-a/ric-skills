@@ -1,0 +1,5 @@
+interface:
+  display_name: "RIC ImageGen Frontend Mobile"
+  short_description: "Generate reviewed mobile screen directions"
+  default_prompt: "Use $ric-imagegen-frontend-mobile to generate a coherent mobile flow and reviewed visual direction."
+

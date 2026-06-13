@@ -1,88 +1,84 @@
 ---
 name: ric-infra-safety
-description: "RIC shared infrastructure and data-safety skill. Use whenever work touches Elasticsearch, Kafka, TimescaleDB/PostgreSQL, Redis, NATS, MinIO, migrations, schemas, indices, topics, streams, keys, buckets, secrets, or provisioning decisions. Enforces reuse-before-create, ric namespace isolation, non-destructive operations, and environment-variable secrets."
+description: Use when work may read or modify databases, migrations, caches, queues, search indices, streams, object storage, shared services, credentials, or infrastructure provisioning.
 ---
 # RIC Infrastructure Safety
 
-Use this skill for any infrastructure, data, cache, message, search, storage, or migration work.
+## Role
 
-## Shared Services
+Act as a mandatory safety policy and review gate for infrastructure and persistent data. Never approve destructive operations or fabricate credentials.
 
-Reuse these services when they satisfy requirements:
+## Required Companions
 
-- Elasticsearch: `192.168.31.190:9200`, version 9.3.1, username `elastic`, password from `RIC_ES_PASSWORD`.
-- Kafka: `192.168.31.190:9092`, version 4.2.0, SASL_PLAINTEXT, credentials from `RIC_KAFKA_USERNAME` and `RIC_KAFKA_PASSWORD`.
-- TimescaleDB/PostgreSQL: `192.168.31.190:15433`, PostgreSQL 18 + TimescaleDB, credentials from `RIC_PG_USER` and `RIC_PG_PASSWORD`.
-- Redis: `192.168.31.190:6379`, version 8.x, password from `RIC_REDIS_PASSWORD`.
-- NATS: `192.168.31.190`, client `4222`, monitoring `8222`, version 2.12.
-- MinIO: `192.168.31.190:9000`, console `9001`, version `RELEASE.2025-09-07`, credentials from `RIC_MINIO_USER` and `RIC_MINIO_PASSWORD`.
+- Apply `ric-agent-operating-rules`.
+- Use the relevant backend, data-pipeline, deployment, or domain skill.
+- Require independent `ric-security-review` or equivalent safety review for non-trivial writes.
+- Hand executable verification to `ric-testing-quality`.
 
-## Absolute Safety Rules
+## Environment Profile
 
-Never execute destructive operations against databases, caches, message systems, or object storage.
+Treat configured shared RIC services as the preferred profile, not as universal defaults:
 
-Forbidden examples:
+- Elasticsearch `192.168.31.190:9200`
+- Kafka `192.168.31.190:9092`
+- TimescaleDB/PostgreSQL `192.168.31.190:15433`
+- Redis `192.168.31.190:6379`
+- NATS `192.168.31.190:4222`, monitoring `8222`
+- MinIO `192.168.31.190:9000`, console `9001`
 
-- SQL: `DROP DATABASE`, `DROP TABLE`, `TRUNCATE TABLE`, broad `DELETE FROM`.
-- Redis: `FLUSHALL`, `FLUSHDB`.
-- Elasticsearch: `DELETE INDEX`, `DROP INDEX`.
-- Object storage deletion outside explicit safe user-approved scope.
+Verify availability, configuration, and user intent before connecting. Reuse a suitable shared service before proposing a new one.
 
-Migrations must not remove existing user data.
+## Operation Classes
 
-## Namespace Rules
+| Class | Examples | Policy |
+| --- | --- | --- |
+| Read-only | schema inspection, health check, metadata query | Allowed when credentials and scope are valid |
+| Additive | new prefixed table, index, topic, key, or safe migration | Allowed after preflight and evidence plan |
+| Bounded mutation | scoped update required by approved behavior | Requires explicit scope, backup/rollback strategy, and independent review |
+| Destructive | drop, truncate, flush, broad delete, unbounded purge | Forbidden |
 
-Writable resources must use ric namespace:
+Object deletion is destructive. Do not delete objects, buckets, records, topics, indices, or schemas. MinIO writes are permitted only in bucket `codex`.
 
-- Elasticsearch indices start with `ric-`.
-- PostgreSQL/TimescaleDB databases, schemas, tables, sequences, views, and related resources start with `ric_` or `ric-` depending on naming constraints.
-- Redis keys start with `ric:` or `ric-`.
-- Kafka/NATS subjects/topics created for ric work should use a clear `ric.` or `ric-` prefix when the platform allows it.
-- MinIO manipulation is allowed only for bucket `codex`.
+## Namespace Contract
 
-Resources without required ric prefixes are external assets. Read-only inspection is allowed when necessary; writes are prohibited.
+Writable resources must use:
 
-## Secrets
+- Elasticsearch: `ric-`
+- PostgreSQL/TimescaleDB objects: `ric_` or `ric-`
+- Redis keys: `ric:` or `ric-`
+- Kafka/NATS topics or subjects: `ric.` or `ric-` when supported
 
-Never hardcode secrets.
+Nonconforming resources are external and read-only.
 
-Use:
+## Secrets Contract
+
+Use environment variables:
 
 - `RIC_ES_PASSWORD`
-- `RIC_KAFKA_USERNAME`
-- `RIC_KAFKA_PASSWORD`
-- `RIC_PG_USER`
-- `RIC_PG_PASSWORD`
+- `RIC_KAFKA_USERNAME`, `RIC_KAFKA_PASSWORD`
+- `RIC_PG_USER`, `RIC_PG_PASSWORD`
 - `RIC_REDIS_PASSWORD`
-- `RIC_MINIO_USER`
-- `RIC_MINIO_PASSWORD`
+- `RIC_MINIO_USER`, `RIC_MINIO_PASSWORD`
 
-If a required secret is missing:
+If a required secret is absent, stop and name the missing variable. Never log, persist, invent, or expose a secret.
 
-1. Stop.
-2. State which secret is missing.
-3. Ask the user to provide it through the environment.
-4. Do not fabricate credentials.
+## Preflight And Evidence
 
-## Provisioning Policy
+Before writes, record:
 
-Before creating a new service, verify whether shared infrastructure satisfies the requirement.
+- target environment and resource names;
+- operation class and bounded scope;
+- namespace compliance;
+- expected effects and failure modes;
+- backup, rollback, or additive recovery strategy;
+- dry-run or isolated-test method;
+- monitoring and stop conditions.
 
-If a capability is missing, ask:
+After approved additive or bounded work, report exact commands, affected resources, results, and residual risk. Do not claim safety from intention alone.
 
-`A shared infrastructure for this capability does not currently exist. Would you like to add a reusable shared environment instead of creating a project-specific instance?`
+## Gate Decision
 
-Do not create duplicate infrastructure automatically.
-
-## Implementation Pattern
-
-For infrastructure-related code:
-
-- Put host, port, username, password, database/index/topic/key prefix, TLS, and auth settings in configuration.
-- Use environment variables for secrets.
-- Add connection health checks.
-- Add timeouts and retries with bounded backoff.
-- Add clear logging without secret leakage.
-- Add tests using mocks or local isolated resources when possible.
-- Document required environment variables.
-
+- `PASS`: approved read-only, additive, or explicitly authorized bounded mutation with complete scope, recovery, independent review, and verification evidence.
+- `FAIL_REWORK`: namespace, recovery, scope, or verification is incomplete.
+- `BLOCKED`: missing secrets, unavailable shared service, or unsafe external resource.
+- `ESCALATE`: requested operation is destructive or conflicts with safety policy.

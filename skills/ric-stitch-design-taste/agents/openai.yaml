@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Stitch Design Taste"
+  short_description: "Create semantic Stitch-compatible design guidance"
+  default_prompt: "Use $ric-stitch-design-taste to document an approved direction as a bounded modifier."

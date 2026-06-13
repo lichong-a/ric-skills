@@ -1,52 +1,68 @@
 ---
 name: ric-code-review
-description: "RIC code review skill. Use when reviewing code, diffs, pull requests, architecture changes, frontend/admin UI changes, backend services, APIs, data pipelines, infrastructure changes, tests, and documentation. Prioritizes bugs, regressions, data safety, security, permissions, missing tests, and ric convention violations."
+description: Use when an implementation, diff, pull request, migration, configuration change, test change, or documentation change requires an independent correctness and risk decision.
 ---
 # RIC Code Review
 
-Use this skill in review mode.
+## Role
 
-## Review Priority
+Act as a read-only, independent reviewer. Review a pinned revision or immutable artifact. Do not edit files, apply fixes, approve your own work, or waive failed evidence.
 
-Findings first, ordered by severity:
+## Required Companions
 
-1. Data loss or destructive infrastructure risk.
-2. Security, secrets, auth, or permission bypass.
-3. Behavioral regressions.
-4. Incorrect API/data contracts.
-5. Admin UI permission or state gaps.
-6. Reliability, idempotency, retry, concurrency issues.
-7. Missing tests for changed behavior.
-8. Maintainability issues that will cause near-term defects.
+- Apply `ric-agent-operating-rules`.
+- The dispatched reviewer loads `ric-independent-review`, `ric-code-review`, the primary domain skill, and approved requirements/contracts.
+- Use `ric-infra-safety` for infrastructure or persistent-data changes.
+- Inspect `ric-testing-quality` evidence when available.
 
-## What To Check
+## Independence Contract
 
-- Does the code follow existing repo conventions?
-- Are user changes preserved?
-- Are secrets hardcoded?
-- Are ric namespace rules followed?
-- Are destructive operations introduced?
-- Are permissions enforced server-side?
-- Are frontend buttons/routes aligned with permissions?
-- Are loading/empty/error states complete?
-- Are tests updated for the changed behavior?
-- Are dependencies justified?
+- Use fresh context separate from the author/fixer when possible.
+- Record the reviewed revision, diff range, scope, requirements, and evidence inputs.
+- Review raw artifacts before reading the author's rationale when practical.
+- Re-review the new pinned revision after fixes; prior approval never carries forward automatically.
+- If independent review is unavailable, report `BLOCKED`. Explicitly accepted degraded review remains a blocked diagnostic result.
 
-## Output Format
+## Review Procedure
 
-Lead with findings:
+1. Inspect repository instructions and affected context, not only the diff.
+2. Map changed behavior to requirements, contracts, and tests.
+3. Reproduce or independently verify high-risk claims where feasible.
+4. Inspect CI, static checks, tests, migrations, generated artifacts, and documentation impact.
+5. Report only actionable findings grounded in file/line evidence.
 
-- Severity.
-- File and line.
-- Concrete issue.
-- Why it matters.
-- Suggested fix.
+## Priority And Severity
 
-Then include:
+- `S0`: destructive data loss, critical security issue, or fundamentally wrong behavior.
+- `S1`: blocking correctness, permission, compatibility, reliability, or missing-test issue.
+- `S2`: important risk with a defensible temporary disposition.
+- `S3`: advisory improvement.
 
-- Open questions.
-- Test gaps.
-- Brief summary only after findings.
+Prioritize data safety, secrets, auth/authz, tenant isolation, behavioral regressions, API/data contracts, concurrency, idempotency, retries, lifecycle, deployment risk, and missing tests.
 
-If no issues are found, say so and mention remaining risk/test gaps.
+## Required Output
 
+Lead with findings ordered by severity. Each finding includes:
+
+- severity;
+- file and precise line;
+- concrete defect or risk;
+- impact and reproducible scenario;
+- required fix or verification.
+
+Then provide:
+
+- reviewed revision and scope;
+- evidence inspected and checks independently rerun;
+- open questions and residual risks;
+- decision: `PASS`, `PASS_WITH_ADVISORIES`, `FAIL_REWORK`, `BLOCKED`, or `ESCALATE`.
+
+## Decision Rules
+
+- `PASS` requires zero unresolved `S0`/`S1` and sufficient current evidence.
+- `PASS_WITH_ADVISORIES` permits only owned and justified `S2`/`S3`.
+- `FAIL_REWORK` returns findings to a fixer and requires re-review.
+- `BLOCKED` applies when required context, evidence, tools, or independence is missing.
+- `ESCALATE` applies to conflicting requirements, unsafe requests, or reviewer disagreement requiring adjudication.
+
+If no findings exist, say so explicitly and identify remaining test gaps or residual risk.

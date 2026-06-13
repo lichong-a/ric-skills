@@ -1,77 +1,54 @@
 ---
 name: ric-docs
-description: "RIC documentation skill. Use for README files, setup guides, runbooks, API docs, architecture notes, change logs, deployment docs, admin-console usage docs, environment variable documentation, and handoff notes for ric projects."
+description: Use when changed behavior, contracts, configuration, architecture, operations, setup, release procedures, or user workflows require accurate documentation or handoff material.
 ---
 # RIC Documentation
 
-Use this skill for project and operational documentation.
+## Role
 
-## Principles
+Own documentation accuracy and handoff evidence. Documentation is part of the definition of done when behavior, contracts, configuration, operations, or user workflows change.
 
-- Write for the next engineer or operator.
-- Keep docs accurate to the repo.
-- Prefer commands that work in PowerShell on Windows.
-- Include pnpm commands for Node projects.
-- Never include real secrets.
-- Document environment variables by name.
+## Required Companions
 
-## README Structure
+- Apply `ric-agent-operating-rules`.
+- Read approved requirements, contracts, implementation, and current verification evidence.
+- Use the primary domain skill for terminology and operational truth.
+- Hand documentation to independent review or acceptance validation.
 
-Recommended:
+## Documentation Contract
 
-1. Project purpose.
-2. Tech stack.
-3. Prerequisites.
-4. Environment variables.
-5. Install.
-6. Run locally.
-7. Test/build.
-8. Deployment notes.
-9. Important conventions.
+Update only documents affected by the change. Depending on scope, cover:
 
-## Runbooks
+- purpose, prerequisites, setup, and supported runtime;
+- environment variables by name, source, default, sensitivity, and validation behavior;
+- API or event contracts, permissions, errors, examples, and compatibility notes;
+- architecture decisions and tradeoffs through ADRs when decisions are durable;
+- deployment, migration, monitoring, rollback, and recovery;
+- operator runbooks with symptoms, safe checks, expected results, remediation, and escalation;
+- user/admin workflows, roles, permissions, states, and failure handling;
+- changelog, release notes, and handoff summary.
 
-Include:
+Never include real secrets, destructive remediation commands, fabricated output, or instructions not verified against the repository.
 
-- Symptoms.
-- Checks.
-- Commands.
-- Expected output.
-- Safe remediation.
-- Escalation.
+## Verification
 
-Do not include destructive database/cache/message/storage commands.
+- Run documentation lint and link checks when available.
+- Execute or safely validate documented commands and examples.
+- Confirm generated API docs match the machine contract.
+- Confirm configuration names and defaults match code.
+- Rehearse critical runbook paths in a safe environment when feasible.
+- Verify changed behavior has corresponding documentation or an explicit reason it does not need it.
 
-## API Docs
+## Required Evidence
 
-Include:
+Report:
 
-- Endpoint/operation.
-- Auth/permission.
-- Request.
-- Response.
-- Errors.
-- Pagination/filter/sort.
-- Examples.
+- documents changed and the implementation/contract revision they describe;
+- commands, links, examples, and runbooks verified;
+- intentional documentation omissions with rationale;
+- owners and known staleness risks;
+- decision: `PASS`, `PASS_WITH_ADVISORIES`, `FAIL_REWORK`, `BLOCKED`, or `ESCALATE`.
 
-## Admin Docs
+## Exit Criteria
 
-For admin systems, document:
-
-- Roles and permissions.
-- Menu structure.
-- Main workflows.
-- Import/export behavior.
-- Audit/log behavior.
-- Common failure states.
-
-## Changelog
-
-Keep entries concise:
-
-- Added.
-- Changed.
-- Fixed.
-- Security.
-- Migration notes when needed.
-
+Pass only when documentation matches the current verified revision, contains no secrets or unsafe procedures, and gives the next engineer, operator, or user enough information to perform the documented task.

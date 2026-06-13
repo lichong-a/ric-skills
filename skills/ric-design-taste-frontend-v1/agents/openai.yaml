@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Design Taste Frontend V1"
+  short_description: "Apply legacy taste as a bounded modifier"
+  default_prompt: "Use $ric-design-taste-frontend-v1 only as a bounded visual modifier under the selected primary executor."

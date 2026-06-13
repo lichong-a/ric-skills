@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/review-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "gate", "decision", "source_revision", "reviewer", "artifact_authors", "artifact_fixers", "findings", "evidence"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "gate": {"type": "string"},
+    "decision": {"enum": ["PASS", "PASS_WITH_ADVISORIES", "FAIL_REWORK", "BLOCKED", "ESCALATE"]},
+    "source_revision": {"type": "string"},
+    "artifact_version": {"type": "string"},
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "fresh_context", "read_only"],
+      "properties": {
+        "id": {"type": "string"},
+        "fresh_context": {"type": "boolean"},
+        "read_only": {"type": "boolean"}
+      }
+    },
+    "artifact_authors": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "artifact_fixers": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "status"],
+        "properties": {
+          "severity": {"enum": ["S0", "S1", "S2", "S3"]},
+          "status": {"enum": ["OPEN", "RESOLVED", "ACCEPTED"]},
+          "owner": {"type": "string"},
+          "rationale": {"type": "string"},
+          "disposition": {"type": "string"}
+        }
+      }
+    },
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "visual_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface_class", "total", "categories"],
+      "properties": {
+        "surface_class": {"enum": ["utility", "high-visual"]},
+        "total": {"type": "number", "minimum": 0, "maximum": 100},
+        "categories": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["specificity", "hierarchy", "distinctiveness", "consistency", "responsive_accessibility", "asset_fidelity"],
+          "properties": {
+            "specificity": {"type": "number", "minimum": 1, "maximum": 5},
+            "hierarchy": {"type": "number", "minimum": 1, "maximum": 5},
+            "distinctiveness": {"type": "number", "minimum": 1, "maximum": 5},
+            "consistency": {"type": "number", "minimum": 1, "maximum": 5},
+            "responsive_accessibility": {"type": "number", "minimum": 1, "maximum": 5},
+            "asset_fidelity": {"type": "number", "minimum": 1, "maximum": 5}
+          }
+        }
+      }
+    }
+  }
+}

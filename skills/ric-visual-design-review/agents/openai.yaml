@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Visual Design Review"
+  short_description: "Independently score and critique visual quality"
+  default_prompt: "Use $ric-visual-design-review to independently critique and score this visual implementation."

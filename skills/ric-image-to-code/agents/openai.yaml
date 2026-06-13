@@ -1,0 +1,5 @@
+interface:
+  display_name: "RIC Image To Code"
+  short_description: "Implement frontend from visual sources"
+  default_prompt: "Use $ric-image-to-code to implement this frontend from the supplied visual source with measurable fidelity."
+

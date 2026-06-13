@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Security Review"
+  short_description: "Independently review security and data safety"
+  default_prompt: "Use $ric-security-review to independently assess this pinned change for security and safety risks."

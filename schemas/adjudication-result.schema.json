@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/adjudication-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "gate", "adjudicator", "fresh_context", "read_only", "source_revision", "decision", "reason"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "gate": {"type": "string"},
+    "adjudicator": {"type": "string"},
+    "fresh_context": {"type": "boolean"},
+    "read_only": {"type": "boolean"},
+    "source_revision": {"type": "string"},
+    "decision": {"enum": ["FAIL_REWORK", "BLOCKED", "ESCALATE", "PASS", "PASS_WITH_ADVISORIES"]},
+    "reason": {"type": "string"}
+  }
+}

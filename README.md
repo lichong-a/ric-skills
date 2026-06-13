@@ -2,155 +2,237 @@
 
 ![RIC Skills hero](assets/readme-hero.png)
 
-RIC Skills is a personal Agent Skills repository based on [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), customized for RIC workflows, Chinese enterprise admin-console design, shadcn-first React admin builds, Windows/PowerShell execution, pnpm/FNM Node projects, shared infrastructure safety, ImageGen-backed brand assets, and browser screenshot validation loops.
+RIC Skills is a taste-driven, evidence-backed Agent Skills repository derived from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill). It combines product and visual design, Chinese enterprise admin-console implementation, backend/data/API engineering, independent review, testing, acceptance validation, ImageGen assets, and cross-agent delivery contracts.
 
-It keeps the upstream taste-skill design capabilities, renames them into `ric-*` install names, and adds RIC-native engineering skills for admin systems, infrastructure, backend services, data pipelines, API design, testing, code review, deployment, and documentation.
+For every non-trivial product or engineering delivery, start with **`ric-delivery-loop`**. A task has one active primary executor; independent quality gates review, test, and validate the same final revision. When subagent, isolated-thread, and external-agent independence routes are all unavailable during a complete delivery loop, the run remains `BLOCKED`, never a synthetic PASS.
 
-![RIC CMS workbench example](examples/cms-workbench.png)
+![RIC CMS workbench utility example](examples/cms-workbench.png)
 
-## Attribution
+The banner is a generated repository concept and the CMS workbench is a utility-admin example. Neither image is release evidence. A real delivery passes only with current revision-bound review, test, and acceptance artifacts; visual/Design QA and browser-interaction artifacts are additionally mandatory when the task includes those surfaces.
 
-This project is derived from `Leonxlnx/taste-skill`, licensed under MIT. See [NOTICE.md](NOTICE.md) and [LICENSE](LICENSE).
+## Two Operating Paths
 
-## Installing
+Use the complete runtime loop for delivered systems:
 
-Install all skills:
-
-```powershell
-npx skills add https://github.com/lichong-a/ric-skills
+```text
+requirements -> subagent requirements review -> design -> subagent design review
+-> implementation -> subagent code/security/visual review
+-> subagent tests -> subagent acceptance validation -> evidence handoff
 ```
 
-Install one skill by install name:
+Maintaining this skill repository is intentionally lighter:
 
-```powershell
-npx skills add https://github.com/lichong-a/ric-skills --skill "ric-admin-console"
-npx skills add https://github.com/lichong-a/ric-skills --skill "ric-design-taste-frontend"
+```text
+read skill-authoring guidance -> edit skill/schema/validator
+-> static checks and deterministic evals
+-> explicitly invoke ric-skill-quality when final independent behavior evaluation is needed
 ```
 
-The install name is the `name:` field in each `SKILL.md`, not necessarily the folder name.
+Repository authors may choose the implementation method. They must report which
+checks and behavior evals actually ran, but a mechanical skill-repository edit is
+not blocked only because no subagent was used during authoring.
+
+## Closed Delivery Loop
+
+```mermaid
+flowchart LR
+    A["Request"] --> B["Requirements"]
+    B --> C{"Two independent requirements reviewers"}
+    C -->|FAIL_REWORK| B
+    C -->|PASS| D["Solution and visual design"]
+    D --> E{"Two independent design reviewers"}
+    E -->|FAIL_REWORK| D
+    E -->|PASS| F["Implementation and integration"]
+    F --> G{"Code + security review"}
+    F -. visual work .-> V{"Visual review + Design QA"}
+    G -->|FAIL_REWORK| F
+    V -->|FAIL_REWORK| F
+    G -->|PASS| R{"Required reviews complete"}
+    V -->|PASS| R
+    F -. non-visual work .-> R
+    R --> H["Independent test gate"]
+    H -->|FAIL_REWORK| F
+    H -->|PASS| I["Independent acceptance validation"]
+    I -->|FAIL_REWORK| F
+    I -->|PASS| J["Revision-bound evidence handoff"]
+```
+
+Any implementation fix creates a new revision and invalidates old code, security, test, visual, Design QA, and acceptance results. The required return path is:
+
+```text
+fix -> code/security re-review -> affected tests -> required full tests
+-> affected visual/design QA -> acceptance validation -> evidence handoff
+```
+
+## Gate Contract
+
+| Decision | Meaning |
+| --- | --- |
+| `PASS` | Current revision has complete evidence and no unresolved findings. |
+| `PASS_WITH_ADVISORIES` | Only owned, justified, and disposed `S2`/`S3` findings remain. |
+| `FAIL_REWORK` | A separate fixer must change the artifact and trigger re-review. |
+| `BLOCKED` | Capability, secret, safety rule, environment, or independence prevents proof. |
+| `ESCALATE` | Reviewer conflict, exhausted loop budget, major scope change, or risk acceptance needs adjudication. |
+
+Requirements and design use two independent reviewers. Every non-trivial task uses an independent security reviewer. Each gate and run epoch is capped at three rounds; no progress across two fixes triggers an adjudicator.
+
+## Machine Contracts
+
+`skills/catalog.json` is the source of truth for skill roles, companions, conflicts, quality gates, gate-type ownership, capability routes, and generated registries. A passing run must include the primary executor's catalog-declared gates and cannot select conflicting skills.
+
+Runtime evidence is stored under ignored `.ric-work/<run-id>/`:
+
+```text
+run.json                 requirements.md
+acceptance.json          traceability.json
+risk-register.json       design.md
+dispatch/*.json          review-results/*.json
+adjudication-results/*.json
+test-plan.json           test-results/*.json
+handoff.md
+live-eval-result.json    live-eval-evidence/   # optional behavior eval
+```
+
+Minimal selected-skill contract:
+
+```json
+{
+  "selected_skills": [
+    {"name": "ric-delivery-loop", "active_role": "orchestrator"},
+    {"name": "ric-admin-console", "active_role": "primary-executor"},
+    {"name": "ric-security-review", "active_role": "quality-gate"}
+  ]
+}
+```
+
+Evidence paths must remain inside the run directory, exist, match SHA-256, and bind to the final source revision. All canonical JSON artifacts bind to the same `run_id`. Requirements and design reviews bind to immutable artifact versions; source-bound reviews, tests, and acceptance bind to the final revision. Reworked gates preserve ordered failure, fix, invalidation, and re-pass history. Utility-only admin work does not require high-visual treatment; activating a visual modifier, public portal, login, workbench, redesign, or source-fidelity workflow requires visual review and Design QA.
+
+`scripts/validate-delivery-run.py` rejects invalid schemas, malformed catalog instances (without crashing), invalid catalog roles or companions, unknown capabilities, empty author provenance on passing runs, self-approval, reused gate actors, missing required subagent skills, cross-run artifacts, stale or terminally invalidated gates, non-required gates with terminal failures that coexist with PASS, contradictory duplicate gate results, dangling evidence references, secrets, open `S0/S1`, undisposed `S2`, failed acceptance, missing evidence, test plans with no mandatory suites, mandatory acceptance criteria unmapped to mandatory suites, low visual scores, visual work that omits `visual-review` or `design-qa` (detected from request scope, active visual modifiers, or admin console tasks), over-budget loops, degraded PASS, and non-passing live-eval evidence when a live-eval file is present.
+
+The non-cryptographic strengthening model prevents accidental forgeries and honest mistakes through invocation receipts, loaded-skill binding, typed evidence, content-hash artifact versions, and mandatory-suite enforcement. It does not claim to prevent a malicious actor who controls the entire run package, all artifacts, and the validator from forging results. True prevention of that threat requires external CI enforcement, branch protection, and CODEOWNER review.
+
+## Visual And Behavioral Evidence
+
+Screenshots prove appearance only. Browser actions, assertions, traces, and acceptance evidence prove behavior.
+
+- Visual reviewer: independent quality, product fit, hierarchy, brand expression, and distinctiveness.
+- Design QA reviewer: approved source versus rendered implementation at matching states and viewports.
+- Interaction validator: breadcrumb navigation, permissions, state restoration, forms, loading, responsive behavior, and accessibility.
+- Advanced motion/WebGL: video or motion trace, performance profile, reduced-motion evidence, and nonblank canvas/WebGL assertion.
+- Public portal, login, invite, registration, tenant welcome, and immersive workbench: at least one mobile viewport is mandatory.
+
+## Agent And Capability Routing
+
+Codex is the primary environment, but contracts are capability-based and portable to Claude Code, Cursor, Windsurf, Cline, Aider, isolated threads, external agents, and CI workers.
+
+| Capability | Preferred use | Fallback |
+| --- | --- | --- |
+| Subagents | independent review, tests, validation | isolated thread, external agent; otherwise `BLOCKED` |
+| Creative Production | logo, moodboard, three visual directions, ImageGen direction board | local visual skills and approved ImageGen runtime |
+| Product Design | flows, prototypes, product critique, design-source review | domain design contract and independent Design QA |
+| Build Web Data Visualization | dashboards, maps, charts, command centers, data narratives | existing framework/chart stack with explicit metric semantics |
+| Codex Security | threat model, diff scan, finding validation | `ric-security-review` plus reproducible security evidence |
+| OpenAI Developers / Agents SDK | agentic app guidance or a user-supplied live-eval program | connect it through the external-command live-eval adapter |
+| Browser automation | real interaction and screenshot evidence | Playwright/Cypress/Puppeteer/IDE browser; otherwise `BLOCKED` |
+| ImageGen | agent-native/MCP/IDE image tool | trusted canonical CLI fallback; missing credentials means `BLOCKED` |
 
 ## Recommended Entry Points
 
-| Task | Skill |
+| Task | Entry |
 | --- | --- |
-| Chinese enterprise admin panel, CRUD console, SaaS back office, RBAC, data table, workflow, audit, dashboard, branded login, workbench, user-facing portal attached to an admin system | `ric-admin-console` |
-| Public landing page, portfolio, marketing page, public visual redesign | `ric-design-taste-frontend` |
-| Screenshot or generated design reference that must be analyzed and implemented | `ric-image-to-code` |
-| Shared infrastructure, Redis, Kafka, TimescaleDB/PostgreSQL, Elasticsearch, NATS, MinIO, secrets, namespaces | `ric-infra-safety` |
-| Node/FNM/pnpm workflows | `ric-node-pnpm` |
-| Complete no-placeholder artifact generation | `ric-full-output-enforcement` |
+| Non-trivial end-to-end delivery | `ric-delivery-loop` |
+| Chinese enterprise admin, SaaS back office, CRUD, RBAC, workbench, attached portal | `ric-admin-console` |
+| Public landing page, portfolio, product marketing, visual frontend | `ric-design-taste-frontend` |
+| Backend service or worker | `ric-backend-service` |
+| Event/data pipeline, DLQ, replay, backfill | `ric-data-pipeline` |
+| Review-only request | `ric-code-review`, `ric-security-review`, or another quality gate directly |
+| Skill repository change | Edit and run repository checks directly; explicitly invoke `ric-skill-quality` for final independent behavior evaluation; optionally retrieve `writing-skills` for RED-GREEN-REFACTOR guidance |
 
-`ric-admin-console` is the single entry point for backend management systems. It includes admin-adapted visual taste from `ric-design-taste-frontend`, including branded first screens, ImageGen assets, controlled GSAP/3D usage, and portal-grade visual impact where the page is user-facing.
+## Admin Console
 
-## Admin Console Capability Matrix
+`ric-admin-console` remains the single admin-product primary entry. It is shadcn-first for new React admin systems, preserves established UI stacks, actively retrieves framework skills, plans i18n/theme/layout/title/logo/RBAC/menu/SSO, uses ImageGen assets where appropriate, and keeps utility CRUD pages efficient while allowing stronger portal/login/workbench visuals. It separately validates screenshot quality and real interactions.
 
-| Capability | Default behavior |
-| --- | --- |
-| Planning questions | Records or asks about multilingual support, theme switching, layout mode, system title, LOGO style, RBAC, menu management, SSO, tenant/data permissions, and public portal scope. |
-| Layouts | Supports `sidebar-only`, `topnav-only`, and `sidebar-with-topbar` with fixed shell regions, grouped menus, profile dropdown, and actionable breadcrumbs. |
-| React stack | New React admin projects are shadcn-first: React + Vite/Next + shadcn/ui + Tailwind + Radix primitives + TanStack Table. Ant Design is a user-selected or existing-project fallback. |
-| Vue stacks | Element Plus, Naive UI, and Arco are supported through framework detection and matching skill/API lookup. |
-| Multilingual UI | Supports i18n-ready or implemented language switching across Next.js, React/Vite, Vue 3, Nuxt, Angular, and SvelteKit patterns. |
-| Theme switching | Supports light, dark, or `light/dark/system` through tokens/providers, with assets and components verified in each theme. |
-| Brand assets | Uses existing assets or active ImageGen/RIC CLI fallback for LOGO, app icon, default avatar, backgrounds, empty states, module visuals, and report/announcement art. |
-| Visual impact | Utility pages stay efficient; login, workbench, module homepage, public portal, command center, onboarding, and report cover can use stronger brand expression, GSAP, Three.js/WebGL, 3D cards, or canvas effects when justified. |
-| List quality | Enforces one page title, one create action, one `清空选择`, permission-aware `批量删除`, no duplicated toolbar controls, polished scrollbars, and complete loading/empty/error states. |
-| Verification | Runnable UI work requires browser screenshots at `1366x768`, `1440x900`, and `1920x1080`, comparison against skill requirements, fixes, and repeated screenshots until passing or blocked. |
+## Install
 
-## ImageGen Asset Workflow
+```powershell
+npx skills add https://github.com/lichong-a/ric-skills
+npx skills add https://github.com/lichong-a/ric-skills --skill "ric-delivery-loop"
+```
 
-RIC image-generation skills prefer the environment's agent-native or built-in image capability when available. This includes Codex image generation, MCP image tools, IDE-integrated image tools, or equivalent agent-native generation.
+Local lookup:
 
-If image tooling is missing or unavailable, RIC skills use the bundled CLI fallback documented in [references/ric-imagegen-fallback.md](references/ric-imagegen-fallback.md). The CLI fallback requires `OPENAI_API_KEY` in the environment. Do not hardcode keys.
-
-Typical admin asset pack for downstream projects:
-
-- App logo or mark variants for sidebar/topbar.
-- Default avatar and profile placeholders.
-- Empty-state art and onboarding/report/announcement backgrounds.
-- Optional generated module icon pack when the user explicitly wants custom small icons.
-
-## Agent Compatibility
-
-Codex is the primary execution environment for this repository, but the skills are written to stay usable in Claude Code, Cursor, Windsurf, Cline, Aider, Antigravity, and other agent environments.
-
-Rules are capability-based:
-
-- Use Codex Browser when available; otherwise use Playwright, Cypress, Puppeteer, IDE browser preview, or another browser automation surface.
-- Use agent-native ImageGen when available; otherwise use RIC CLI fallback.
-- Use local framework skills when installed; otherwise inspect package versions and official docs before using framework APIs.
-- Never claim screenshot validation, image generation, or framework API verification was completed unless it actually ran.
-
-## Validation Loop
-
-For runnable admin UI work, `ric-admin-console` requires:
-
-1. Skill point inventory.
-2. Static checks: lint, test, build, typecheck, and framework checks when available.
-3. Real browser run.
-4. Screenshot matrix across key pages, states, and viewports.
-5. Visual comparison against the skill and checklist.
-6. Fix loop until screenshots and checks pass.
-7. Final evidence: checked pages/states, viewport sizes, issues, fixes, loop count, residual risks.
-
-This loop covers layout, menu, breadcrumbs, loading, list actions, batch delete, modals/drawers, scrollbars, generated assets, theme switching, i18n, and portal/admin separation.
+```powershell
+.\skill.ps1 ric-delivery-loop
+.\skill.ps1 ric-admin-console
+```
 
 ## Skills
 
-### Upstream-Derived Design Skills
+<!-- BEGIN GENERATED SKILLS -->
 
-| Folder | Install name | Use for |
+| Install name | Default role | Trigger |
 | --- | --- | --- |
-| `ric-design-taste-frontend` | `ric-design-taste-frontend` | Anti-slop landing pages, portfolios, marketing pages, visual redesigns. Routes admin-console work to `ric-admin-console`, including admin pages that need strong brand expression. |
-| `ric-design-taste-frontend-v1` | `ric-design-taste-frontend-v1` | Backward-compatible v1 taste-skill behavior with RIC constraints. |
-| `ric-gpt-taste` | `ric-gpt-taste` | Stricter premium frontend execution and motion-heavy marketing surfaces. |
-| `ric-image-to-code` | `ric-image-to-code` | Image-first design analysis and implementation; admin screenshots route to `ric-admin-console`. |
-| `ric-imagegen-frontend-web` | `ric-imagegen-frontend-web` | Website reference images only. |
-| `ric-imagegen-frontend-mobile` | `ric-imagegen-frontend-mobile` | Mobile app screen reference images only. |
-| `ric-brandkit` | `ric-brandkit` | Brand-kit boards, logo directions, identity systems, palettes, typography, mockups. |
-| `ric-redesign-existing-projects` | `ric-redesign-existing-projects` | Redesign existing websites, apps, and admin systems after audit. |
-| `ric-high-end-visual-design` | `ric-high-end-visual-design` | Premium visual UI direction with strong anti-generic rules. |
-| `ric-full-output-enforcement` | `ric-full-output-enforcement` | Complete output enforcement, no placeholders or omitted files. |
-| `ric-minimalist-ui` | `ric-minimalist-ui` | Clean editorial minimal product UI. |
-| `ric-industrial-brutalist-ui` | `ric-industrial-brutalist-ui` | Industrial/brutalist/tactical telemetry UI. |
-| `ric-stitch-design-taste` | `ric-stitch-design-taste` | Google Stitch-compatible semantic DESIGN.md generation. |
+| `ric-acceptance-validation` | quality-gate | Use when a tested integrated revision must be independently validated against approved acceptance criteria before final delivery or release readiness. |
+| `ric-admin-console` | primary-executor | Use when creating or changing admin panels, SaaS back offices, CRUD consoles, RBAC systems, data-heavy dashboards, branded management workbenches, or public surfaces attached to an admin product. |
+| `ric-agent-operating-rules` | policy | Use when performing any task in a RIC workspace or when repository work must preserve user changes, follow the configured Windows runtime, and apply RIC safety constraints. |
+| `ric-api-design` | modifier | Use when creating or changing REST, RPC, event, webhook, OpenAPI, request-response, pagination, error, authorization, or compatibility contracts between systems. |
+| `ric-backend-service` | primary-executor | Use when creating or changing API servers, backend services, workers, scheduled jobs, integrations, persistence logic, service lifecycle, or runtime observability. |
+| `ric-brandkit` | modifier | Use when generating or refining a visual identity system, logo direction, brand board, palette, typography direction, image language, or branded application concepts. |
+| `ric-code-review` | quality-gate | Use when an implementation, diff, pull request, migration, configuration change, test change, or documentation change requires an independent correctness and risk decision. |
+| `ric-data-pipeline` | primary-executor | Use when designing or changing event streams, ingestion, projections, indexing, analytics flows, consumers, retries, dead-letter handling, replay, reconciliation, or backfills. |
+| `ric-delivery-loop` | orchestrator | Use when delivering a non-trivial feature, fix, redesign, migration, or system change that requires coordinated requirements, design, implementation, review, testing, validation, and evidence. |
+| `ric-deployment-ops` | handoff | Use when a verified change must be packaged, released, rolled out, monitored, rolled back, or assessed for production readiness through CI/CD or runtime operations. |
+| `ric-design-qa` | quality-gate | Use when a rendered UI or generated asset implementation must be compared with an approved design, screenshot, reference image, direction board, or source-of-truth visual target. |
+| `ric-design-taste-frontend` | primary-executor | Use when creating or substantially redesigning public-facing websites, landing pages, portfolios, product marketing surfaces, or branded frontend experiences where visual direction, interaction craft, and anti-template quality materially affect the outcome. |
+| `ric-design-taste-frontend-v1` | modifier | Use when an existing visual direction explicitly depends on the legacy taste-skill v1 language and needs a bounded compatibility modifier. |
+| `ric-docs` | handoff | Use when changed behavior, contracts, configuration, architecture, operations, setup, release procedures, or user workflows require accurate documentation or handoff material. |
+| `ric-full-output-enforcement` | modifier | Use when a requested implementation or artifact must be complete and partial snippets, placeholders, omitted files, or user-side assembly would make delivery unusable. |
+| `ric-gpt-taste` | modifier | Use when a public-facing visual surface needs a premium, motion-aware direction and the primary executor needs a bounded style modifier. |
+| `ric-high-end-visual-design` | modifier | Use when an approved product or public-facing surface needs a premium visual direction with stronger hierarchy, typography, imagery, and interaction craft. |
+| `ric-image-to-code` | primary-executor | Use when implementing or redesigning a frontend from screenshots, mockups, generated references, design exports, or other visual sources where source-to-render fidelity is a primary acceptance criterion. |
+| `ric-imagegen-frontend-mobile` | modifier | Use when generating mobile app visual directions, screen concepts, flow references, or asset systems for iOS, Android, and cross-platform product experiences. |
+| `ric-imagegen-frontend-web` | modifier | Use when generating visual directions, section references, asset concepts, or high-fidelity web comps for landing pages, public product surfaces, portfolios, campaigns, and image-led frontend work. |
+| `ric-imagegen-runtime` | runtime | Use when generated or edited raster assets are required in an environment where ImageGen capabilities, providers, credentials, or output paths may vary. |
+| `ric-independent-review` | quality-gate | Use when requirements, designs, code, tests, evidence, or release decisions need a read-only fresh-context reviewer who is independent from the artifact author or fixer. |
+| `ric-industrial-brutalist-ui` | modifier | Use when an approved interface direction calls for industrial, brutalist, mechanical, Swiss, tactical, or telemetry-oriented visual language. |
+| `ric-infra-safety` | policy | Use when work may read or modify databases, migrations, caches, queues, search indices, streams, object storage, shared services, credentials, or infrastructure provisioning. |
+| `ric-minimalist-ui` | modifier | Use when an approved product direction calls for restrained, editorial, calm, precise, or utility-focused visual language. |
+| `ric-node-pnpm` | policy | Use when a task changes Node.js versions, JavaScript or TypeScript dependencies, package-manager state, workspace scripts, lockfiles, or pnpm monorepo configuration. |
+| `ric-redesign-existing-projects` | modifier | Use when an existing website, product, admin console, or application needs a visual or interaction redesign while preserving verified behavior. |
+| `ric-requirements-engineering` | lifecycle-stage | Use when a non-trivial request has ambiguous scope, unstated constraints, missing acceptance criteria, competing stakeholder needs, or requires a reviewable requirements baseline. |
+| `ric-security-review` | quality-gate | Use when a non-trivial change touches code, data, authentication, authorization, tenants, secrets, dependencies, infrastructure, integrations, deployment, or any user-controlled input. |
+| `ric-skill-quality` | quality-gate | Use when creating, editing, reviewing, packaging, or releasing skills and the repository needs structural checks, trigger evaluation, conflict detection, behavioral scenarios, or independent quality evidence. |
+| `ric-solution-design` | lifecycle-stage | Use when approved requirements need an implementation-ready product, architecture, data, API, visual, operational, or migration design before coding begins. |
+| `ric-stitch-design-taste` | modifier | Use when an approved design direction needs a concise semantic DESIGN.md or Google Stitch-compatible visual guidance artifact. |
+| `ric-testing-quality` | quality-gate | Use when changed behavior requires a formal unit, integration, contract, end-to-end, browser, accessibility, security, migration, data, performance, or build verification gate. |
+| `ric-visual-design-review` | quality-gate | Use when a UI, portal, admin console, redesign, brand surface, generated asset set, or visual implementation needs an independent critique of quality, specificity, hierarchy, and distinctiveness. |
 
-### RIC Native Skills
+<!-- END GENERATED SKILLS -->
 
-| Folder | Install name | Use for |
-| --- | --- | --- |
-| `ric-admin-console` | `ric-admin-console` | Chinese enterprise admin systems, CRUD, permissions, tables, branded login pages, visual workbenches, SaaS console homepages, public portals attached to admin systems, actionable breadcrumbs, skeleton-first loading, multilingual planning, light/dark/system theme switching, RBAC/menu/SSO planning, shadcn-first React stack, optional Ant Design fallback, framework-specific UI skill routing, active ImageGen brand assets, browser screenshot validation loops, list-page quality, detail pages, profile center, workflow, logs, settings. |
-| `ric-agent-operating-rules` | `ric-agent-operating-rules` | Baseline agent behavior: skill retrieval, PowerShell, non-destructive work, verification. |
-| `ric-infra-safety` | `ric-infra-safety` | Shared infrastructure reuse, ric namespace rules, secrets, non-destructive data operations. |
-| `ric-node-pnpm` | `ric-node-pnpm` | Node 24/FNM/pnpm 11 workflows and lockfile hygiene. |
-| `ric-backend-service` | `ric-backend-service` | Backend services, workers, health checks, config, auth, logging, shared infrastructure connections. |
-| `ric-data-pipeline` | `ric-data-pipeline` | Kafka/NATS/Redis/TimescaleDB/Elasticsearch data pipelines, idempotency, retries, backfills. |
-| `ric-api-design` | `ric-api-design` | API contracts, pagination, sorting, errors, permissions, compatibility. |
-| `ric-testing-quality` | `ric-testing-quality` | Unit/integration/E2E/visual/static/build verification. |
-| `ric-code-review` | `ric-code-review` | Review diffs for bugs, regressions, safety, permissions, missing tests. |
-| `ric-deployment-ops` | `ric-deployment-ops` | Build, release, config, health checks, rollback, CI/CD, ops readiness. |
-| `ric-docs` | `ric-docs` | README, runbooks, API docs, admin docs, changelogs, handoff notes. |
-
-## Local Registry
-
-PowerShell:
+## Repository Quality
 
 ```powershell
-.\skill.ps1 ric-admin-console
-.\skill.ps1 ric-design-taste-frontend
+$env:PYTHONUTF8='1'
+python scripts/generate-registries.py --check
+python -m unittest discover -s scripts -p "test_*.py" -v
+python scripts/run-deterministic-evals.py
+.\scripts\validate-skills.ps1 -WarningsAsErrors
 ```
 
-Bash:
+`scripts/validate-delivery-run.py --repo <repository> <run-dir>` validates a
+completed runtime package and optionally confirms that its final revision equals
+the repository `HEAD`.
 
-```bash
-./skill.sh ric-admin-console
-./skill.sh ric-design-taste-frontend
-```
+`scripts/run-live-evals.py` is an optional final behavior-evaluation adapter. It
+records actual loaded skills, fresh-context roles, gate evidence, transcript
+hashes, and scenario outcomes. If no independent adapter is available, it reports
+that the behavior eval was not completed; this does not block ordinary repository
+editing, static validation, commits, or releases. External adapters run with an
+allowlisted minimal environment, bounded output, evidence-path checks, and timeout
+termination.
 
-## Development Notes
+GitHub branch protection must require the quality workflow and CODEOWNER review for workflows, validators, schemas, catalog, and quality-gate skills. Repository files alone cannot prevent an authorized contributor from changing both a gate and its validator in the same pull request.
 
-- Keep `SKILL.md` frontmatter to `name` and `description`.
-- Keep install names lowercase and hyphenated.
-- Preserve upstream attribution when updating derived skills.
-- Validate skill frontmatter after edits.
-- Prefer detailed execution protocols over vague "best practice" advice.
+## Attribution
+
+Derived from `Leonxlnx/taste-skill` under the MIT License. See [NOTICE.md](NOTICE.md), [LICENSE](LICENSE), and [CHANGELOG.md](CHANGELOG.md).

@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Agent Operating Rules"
+  short_description: "Apply RIC workspace execution and safety policy"
+  default_prompt: "Use $ric-agent-operating-rules to inspect this workspace and establish the required execution constraints."
+policy:
+  allow_implicit_invocation: true

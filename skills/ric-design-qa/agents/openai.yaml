@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Design QA"
+  short_description: "Compare rendered UI with approved visual targets"
+  default_prompt: "Use $ric-design-qa to compare this rendered implementation with its approved visual target."

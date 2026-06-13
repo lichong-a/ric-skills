@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/risk-register.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "risks"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "severity", "owner", "mitigation", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "severity": {"enum": ["S0", "S1", "S2", "S3"]},
+          "owner": {"type": "string"},
+          "mitigation": {"type": "string"},
+          "status": {"enum": ["OPEN", "MITIGATED", "ACCEPTED", "CLOSED"]}
+          ,"disposition": {"type": "string"}
+        }
+      }
+    }
+  }
+}

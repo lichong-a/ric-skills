@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/delivery-run.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "request", "scope", "non_goals", "assumptions", "capabilities", "status", "epoch", "degraded_mode", "final_source_revision", "artifact_versions", "actors", "selected_skills", "required_gates", "gates", "events"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["PENDING", "PASS", "PASS_WITH_ADVISORIES", "FAIL_REWORK", "BLOCKED", "ESCALATE"]},
+    "epoch": {"type": "integer", "minimum": 1, "maximum": 3},
+    "degraded_mode": {"type": "boolean"},
+    "final_source_revision": {"type": "string", "minLength": 1},
+    "request": {"type": "string", "minLength": 1},
+    "scope": {"type": "array", "items": {"type": "string"}},
+    "non_goals": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "capabilities": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "artifact_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "actors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authors", "fixers", "adjudicators"],
+      "properties": {
+        "authors": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "fixers": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "adjudicators": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "selected_skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "active_role"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^ric-[a-z0-9-]+$"},
+          "active_role": {"enum": ["orchestrator", "lifecycle-stage", "policy", "primary-executor", "modifier", "quality-gate", "handoff", "runtime"]}
+        }
+      }
+    },
+    "required_gates": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "decision", "iteration", "source_revision", "reviewers"],
+        "properties": {
+          "type": {"type": "string"},
+          "decision": {"enum": ["PENDING", "PASS", "PASS_WITH_ADVISORIES", "FAIL_REWORK", "BLOCKED", "ESCALATE"]},
+          "iteration": {"type": "integer", "minimum": 1, "maximum": 3},
+          "source_revision": {"type": "string"},
+          "reviewers": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "artifact_versions": {"type": "object", "additionalProperties": {"type": "string"}}
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sequence", "type", "actor_id"],
+        "properties": {
+          "sequence": {"type": "integer", "minimum": 1},
+          "type": {"enum": ["gate-passed", "gate-failed", "fix-applied", "results-invalidated", "test-impacted-passed", "test-full-passed", "return-to-requirements", "return-to-design", "adjudicated"]},
+          "gate": {"type": "string"},
+          "suite_id": {"type": "string"},
+          "actor_id": {"type": "string"},
+          "source_revision": {"type": "string"},
+          "artifact_version": {"type": "string"},
+          "finding_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

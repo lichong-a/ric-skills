@@ -1,0 +1,5 @@
+interface:
+  display_name: "RIC ImageGen Frontend Web"
+  short_description: "Generate reviewed web visual directions"
+  default_prompt: "Use $ric-imagegen-frontend-web to generate a product-specific web visual direction and implementation-ready reference set."
+

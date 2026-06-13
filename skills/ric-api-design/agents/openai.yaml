@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC API Design"
+  short_description: "Design verifiable and compatible service contracts"
+  default_prompt: "Use $ric-api-design to define and independently verify the API contract for this change."
+policy:
+  allow_implicit_invocation: true

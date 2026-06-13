@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Testing and Quality"
+  short_description: "Run a formal independent test and evidence gate"
+  default_prompt: "Use $ric-testing-quality to create and execute an independent evidence-backed test gate for this revision."
+policy:
+  allow_implicit_invocation: true

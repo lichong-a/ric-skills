@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Backend Service"
+  short_description: "Build reliable backend services and workers"
+  default_prompt: "Use $ric-backend-service to implement this backend change with explicit lifecycle, reliability, and evidence contracts."
+policy:
+  allow_implicit_invocation: true

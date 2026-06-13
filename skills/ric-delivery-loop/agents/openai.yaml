@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Delivery Loop"
+  short_description: "Orchestrate evidence-backed delivery gates"
+  default_prompt: "Use $ric-delivery-loop to deliver this change through independent review, testing, and validation."

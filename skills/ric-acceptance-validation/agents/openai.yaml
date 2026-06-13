@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Acceptance Validation"
+  short_description: "Validate tested revisions against acceptance criteria"
+  default_prompt: "Use $ric-acceptance-validation to independently validate this tested revision against its acceptance criteria."

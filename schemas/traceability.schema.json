@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/traceability.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "links"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "acceptance_id", "design_refs", "test_refs", "evidence_refs"],
+        "properties": {
+          "requirement_id": {"type": "string"},
+          "acceptance_id": {"type": "string"},
+          "design_refs": {"type": "array", "items": {"type": "string"}},
+          "test_refs": {"type": "array", "items": {"type": "string"}},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

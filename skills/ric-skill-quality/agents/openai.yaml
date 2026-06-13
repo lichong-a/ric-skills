@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Skill Quality"
+  short_description: "Run final independent skill behavior evaluation"
+  default_prompt: "Use $ric-skill-quality as the explicit final independent quality gate for this skill change."

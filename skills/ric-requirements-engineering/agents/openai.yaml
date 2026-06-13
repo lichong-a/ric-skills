@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Requirements Engineering"
+  short_description: "Create testable requirements and acceptance criteria"
+  default_prompt: "Use $ric-requirements-engineering to turn this request into a reviewed requirements baseline."

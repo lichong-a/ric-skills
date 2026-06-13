@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Deployment and Operations"
+  short_description: "Gate and execute safe evidence-backed releases"
+  default_prompt: "Use $ric-deployment-ops to assess and execute this verified change through a safe release gate."
+policy:
+  allow_implicit_invocation: true

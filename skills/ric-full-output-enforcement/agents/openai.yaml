@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Full Output Enforcement"
+  short_description: "Prevent incomplete or omitted artifacts"
+  default_prompt: "Use $ric-full-output-enforcement as a modifier to require complete output without taking ownership."

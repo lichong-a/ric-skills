@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "kind": "negative-triggers",
+  "description": "Prompts that must not activate unrelated primary executors or a full delivery loop.",
+  "cases": [
+    {
+      "id": "simple-explanation",
+      "prompt": "Explain what an HTTP 409 response means. Do not change files.",
+      "expected": {
+        "primary": null,
+        "required": [],
+        "excluded": [
+          "ric-delivery-loop",
+          "ric-admin-console",
+          "ric-backend-service",
+          "ric-data-pipeline",
+          "ric-api-design",
+          "ric-design-taste-frontend",
+          "ric-image-to-code",
+          "ric-imagegen-frontend-web",
+          "ric-imagegen-frontend-mobile",
+          "ric-brandkit",
+          "ric-redesign-existing-projects",
+          "ric-deployment-ops",
+          "ric-docs",
+          "ric-infra-safety",
+          "ric-node-pnpm"
+        ]
+      }
+    },
+    {
+      "id": "review-only-request",
+      "prompt": "Review this existing diff for correctness and missing tests. Do not implement fixes.",
+      "expected": {
+        "primary": null,
+        "required": [
+          "ric-code-review",
+          "ric-independent-review"
+        ],
+        "excluded": [
+          "ric-admin-console",
+          "ric-backend-service",
+          "ric-deployment-ops"
+        ]
+      }
+    },
+    {
+      "id": "utility-audit-log-page",
+      "prompt": "Add an audit-log list page to the existing admin console. Keep it dense and utility-first.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": [
+          "ric-testing-quality",
+          "ric-code-review",
+          "ric-security-review",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-gpt-taste",
+          "ric-high-end-visual-design",
+          "ric-imagegen-frontend-web"
+        ]
+      }
+    },
+    {
+      "id": "read-only-infrastructure-inspection",
+      "prompt": "Inspect the existing Redis configuration and report risks without making changes.",
+      "expected": {
+        "primary": null,
+        "required": [
+          "ric-infra-safety"
+        ],
+        "excluded": [
+          "ric-deployment-ops",
+          "ric-data-pipeline"
+        ]
+      }
+    },
+    {
+      "id": "utility-audit-log-synonym",
+      "prompt": "Add a utility-only audit log list page to the existing admin console.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": [
+          "ric-code-review",
+          "ric-security-review",
+          "ric-testing-quality",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-visual-design-review",
+          "ric-design-qa",
+          "ric-high-end-visual-design",
+          "ric-imagegen-frontend-web"
+        ]
+      }
+    },
+    {
+      "id": "utility-with-explicit-visual-modifier",
+      "prompt": "Add a utility-only audit log list page to the existing admin console with ric-high-end-visual-design explicitly active as a visual modifier.",
+      "expected": {
+        "primary": "ric-admin-console",
+        "required": [
+          "ric-high-end-visual-design",
+          "ric-visual-design-review",
+          "ric-design-qa",
+          "ric-code-review",
+          "ric-security-review",
+          "ric-testing-quality",
+          "ric-acceptance-validation"
+        ],
+        "excluded": [
+          "ric-imagegen-frontend-web"
+        ]
+      }
+    }
+  ]
+}

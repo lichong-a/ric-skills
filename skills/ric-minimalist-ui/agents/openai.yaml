@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Minimalist UI"
+  short_description: "Apply restrained product visual direction"
+  default_prompt: "Use $ric-minimalist-ui as a bounded style modifier without removing required behavior."

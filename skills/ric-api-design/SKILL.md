@@ -1,80 +1,64 @@
 ---
 name: ric-api-design
-description: "RIC API design skill for REST, OpenAPI, RPC, service contracts, request/response schemas, pagination, filtering, sorting, errors, auth, permissions, idempotency, compatibility, and frontend-backend integration in ric projects."
+description: Use when creating or changing REST, RPC, event, webhook, OpenAPI, request-response, pagination, error, authorization, or compatibility contracts between systems.
 ---
 # RIC API Design
 
-Use this skill when designing or changing API contracts.
+For non-trivial delivery, operate under `ric-delivery-loop` as the selected primary executor or a bounded contract modifier. Record the active role and never approve the resulting gates.
 
-## Contract First
+## Role
 
-Define:
+Own the machine-verifiable interface contract. Do not implement unrelated business logic or approve your own contract review.
 
-- Resource or operation.
-- HTTP method or RPC name.
-- Path/name.
-- Auth requirement.
-- Permission requirement.
-- Request schema.
-- Response schema.
-- Error schema.
-- Pagination/filter/sort behavior.
-- Compatibility impact.
+## Required Companions
 
-## REST Conventions
+- Apply `ric-agent-operating-rules`.
+- Use `ric-backend-service` for implementation.
+- Use `ric-infra-safety` when persistence, queues, or shared services are involved.
+- Require independent contract review and `ric-testing-quality` before handoff.
 
-Use consistent patterns:
+## Inputs
 
-- `GET` for read.
-- `POST` for create/actions.
-- `PUT` or `PATCH` for update based on local convention.
-- `DELETE` only for safe user-approved logical delete patterns; never destructive data removal without explicit approved domain design.
+Inspect existing routes, schemas, generated clients, auth model, permission model, error format, versioning policy, and consumers. Record the current contract version and compatibility constraints.
 
-For admin list APIs:
+## Contract Artifact
 
-- Pagination: page/pageSize or cursor, matching existing convention.
-- Filtering: explicit query params or structured body for complex search.
-- Sorting: field + direction.
-- Response includes data and total when paginated.
+Produce or update a machine-verifiable contract such as OpenAPI, AsyncAPI, protobuf, GraphQL schema, JSON Schema, or the repository's equivalent. The contract must define:
 
-## Error Shape
+- operation, method, path, media types, and version;
+- authentication, authorization, tenant/data scope, and audit expectations;
+- request, response, field validation, and stable errors;
+- status codes and retry semantics;
+- pagination, filtering, sorting, and limits;
+- idempotency, concurrency control, and duplicate handling;
+- rate limits, caching, asynchronous-job behavior, and webhook/event delivery when relevant;
+- realistic examples without secrets.
 
-Use the existing project error format. If absent, define:
+## Compatibility Contract
 
-- code.
-- message.
-- details.
-- trace/request ID.
-- field errors for validation.
+- Generate a compatibility diff against the prior contract.
+- Prefer additive changes.
+- Identify breaking changes, affected consumers, migration path, deprecation window, and rollback strategy.
+- Do not silently change field meaning, nullability, ordering, error codes, or authorization scope.
 
-Do not expose sensitive internals.
+## Security And Reliability
 
-## Auth And Permissions
+- Enforce authorization and tenant/data scope server-side.
+- Distinguish unauthenticated, unauthorized, validation, conflict, not-found, throttled, and dependency failures.
+- Prevent sensitive internals, secrets, and cross-tenant identifiers from leaking.
+- Require idempotency for retried creates, imports, payment-like actions, long-running jobs, and external callbacks.
+- Define optimistic concurrency or conflict behavior for contested mutations.
 
-- Distinguish unauthenticated from unauthorized.
-- Enforce permission server-side.
-- Return stable codes for frontend handling.
-- Do not rely on menu/button hiding.
+## Required Evidence
 
-## Compatibility
+Provide:
 
-- Avoid breaking response fields.
-- Add fields instead of renaming when possible.
-- Version APIs when breaking changes are required.
-- Preserve route semantics unless the user asks for redesign.
+- contract artifact and compatibility diff;
+- acceptance examples and negative examples;
+- generated-client or schema-validation result when applicable;
+- contract tests for success, validation, authorization, compatibility, concurrency, and idempotency;
+- unresolved consumer, migration, or security risks.
 
-## Idempotency
+## Gate And Handoff
 
-Use idempotency keys for:
-
-- Payment-like operations.
-- Imports.
-- Long-running jobs.
-- Retried creates.
-- External integrations.
-
-## Documentation
-
-Update OpenAPI/docs/examples when present.
-Include realistic Chinese enterprise admin examples when relevant.
-
+An independent reviewer evaluates the pinned contract artifact. Pass only with no unresolved blocking contract, authorization, compatibility, or test findings. Return the decision to `ric-delivery-loop`; implementation discoveries that alter semantics invalidate affected downstream gates and return to contract review.

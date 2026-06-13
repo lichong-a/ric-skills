@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC ImageGen Runtime"
+  short_description: "Select and verify cross-agent ImageGen execution"
+  default_prompt: "Use $ric-imagegen-runtime to generate and validate the required project image assets."

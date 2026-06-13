@@ -60,7 +60,7 @@ Preferred tools:
 Rules:
 
 - Retrieve and apply the `shadcn` skill before writing shadcn code, even if you have used shadcn before.
-- Run shadcn commands with the project's package runner. Prefer `pnpm dlx shadcn@latest` when pnpm is the project manager; otherwise follow the package manager detected by `components.json`, lockfile, or `package.json`.
+- Run shadcn commands with the project's package runner. Prefer a project-installed or explicitly pinned shadcn CLI version. Do not silently execute `@latest`; record and approve any version change first.
 - Before selecting components, run or refresh `shadcn info --json` and use its aliases, `isRSC`, Tailwind version, CSS file, base primitive, icon library, resolved paths, framework, package manager, and preset.
 - Before implementing or fixing shadcn components, run `shadcn docs <component...>` and fetch/read the returned docs or examples for the exact components being used.
 - Check installed components first; do not import a shadcn component that has not been added, and do not re-add one that already exists.

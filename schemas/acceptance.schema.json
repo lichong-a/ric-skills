@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ric-skills.dev/schemas/acceptance.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "criteria"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "statement", "expected_evidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"},
+          "expected_evidence": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "mandatory": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

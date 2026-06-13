@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIC Node and pnpm"
+  short_description: "Manage Node, FNM, pnpm, and lockfiles safely"
+  default_prompt: "Use $ric-node-pnpm to make this Node.js dependency or workspace change without disturbing global runtime settings."
+policy:
+  allow_implicit_invocation: true

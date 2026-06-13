@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Admin Console"
+  short_description: "Build and verify enterprise admin products"
+  default_prompt: "Use $ric-admin-console as the primary executor for this admin product task within $ric-delivery-loop."

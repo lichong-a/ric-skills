@@ -1,0 +1,4 @@
+interface:
+  display_name: "RIC Independent Review"
+  short_description: "Run fresh-context read-only quality gates"
+  default_prompt: "Use $ric-independent-review to independently review this pinned artifact and issue a gate decision."
